@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3uy7umso3j76"]
+
+[ext_resource type="Script" uid="uid://bw4sxau64m7gh" path="res://Worlds/world.gd" id="1_2v3dg"]
+[ext_resource type="PackedScene" uid="uid://dkieehd6dbb8r" path="res://Worlds/1_oscillation/mass.tscn" id="1_3rf22"]
+[ext_resource type="Script" uid="uid://3abatm7ayyhf" path="res://Worlds/1_oscillation/CalculatedOscillator.gd" id="2_3rf22"]
+[ext_resource type="Script" uid="uid://mmqo547r47wj" path="res://Worlds/1_oscillation/ForcedSimulatedOscillator.gd" id="3_dqv8p"]
+[ext_resource type="Script" uid="uid://d3nc73j8r7lp" path="res://Worlds/1_oscillation/ForcedCalculatedOscillator.gd" id="4_eglwa"]
+[ext_resource type="Script" uid="uid://1nkeu6gmep1p" path="res://Worlds/1_oscillation/Forced2SimulatedOscillator.gd" id="5_3hsmm"]
+
+[node name="1_oscillation" type="Node2D"]
+scale = Vector2(0.605, 0.605)
+skew = 0.27925268
+script = ExtResource("1_2v3dg")
+
+[node name="Mass" parent="." instance=ExtResource("1_3rf22")]
+position = Vector2(0, -488)
+
+[node name="Mass2" parent="." instance=ExtResource("1_3rf22")]
+position = Vector2(0, -264)
+script = ExtResource("2_3rf22")
+
+[node name="Mass3" parent="." instance=ExtResource("1_3rf22")]
+position = Vector2(0, -40)
+script = ExtResource("3_dqv8p")
+
+[node name="Mass4" parent="." instance=ExtResource("1_3rf22")]
+position = Vector2(0, 184)
+script = ExtResource("4_eglwa")
+
+[node name="Mass5" parent="." instance=ExtResource("1_3rf22")]
+position = Vector2(0, 408)
+script = ExtResource("5_3hsmm")

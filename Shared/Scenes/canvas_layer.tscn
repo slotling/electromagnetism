@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt4lc2lt5wuf"]
+
+[ext_resource type="Script" uid="uid://cj1i16qtum3ah" path="res://Shared/Scenes/canvas_layer.gd" id="1_oqheq"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_oqheq")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 104.0
+offset_bottom = 48.0
+text = "pause"
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 96.0
+text = "reset"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 104.0
+offset_bottom = 144.0
+text = "slower"
+
+[node name="Paused" type="Node2D" parent="."]
+position = Vector2(0, 48)
+
+[node name="Button3" type="Button" parent="Paused"]
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 104.0
+offset_bottom = 144.0
+text = "step"
+
+[node name="Label" type="Label" parent="Paused"]
+offset_left = 120.0
+offset_top = 112.0
+offset_right = 186.0
+offset_bottom = 143.0
+text = "dt = 0.01"
+vertical_alignment = 1
+
+[node name="Resumed" type="Node2D" parent="."]
+
+[connection signal="pressed" from="Button" to="." method="toggle_pause"]
+[connection signal="pressed" from="Button3" to="." method="reset"]
+[connection signal="pressed" from="Button2" to="." method="slow_toggle"]
+[connection signal="pressed" from="Paused/Button3" to="." method="step"]

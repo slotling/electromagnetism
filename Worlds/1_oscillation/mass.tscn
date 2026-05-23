@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkieehd6dbb8r"]
+
+[ext_resource type="Script" uid="uid://b3cr0b6md5ac4" path="res://Worlds/1_oscillation/SimulatedOscillator.gd" id="1_qa110"]
+
+[sub_resource type="Gradient" id="Gradient_70ths"]
+colors = PackedColorArray(0.19676998, 0.1953, 0.21, 1, 0.40893, 0.40420002, 0.43, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t0max"]
+gradient = SubResource("Gradient_70ths")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Theme" id="Theme_qa110"]
+Label/font_sizes/font_size = 32
+
+[node name="Mass" type="Node2D"]
+script = ExtResource("1_qa110")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Sprite"]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = SubResource("GradientTexture2D_t0max")
+metadata/_edit_use_anchors_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Sprite"]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+border_color = Color(1, 1, 1, 1)
+border_width = 2.0
+editor_only = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Sprite"]
+offset_left = 112.0
+offset_top = -96.0
+offset_right = 544.0
+offset_bottom = -51.0
+theme = SubResource("Theme_qa110")
+text = "stats"

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://gosnea0i5ufl"]
+
+[ext_resource type="Script" uid="uid://bp5w3ywu7ku5k" path="res://Shared/Scenes/display_vector.gd" id="1_eibn6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7fmub"]
+radius = 1.0
+height = 2.0
+radial_segments = 100
+rings = 1
+is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eibn6"]
+height = 4.0
+
+[node name="DisplayVector" type="Node3D"]
+script = ExtResource("1_eibn6")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = SubResource("SphereMesh_7fmub")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_eibn6")
+skeleton = NodePath("../..")

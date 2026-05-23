@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cre3xje2sbo5h"]
+
+[ext_resource type="PackedScene" uid="uid://4tag6ti1sfhp" path="res://Worlds/2_electromagnetism/2_1_differential_vector_calculus/2_1_differential_vector_calculus.tscn" id="1_4uv8h"]
+[ext_resource type="PackedScene" uid="uid://bt4lc2lt5wuf" path="res://Shared/Scenes/canvas_layer.tscn" id="2_qhi0i"]
+[ext_resource type="PackedScene" uid="uid://db6l0b7ieh54k" path="res://Shared/Scenes/scene_switcher.tscn" id="2_uxfqk"]
+[ext_resource type="Script" uid="uid://dwpefa5nxn2kr" path="res://camera_3d.gd" id="3_qhi0i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4uv8h"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_qhi0i"]
+sky_material = SubResource("ProceduralSkyMaterial_4uv8h")
+
+[sub_resource type="Environment" id="Environment_uxfqk"]
+background_mode = 2
+sky = SubResource("Sky_qhi0i")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
+light_energy = 5.0
+light_indirect_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uxfqk")
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("2_uxfqk")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("2_qhi0i")]
+visible = false
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(0.7071068, -0.45451948, 0.54167527, 0, 0.7660445, 0.64278764, -0.7071068, -0.45451948, 0.54167527, 90, 90, 90)
+current = true
+script = ExtResource("3_qhi0i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraPivot"]
+light_energy = 1.5
+
+[node name="Scene" type="Node3D" parent="."]
+
+[node name="2_1_differential_vector_calculus" parent="Scene" instance=ExtResource("1_4uv8h")]

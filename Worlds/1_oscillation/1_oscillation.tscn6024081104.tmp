@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3uy7umso3j76"]
+
+[ext_resource type="Script" uid="uid://b3cr0b6md5ac4" path="res://Worlds/1_oscillation/SimulatedOscillator.gd" id="1_t0max"]
+[ext_resource type="Script" uid="uid://3abatm7ayyhf" path="res://Worlds/1_oscillation/CalculatedOscillator.gd" id="2_3rf22"]
+
+[sub_resource type="Gradient" id="Gradient_70ths"]
+colors = PackedColorArray(0.19676998, 0.1953, 0.21, 1, 0.40893, 0.40420002, 0.43, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t0max"]
+gradient = SubResource("Gradient_70ths")
+fill_from = Vector2(1, 1)
+
+[node name="1_oscillation" type="Node2D"]
+
+[node name="Mass" type="Node2D" parent="."]
+script = ExtResource("1_t0max")
+
+[node name="TextureRect" type="TextureRect" parent="Mass"]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = SubResource("GradientTexture2D_t0max")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Mass"]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+border_color = Color(1, 1, 1, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
+
+[node name="Mass2" type="Node2D" parent="."]
+position = Vector2(0, 248)
+script = ExtResource("2_3rf22")
+
+[node name="TextureRect" type="TextureRect" parent="Mass2"]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = SubResource("GradientTexture2D_t0max")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Mass2"]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+border_color = Color(1, 1, 1, 1)
+border_width = 2.0
+editor_only = false

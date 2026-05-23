@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi5dxfjn37qkq"]
+
+[ext_resource type="PackedScene" uid="uid://bt4lc2lt5wuf" path="res://Shared/Scenes/canvas_layer.tscn" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://c3uy7umso3j76" path="res://Worlds/1_oscillation/1_oscillation.tscn" id="2_tlwt5"]
+
+[node name="World" type="Node2D"]
+
+[node name="1_oscillation" parent="." instance=ExtResource("2_tlwt5")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_fj7yv")]
