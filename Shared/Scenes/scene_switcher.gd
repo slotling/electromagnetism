@@ -1,8 +1,9 @@
 extends CanvasLayer
 
 var scenes = []
+var scenes_loaded = []
 
-func init(options: Dictionary[String, Resource]) -> void: # name, nodepath
+func init(options: Dictionary) -> void: # name, nodepath
 	$OptionButton.clear()
 	for i in options.keys():
 		$OptionButton.add_item(i)
@@ -10,14 +11,25 @@ func init(options: Dictionary[String, Resource]) -> void: # name, nodepath
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	scenes_loaded.append($OptionButton.selected)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_option_button_item_selected(index: int) -> void:
-	G.ROOT_WORLD.get_node("Scene").get_child(0).queue_free()
-	G.ROOT_WORLD.get_node("Scene").add_child(scenes[index].instantiate())
+	#G.ROOT_WORLD.get_node("Scene").get_child(0).queue_free()
+	for i in G.ROOT_SCENE.get_children():
+		i.visible = false
+	
+	var loaded_find = scenes_loaded.find(index)
+	#print(loaded_find)
+	if loaded_find == -1:
+		var NEW_WORLD = scenes[index].instantiate()
+		G.ROOT_SCENE.add_child(NEW_WORLD)
+		scenes_loaded.append(index)
+		G.WORLD = NEW_WORLD
+	else:
+		G.ROOT_SCENE.get_children()[loaded_find].visible = true
+
+	#G.refresh_world()

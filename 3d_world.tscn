@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cre3xje2sbo5h"]
 
-[ext_resource type="PackedScene" uid="uid://4tag6ti1sfhp" path="res://Worlds/2_electromagnetism/2_1_differential_vector_calculus/2_1_differential_vector_calculus.tscn" id="1_4uv8h"]
+[ext_resource type="PackedScene" uid="uid://4tag6ti1sfhp" path="res://Worlds/electromagnetism/1_vector_fields/1_1_fields.tscn" id="1_4uv8h"]
 [ext_resource type="Script" uid="uid://c3p2c07rqxu0e" path="res://3d_world.gd" id="1_jbcjw"]
 [ext_resource type="PackedScene" uid="uid://bt4lc2lt5wuf" path="res://Shared/Scenes/canvas_layer.tscn" id="2_qhi0i"]
 [ext_resource type="PackedScene" uid="uid://db6l0b7ieh54k" path="res://Shared/Scenes/scene_switcher.tscn" id="2_uxfqk"]
@@ -29,7 +29,7 @@ script = ExtResource("1_jbcjw")
 
 [node name="Scene" type="Node3D" parent="."]
 
-[node name="2_1_differential_vector_calculus" parent="Scene" instance=ExtResource("1_4uv8h")]
+[node name="1_1_fields" parent="Scene" instance=ExtResource("1_4uv8h")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -53,4 +53,7 @@ current = true
 script = ExtResource("3_qhi0i")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraPivot"]
+transform = Transform3D(0.70710677, -0.45451945, 0.5416752, 0, 0.76604444, 0.6427876, -0.70710677, -0.45451945, 0.5416752, 90, 90, 90)
 light_energy = 1.5
+
+[editable path="SceneSwitcher"]
