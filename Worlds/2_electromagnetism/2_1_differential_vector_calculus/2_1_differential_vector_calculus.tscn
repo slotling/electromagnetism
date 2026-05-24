@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://4tag6ti1sfhp"]
-
-[ext_resource type="Script" uid="uid://baxxj1qjw6rx1" path="res://Worlds/2_electromagnetism/2_1_differential_vector_calculus/2_1_differential_vector_calculus.gd" id="1_l7lvn"]
-
-[node name="2_1_differential_vector_calculus" type="Node3D"]
-script = ExtResource("1_l7lvn")
