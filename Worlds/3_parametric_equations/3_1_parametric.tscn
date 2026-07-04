@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds6tgon6cwvmr"]
+
+[ext_resource type="PackedScene" uid="uid://bakh64v877oqf" path="res://Scenes/path.tscn" id="1_ia4ts"]
+[ext_resource type="Script" uid="uid://ci43ksigk8hts" path="res://Worlds/3_parametric_equations/3_1_parametric.gd" id="1_ovkn6"]
+
+[node name="3_1_parametric" type="Node3D"]
+script = ExtResource("1_ovkn6")
+
+[node name="Path" parent="." instance=ExtResource("1_ia4ts")]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://blbxu4etlngqs"]
+
+[ext_resource type="Script" uid="uid://maeo4vn1rhv1" path="res://Worlds/3_parametric_equations/3_2_surface.gd" id="1_8d468"]
+[ext_resource type="PackedScene" uid="uid://de33bloc4b5qt" path="res://Scenes/surface.tscn" id="1_syarw"]
+
+[node name="3_2_parametric_surface" type="Node3D"]
+script = ExtResource("1_8d468")
+
+[node name="surface" parent="." instance=ExtResource("1_syarw")]

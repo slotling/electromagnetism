@@ -17,7 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-G="*res://Shared/Global/Global.gd"
+G="*res://Global/Global.gd"
+
+[debug]
+
+gdscript/warnings/unused_parameter=0
 
 [display]
 

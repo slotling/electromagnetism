@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://de33bloc4b5qt"]
+
+[ext_resource type="Script" uid="uid://cepu50p3r525r" path="res://Scenes/surface.gd" id="1_o104s"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2tapi"]
+
+[node name="surface" type="Node3D"]
+script = ExtResource("1_o104s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_2tapi")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2vx752kua5fl"]
+
+[ext_resource type="PackedScene" uid="uid://4tag6ti1sfhp" path="res://Worlds/1_vector_fields/1_1_fields.tscn" id="1_noa60"]
+[ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="2_csiu6"]
+
+[sub_resource type="Resource" id="Resource_v576g"]
+script = ExtResource("2_csiu6")
+valscale = 1.0
+subfunction_choice = 1
+metadata/_custom_type_script = "uid://b38abs6n85w0l"
+
+[node name="2_3_gradient" instance=ExtResource("1_noa60")]
+config = SubResource("Resource_v576g")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://4tag6ti1sfhp"]
+
+[ext_resource type="Script" uid="uid://baxxj1qjw6rx1" path="res://Worlds/1_vector_fields/1_1_fields.gd" id="1_l7lvn"]
+[ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="2_nndrr"]
+[ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="2_xxy1g"]
+
+[sub_resource type="Resource" id="Resource_xxy1g"]
+script = ExtResource("2_xxy1g")
+metadata/_custom_type_script = "uid://ckj7ev16yia8c"
+
+[sub_resource type="Resource" id="Resource_nndrr"]
+script = ExtResource("2_nndrr")
+draw = SubResource("Resource_xxy1g")
+metadata/_custom_type_script = "uid://b38abs6n85w0l"
+
+[sub_resource type="MultiMesh" id="MultiMesh_xxy1g"]
+transform_format = 1
+
+[node name="1_1_fields" type="Node3D"]
+script = ExtResource("1_l7lvn")
+config = SubResource("Resource_nndrr")
+
+[node name="MM" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_xxy1g")

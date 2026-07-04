@@ -1,0 +1,336 @@
+[gd_scene load_steps=17 format=3 uid="uid://gosnea0i5ufl"]
+
+[ext_resource type="Script" uid="uid://bp5w3ywu7ku5k" path="res://Scenes/display_vector.gd" id="1_eibn6"]
+[ext_resource type="Texture2D" uid="uid://dm78onyhvou52" path="res://Assets/curl.svg" id="2_lgkgx"]
+
+[sub_resource type="Animation" id="Animation_vfu20"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow/Arrow1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arrow/Arrow2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Arrow/Arrow1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Arrow/Arrow2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Arrow/Arrow1/Head1:transparency")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Arrow/Arrow1/Tail1:transparency")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arrow/Arrow2/Head2:transparency")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Arrow/Arrow2/Tail2:transparency")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_eibn6"]
+resource_name = "loop"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow/Arrow1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arrow/Arrow2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -4), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Arrow/Arrow1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Arrow/Arrow2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.5, 0.5, 0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Arrow/Arrow1/Head1:transparency")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Arrow/Arrow1/Tail1:transparency")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Arrow/Arrow2/Head2:transparency")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Arrow/Arrow2/Tail2:transparency")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0he26"]
+_data = {
+&"RESET": SubResource("Animation_vfu20"),
+&"loop": SubResource("Animation_eibn6")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0he26"]
+resource_local_to_scene = true
+transparency = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_7fmub"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0he26")
+radius = 1.0
+height = 2.0
+radial_segments = 100
+rings = 1
+is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eibn6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_0he26")
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfu20"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_eibn6"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vfu20")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgkgx"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mnsc6"]
+material = SubResource("StandardMaterial3D_lgkgx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc4ul"]
+transparency = 1
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v6uct"]
+material = SubResource("StandardMaterial3D_fc4ul")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0e3b"]
+transparency = 1
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h36uw"]
+material = SubResource("StandardMaterial3D_k0e3b")
+
+[node name="DisplayVector" type="Node3D"]
+script = ExtResource("1_eibn6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0he26")
+}
+
+[node name="Arrow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Arrow1" type="MeshInstance3D" parent="Arrow"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Head1" type="MeshInstance3D" parent="Arrow/Arrow1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("SphereMesh_7fmub")
+skeleton = NodePath("../../..")
+
+[node name="Tail1" type="MeshInstance3D" parent="Arrow/Arrow1"]
+mesh = SubResource("CylinderMesh_eibn6")
+skeleton = NodePath("../../..")
+
+[node name="Arrow2" type="MeshInstance3D" parent="Arrow"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Head2" type="MeshInstance3D" parent="Arrow/Arrow2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("SphereMesh_7fmub")
+skeleton = NodePath("../../..")
+
+[node name="Tail2" type="MeshInstance3D" parent="Arrow/Arrow2"]
+mesh = SubResource("CylinderMesh_eibn6")
+skeleton = NodePath("../../..")
+
+[node name="Point" type="Node3D" parent="."]
+
+[node name="Point" type="MeshInstance3D" parent="Point"]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Point/Point"]
+mesh = SubResource("SphereMesh_eibn6")
+skeleton = NodePath("../..")
+
+[node name="CurlPoint" type="Node3D" parent="Point"]
+
+[node name="Sprite3D" type="Sprite3D" parent="Point/CurlPoint"]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0)
+visible = false
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("2_lgkgx")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Point/CurlPoint"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, 0)
+visible = false
+modulate = Color(1, 1, 0, 1)
+texture = ExtResource("2_lgkgx")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Point/CurlPoint"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+modulate = Color(0, 0, 1, 1)
+texture = ExtResource("2_lgkgx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Point/CurlPoint"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_mnsc6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Point/CurlPoint"]
+transform = Transform3D(9.553427e-16, -1.3113416e-07, -0.5, -0.5, -1.3113416e-07, 0, -2.1855694e-08, 3, -2.1855694e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_v6uct")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Point/CurlPoint"]
+transform = Transform3D(2.1855694e-08, -3, -7.54979e-08, -0.5, -1.3113416e-07, 0, -3.300118e-15, 4.5298742e-07, -0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_h36uw")

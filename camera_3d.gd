@@ -12,8 +12,7 @@ func _input(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	G.CAMERA = self
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -21,7 +20,8 @@ func _process(delta: float) -> void:
 		#print("a")
 		orbital_speed = 0
 		get_parent().rotation.y += movement.x * -0.01
-		#get_parent().rotation.z += movement.y * -0.01
+		get_parent().rotation.x += movement.y * -0.01
+		get_parent().rotation.x = clamp(get_parent().rotation.x, -PI/2, PI/2)
 		movement = Vector2.ZERO
 		
 	if orbital_speed != 0:
