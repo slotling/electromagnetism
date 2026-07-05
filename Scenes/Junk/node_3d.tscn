@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://jy6vukjb1n2g"]
+
+[ext_resource type="ArrayMesh" uid="uid://brfks7dnlrg16" path="res://Resources/Visual/ArrowMesh.tres" id="1_83b2w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tyu1"]
+resource_local_to_scene = true
+transparency = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_83b2w"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1tyu1")
+radius = 1.0
+height = 2.0
+radial_segments = 100
+rings = 1
+is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eihrl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_1tyu1")
+height = 4.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ijslc"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Arrow1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="Head1" type="MeshInstance3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, -4.371139e-08, 1)
+visible = false
+mesh = SubResource("SphereMesh_83b2w")
+skeleton = NodePath("../..")
+
+[node name="Tail1" type="MeshInstance3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("CylinderMesh_eihrl")
+skeleton = NodePath("../..")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("SphereMesh_83b2w")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="CSGCombiner3D"]
+mesh = SubResource("CylinderMesh_eihrl")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+mesh = SubResource("ArrayMesh_ijslc")
+
+[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mesh = ExtResource("1_83b2w")

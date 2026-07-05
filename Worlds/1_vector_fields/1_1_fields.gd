@@ -43,15 +43,14 @@ func draw_vectors():
 		#vec.init(i[0], i[1], config.type)
 		#add_child(vec)
 	
-	# Set the format first.
+	 #Set the format first.
 	$MM.multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	# Set the mesh that will be duplicated.
-	$MM.multimesh.mesh = BoxMesh.new()
 	
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
 	var instance_count := instances_dim.x + instances_dim.y + instances_dim.z
 	$MM.multimesh.instance_count = instance_count
 	$MM.multimesh.visible_instance_count = instance_count
+	
 	for i in $MM.multimesh.visible_instance_count:
 		$MM.multimesh.set_instance_transform(i, Transform3D(Basis(), Vector3(i * 20, 0, 0)))
 

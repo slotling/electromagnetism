@@ -3,12 +3,13 @@ extends CanvasLayer
 var scenes = []
 var scenes_loaded = []
 
-func init(options: Dictionary) -> void: # name, nodepath
+func init(options: Dictionary, default_index=0) -> void: # name, nodepath
 	$OptionButton.clear()
 	for i in options.keys():
 		$OptionButton.add_item(i)
 	scenes = options.values()
-	_on_option_button_item_selected(0)
+	$OptionButton.select(default_index)
+	_on_option_button_item_selected(default_index)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
