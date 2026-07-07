@@ -25,7 +25,6 @@ func _on_option_button_item_selected(index: int) -> void:
 		i.visible = false
 	
 	var loaded_find = scenes_loaded.find(index)
-	#print(loaded_find)
 	if loaded_find == -1:
 		var NEW_WORLD = scenes[index].instantiate()
 		G.WORLD = NEW_WORLD

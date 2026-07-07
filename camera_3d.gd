@@ -17,7 +17,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("click"):
-		#print("a")
 		orbital_speed = 0
 		get_parent().rotation.y += movement.x * -0.01
 		get_parent().rotation.x += movement.y * -0.01
@@ -29,4 +28,3 @@ func _process(delta: float) -> void:
 		get_parent().get_node("DirectionalLight3D").look_at(Vector3.ZERO)
 		orbit_yaw += orbital_speed * delta
 		get_parent().rotation.y = orbit_yaw
-		#print(position)

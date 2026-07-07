@@ -1,6 +1,6 @@
 extends Node
 
-var current_function_index = "rotary"
+var current_function_index = "2dswirl"
 var FUNCTIONS: Dictionary[String, Array] = { # Dictionary[String, Array[Callable]]
 	"default": [
 		func(x, y, z): return Vector3(x, y, z), 

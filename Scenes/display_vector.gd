@@ -15,10 +15,9 @@ func _ready() -> void:
 		$AnimationPlayer.seek(randf_range(0, 1))
 
 	var transpoint = (point - G.WORLD.calculated_settings["min"]) / (G.WORLD.calculated_settings["max"] - G.WORLD.calculated_settings["min"])
-	for i in [$Arrow/Arrow1/Head1, $Point/Point/MeshInstance3D]:
+	for i in [$Arrow/Arrow1/Head1, $Point/Point/MeshInstance3D, $Arrow/Arrow1/CSGBakedMeshInstance3D2]:
 		var material = i.get_active_material(0)
 		if material is StandardMaterial3D:
-			#print(transpoint)
 			if not is_scalar:
 				material.albedo_color = Color(transpoint.x, transpoint.y, transpoint.z, material.albedo_color.a)
 			elif vec_type != 3:
@@ -38,12 +37,10 @@ func init(p: Vector3, realpos: Vector3, type: int = 0):
 	point = p
 	is_scalar = type == 1 or type == 2
 	var magnitude = point.length()
-	#print(magnitude / G.WORLD.calculated_settings["magmax"] * G.WORLD.config.BaseSize)
 	scale = Vector3.ONE * max(G.WORLD.config.draw.MinSize if magnitude != 0 or type == 3 else 0, magnitude / G.WORLD.calculated_settings["magmax"] * G.WORLD.config.draw.BaseSize) * G.WORLD.config.draw.MultSize
 	origpos = realpos
 	
 	vec_type = type
-	#print(type)
 	
 	$Point.visible = false
 	$Arrow.visible = false
@@ -65,12 +62,10 @@ func init(p: Vector3, realpos: Vector3, type: int = 0):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	#print(G.WORLD.maxSize, is_scalar)
 	if point == null:
 		return
 	
 	var look = (abs(G.CAMERA.global_transform.basis.z.normalized() * 2) - Vector3.ONE).max(Vector3.ONE * 0) # 0 to avoid visual clutter
-	#print(look)
 	$Point/CurlPoint/Sprite3D.modulate.a = look.x
 	$Point/CurlPoint/Sprite3D2.modulate.a = look.y
 	$Point/CurlPoint/Sprite3D3.modulate.a = look.z

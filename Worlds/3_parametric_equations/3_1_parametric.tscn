@@ -1,9 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds6tgon6cwvmr"]
+[gd_scene load_steps=7 format=3 uid="uid://ds6tgon6cwvmr"]
 
 [ext_resource type="PackedScene" uid="uid://bakh64v877oqf" path="res://Scenes/path.tscn" id="1_ia4ts"]
 [ext_resource type="Script" uid="uid://ci43ksigk8hts" path="res://Worlds/3_parametric_equations/3_1_parametric.gd" id="1_ovkn6"]
+[ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="2_5jxig"]
+[ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="3_2rbmn"]
+
+[sub_resource type="Resource" id="Resource_vxhu7"]
+script = ExtResource("2_5jxig")
+PosScale = 50.0
+ValScale = 0.01
+metadata/_custom_type_script = "uid://ckj7ev16yia8c"
+
+[sub_resource type="Resource" id="Resource_djhfg"]
+script = ExtResource("3_2rbmn")
+draw = SubResource("Resource_vxhu7")
+metadata/_custom_type_script = "uid://b38abs6n85w0l"
 
 [node name="3_1_parametric" type="Node3D"]
 script = ExtResource("1_ovkn6")
+config = SubResource("Resource_djhfg")
 
 [node name="Path" parent="." instance=ExtResource("1_ia4ts")]

@@ -229,7 +229,7 @@ height = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tyu1"]
 resource_local_to_scene = true
-transparency = 1
+vertex_color_use_as_albedo = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lgkgx"]
 _surfaces = [{
@@ -325,6 +325,7 @@ mesh = SubResource("SphereMesh_eibn6")
 skeleton = NodePath("../..")
 
 [node name="CurlPoint" type="Node3D" parent="Point"]
+visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="Point/CurlPoint"]
 transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0)

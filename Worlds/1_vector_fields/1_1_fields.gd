@@ -11,7 +11,7 @@ class_name VectorField
 
 var drawing_list = []
 
-func F(x, y, z) -> Vector3:
+func F(x, y=0, z=0) -> Vector3:
 	var evaluation = G.FUNCTIONS[G.current_function_index][config.subfunction_choice].call(x, y, z)
 	return evaluation if typeof(evaluation) == TYPE_VECTOR3 else Vector3(evaluation, 0, 0)
 
@@ -26,7 +26,7 @@ func _ready() -> void:
 				var y = config.draw.ValScale * iy
 				var z = config.draw.ValScale * iz
 				var value := F(x, y, z)
-				var pos := Vector3(ix*config.draw.PosScale, iy*config.draw.PosScale, iz*config.draw.PosScale)
+				var pos := config.draw.PosScale * Vector3(ix, iy, iz)
 				
 				drawing_list.append([value, pos])
 				
@@ -34,28 +34,59 @@ func _ready() -> void:
 				calculated_settings["magmax"] = max(calculated_settings["magmax"], value.length())
 				calculated_settings["min"] = calculated_settings["min"].min(value)
 	
-	draw_vectors()
+	draw_vectors(0, true)
 
-func draw_vectors():
-	#await get_tree().process_frame
-	#for i in drawing_list:
-		#var vec: DisVec = G.PL["vec"].instantiate()
-		#vec.init(i[0], i[1], config.type)
-		#add_child(vec)
-	
-	 #Set the format first.
-	$MM.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+var cycle_length = 1
+
+func draw_vectors(curtime=0, init=false):
+	var MM = $MM.multimesh
 	
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
-	var instance_count := instances_dim.x + instances_dim.y + instances_dim.z
-	$MM.multimesh.instance_count = instance_count
-	$MM.multimesh.visible_instance_count = instance_count
+	var instance_count := instances_dim.x * instances_dim.y * instances_dim.z
 	
-	for i in $MM.multimesh.visible_instance_count:
-		$MM.multimesh.set_instance_transform(i, Transform3D(Basis(), Vector3(i * 20, 0, 0)))
+	if init:
+		MM.transform_format = MultiMesh.TRANSFORM_3D
+		MM.instance_count = instance_count
+		MM.visible_instance_count = instance_count
+
+	for i in instance_count:
+		var info = drawing_list[i]
+		var transformation = Basis.looking_at(info[0], Vector3(0, 0, -1))
+		
+		if init:
+			var offset = randf_range(0, 1)
+			MM.set_instance_custom_data(i, Color(offset * cycle_length, 0, 0, 0))
+		
+		var magnitude = info[0].length()
+		
+		var finalscale = Vector3.ONE * max((config.draw.MinSize if (magnitude != 0 or config.type == 3) else 0.0), magnitude / calculated_settings["magmax"] * config.draw.BaseSize) * config.draw.MultSize
+		transformation = transformation.scaled(Vector3.ONE * finalscale)
+		
+		# timeoffset: 0 to 1, progress through anim
+		var timeoffset = curtime + MM.get_instance_custom_data(i).r 
+		timeoffset = (timeoffset - int(timeoffset/cycle_length))/cycle_length
+		
+		var moveoffset = info[0].normalized() * ((timeoffset - 0.5) * (finalscale)) * 10
+		
+		var transpoint = (info[0] - calculated_settings["min"]) / (calculated_settings["max"] - calculated_settings["min"])
+		
+		var alpha = 1
+		if timeoffset < 0.2:
+			alpha = timeoffset * 5
+		elif timeoffset > 0.8:
+			alpha = timeoffset * -5 + 5
+		
+		var color = Color(transpoint.x, transpoint.y, transpoint.z, alpha)
+		
+		MM.set_instance_color(i, color)
+		MM.set_instance_transform(i, Transform3D(transformation, info[1] + moveoffset))
+		# Color(transpoint.x, transpoint.x, 1 - transpoint.x, material.albedo_color.a)
 
 var frame = 0
+var time = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	frame+=1
+	frame += 1
+	time += delta
+	draw_vectors(time)
