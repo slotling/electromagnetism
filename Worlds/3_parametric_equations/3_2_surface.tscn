@@ -7,7 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_811um"]
 script = ExtResource("2_svktb")
-PosScale = 50.0
+PosScale = 5.0
+ValScale = 0.2
 metadata/_custom_type_script = "uid://ckj7ev16yia8c"
 
 [sub_resource type="Resource" id="Resource_m1sw4"]

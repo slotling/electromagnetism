@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://de33bloc4b5qt"]
+[gd_scene load_steps=5 format=3 uid="uid://de33bloc4b5qt"]
 
 [ext_resource type="Script" uid="uid://cepu50p3r525r" path="res://Scenes/surface.gd" id="1_o104s"]
+[ext_resource type="Texture2D" uid="uid://d3teg332mh6pv" path="res://Assets/Group 1.svg" id="2_2tapi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o104s"]
+specular_mode = 2
+albedo_texture = ExtResource("2_2tapi")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2tapi"]
 
@@ -8,4 +13,5 @@
 script = ExtResource("1_o104s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_o104s")
 mesh = SubResource("ArrayMesh_2tapi")
