@@ -7,7 +7,6 @@
 transparency = 1
 depth_draw_mode = 1
 specular_mode = 2
-albedo_color = Color(1, 1, 1, 0.003921569)
 albedo_texture = ExtResource("2_2tapi")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2tapi"]

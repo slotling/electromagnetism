@@ -1,6 +1,6 @@
 extends Node
 
-var current_function_index = "2dswirl"
+var current_function_index = "idk"
 var FUNCTIONS: Dictionary[String, Array] = { # Dictionary[String, Array[Callable]]
 	"default": [
 		func(x, y, z): return Vector3(x, y, z), 
@@ -37,6 +37,12 @@ var FUNCTIONS: Dictionary[String, Array] = { # Dictionary[String, Array[Callable
 		func(x, y, z): return Vector3(2*x, 2*y, -2*z),
 		func(x, y, z): return 0, 
 		func(x, y, z): return Vector3(0, 0, 0)
+	],
+	"idk": [
+		func(x, y, z): return Vector3(z, y, x), 
+		#func(x, y, z): return Vector3(2*x, 2*y, -2*z),
+		#func(x, y, z): return 0, 
+		#func(x, y, z): return Vector3(0, 0, 0)
 	],
 }
 

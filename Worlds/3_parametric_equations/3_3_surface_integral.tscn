@@ -8,6 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_vakic"]
 script = ExtResource("3_ptxdd")
+PosScale = 50.0
 ValScale = 1.0
 MultSize = 0.5
 metadata/_custom_type_script = "uid://ckj7ev16yia8c"
