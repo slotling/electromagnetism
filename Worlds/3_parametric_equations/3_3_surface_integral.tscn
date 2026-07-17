@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://ehfxyysvctxi"]
+
+[ext_resource type="PackedScene" uid="uid://4tag6ti1sfhp" path="res://Worlds/1_vector_fields/1_1_fields.tscn" id="1_kd7ai"]
+[ext_resource type="Script" uid="uid://cl1kpty6lvopm" path="res://Worlds/3_parametric_equations/3_3_surface_integral.gd" id="2_m4fcu"]
+[ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="3_ptxdd"]
+[ext_resource type="PackedScene" uid="uid://de33bloc4b5qt" path="res://Scenes/surface.tscn" id="3_q2o5h"]
+[ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="4_rca18"]
+
+[sub_resource type="Resource" id="Resource_vakic"]
+script = ExtResource("3_ptxdd")
+ValScale = 1.0
+MultSize = 0.5
+metadata/_custom_type_script = "uid://ckj7ev16yia8c"
+
+[sub_resource type="Resource" id="Resource_jeg0m"]
+script = ExtResource("4_rca18")
+draw = SubResource("Resource_vakic")
+metadata/_custom_type_script = "uid://b38abs6n85w0l"
+
+[node name="3_3_surface_integral" instance=ExtResource("1_kd7ai")]
+script = ExtResource("2_m4fcu")
+config = SubResource("Resource_jeg0m")
+
+[node name="surface" parent="." index="1" instance=ExtResource("3_q2o5h")]
+visible = false

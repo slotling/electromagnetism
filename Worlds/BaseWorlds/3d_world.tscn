@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cre3xje2sbo5h"]
 
-[ext_resource type="Script" uid="uid://c3p2c07rqxu0e" path="res://3d_world.gd" id="1_jbcjw"]
+[ext_resource type="Script" uid="uid://c3p2c07rqxu0e" path="res://Worlds/BaseWorlds/3d_world.gd" id="1_jbcjw"]
 [ext_resource type="PackedScene" uid="uid://db6l0b7ieh54k" path="res://Scenes/scene_switcher.tscn" id="2_uxfqk"]
 [ext_resource type="Script" uid="uid://dwpefa5nxn2kr" path="res://camera_3d.gd" id="3_qhi0i"]
 

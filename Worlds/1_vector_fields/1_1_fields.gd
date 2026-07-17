@@ -15,25 +15,34 @@ func F(x, y=0, z=0) -> Vector3:
 	var evaluation = G.FUNCTIONS[G.current_function_index][config.subfunction_choice].call(x, y, z)
 	return evaluation if typeof(evaluation) == TYPE_VECTOR3 else Vector3(evaluation, 0, 0)
 
-func _ready() -> void:
+func add_drawing_object(x, y, z, value):
+	var ix = float(x) / float(config.draw.ValScale)
+	var iy = float(y) / float(config.draw.ValScale)
+	var iz = float(z) / float(config.draw.ValScale)
+	var pos := config.draw.PosScale * Vector3(ix, iy, iz)
+			
+	drawing_list.append([value, pos])
+			
+	calculated_settings["max"] = calculated_settings["max"].max(value)
+	calculated_settings["magmax"] = max(calculated_settings["magmax"], value.length())
+	calculated_settings["min"] = calculated_settings["min"].min(value)
+
+func create_drawing_list() -> void:
 	for ix in range(config.draw.LatticeStart.x, config.draw.LatticeEnd.x+1, 1):
 		for iy in range(config.draw.LatticeStart.y, config.draw.LatticeEnd.y+1, 1):
 			for iz in range(config.draw.LatticeStart.z, config.draw.LatticeEnd.z+1, 1):
-				#if ix**2+iy**2+iz**2 > 30:
-					#continue
-				
 				var x = config.draw.ValScale * ix
 				var y = config.draw.ValScale * iy
 				var z = config.draw.ValScale * iz
-				var value := F(x, y, z)
-				var pos := config.draw.PosScale * Vector3(ix, iy, iz)
+				var value = F(x, y, z)
+				add_drawing_object(x, y, z, value)
 				
-				drawing_list.append([value, pos])
-				
-				calculated_settings["max"] = calculated_settings["max"].max(value)
-				calculated_settings["magmax"] = max(calculated_settings["magmax"], value.length())
-				calculated_settings["min"] = calculated_settings["min"].min(value)
-	
+func get_instance_count():
+	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
+	return instances_dim.x * instances_dim.y * instances_dim.z
+
+func _ready() -> void:
+	create_drawing_list()
 	draw_vectors(0, true)
 
 var cycle_length = 1
@@ -41,8 +50,7 @@ var cycle_length = 1
 func draw_vectors(curtime=0, init=false):
 	var MM = $MM.multimesh
 	
-	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
-	var instance_count := instances_dim.x * instances_dim.y * instances_dim.z
+	var instance_count = get_instance_count()
 	
 	if init:
 		MM.transform_format = MultiMesh.TRANSFORM_3D

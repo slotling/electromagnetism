@@ -15,7 +15,7 @@ var FUNCTIONS: Dictionary[String, Array] = { # Dictionary[String, Array[Callable
 		func(x, y, z): return Vector3(0, 0, 0)
 	],
 	"2dswirl": [
-		func(x, y, z): return Vector3(cos(y), cos(x), 0), 
+		func(x, y, z): return Vector3(sin(y), sin(x), 0), 
 		func(x, y, z): return Vector3(0, 0, 0),
 		func(x, y, z): return 0, 
 		func(x, y, z): return Vector3(0, 0, -sin(x) + sin(y))
@@ -51,14 +51,15 @@ var state = {
 }
 
 @onready var ROOT_WORLD = get_tree().root.get_node("World")
-@onready var ROOT_SCENE = ROOT_WORLD.get_node("Scene")
+@onready var ROOT_SCENE
 @onready var WORLD
 
 @onready var CAMERA
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if ROOT_WORLD:
+		ROOT_SCENE = ROOT_WORLD.get_node("Scene")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

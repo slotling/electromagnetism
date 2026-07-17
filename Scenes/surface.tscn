@@ -4,7 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://d3teg332mh6pv" path="res://Assets/Group 1.svg" id="2_2tapi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o104s"]
+transparency = 1
+depth_draw_mode = 1
 specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.003921569)
 albedo_texture = ExtResource("2_2tapi")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2tapi"]
