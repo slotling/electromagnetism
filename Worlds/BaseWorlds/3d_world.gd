@@ -12,7 +12,7 @@ func _ready() -> void:
 		"3.2: parametric surface": load("res://Worlds/3_parametric_equations/3_2_surface.tscn"),
 		"3.3: surface integral": load("res://Worlds/3_parametric_equations/3_3_surface_integral.tscn"),
 	}
-	$SceneSwitcher.init(scenes, 4)
+	$SceneSwitcher.init(scenes, 5)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
