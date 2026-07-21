@@ -19,6 +19,16 @@ func R(u, v):
 	var x = u * cos(v)
 	var y = u * sin(v)
 	return Vector3(x, y, 1-x*x-y*y)
+	
+func R_u(u, v):
+	var x = cos(v)
+	var y = sin(v)
+	return Vector3(x, y, 1 - 2*u)
+	
+func R_v(u, v):
+	var x = -u * sin(v)
+	var y = u * cos(v)
+	return Vector3(x, y, 0)
 
 func F(x, y, z):
 	return Vector3(y, x, z)
@@ -27,45 +37,86 @@ var ustart = 0.0
 var uend = 1.0
 var vstart = 0.0
 var vend = 2 * PI
-var diff = 0.002
+var diff = 0.01 # time taken scales with approx (1/diff)^2
+var finediff = 0.0001 # for checking
 
-func calc_cross(u, v, u2, v2, currentR):
-	return (R(u2, v) - currentR).cross(R(u, v2) - currentR)
+func calculate_analytical_integral(u_a, u_b, v_a, v_b):
+	return -1.0/4.0 * (u_b**4 - u_a**4) * (cos(2*v_b) - cos(2*v_a) + v_b - v_a) + 1.0/2.0 * (u_b**2 - u_a**2) * (v_b - v_a)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	var start_time = Time.get_ticks_usec()
-	
+func calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale):
+	var currentR = R(u, v)
+	var diffCross = R_u(u, v).cross(R_v(u, v)) * uscale * vscale
+	var value = F(currentR.x, currentR.y, currentR.z)
+	return value.dot(diffCross)
+
+func calculate_integrand(u, v, u2, v2):
+	var currentR = R(u, v)
+	var newRu = R(u2, v)
+	var newRv = R(u, v2)
+	var diffRu = newRu - currentR
+	var diffRv = newRv - currentR
+	var diffCross = diffRu.cross(diffRv)
+	var value = F(currentR.x, currentR.y, currentR.z)
+	return value.dot(diffCross)
+
+func calculate(use_analytical_R_partials=true):
 	var uscale = diff
 	var vscale = diff
-	var uintercept = ustart
-	var vintercept = vstart
-	var ireps = int((uend-ustart)/diff)
-	var jreps = int((vend-vstart)/diff)
+	var ufinescale = finediff
+	var vfinescale = finediff
+	var uintercept = ustart + diff/2 # locate at center of patch
+	var vintercept = vstart + diff/2 # locate at center of patch
 	
 	var sum = 0
 	var u = uintercept
-	for i in ireps:
+	
+	var integrandDifferences_u = []
+	var integrandDifferences_v = []
+	
+	# FIRST PASS: unmodified numerical quadrature
+	var areas = 0
+	while u < uend:
 		var v = vintercept
 		var u2 = u + uscale
-		for j in jreps:
+		while v < vend:
 			var v2 = v + vscale
+			var integrand = calculate_integrand(u, v, u2, v2) if not use_analytical_R_partials else calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale)
 			
-			var currentR = R(u, v)
+			#var diff_u_integrand = calculate_integrand_using_analytical_R_partials(u+ufinescale, v, uscale, vscale)
+			#var diff_v_integrand = calculate_integrand_using_analytical_R_partials(u, v+vfinescale, uscale, vscale)
+			#integrandDifferences_u.append(abs(diff_u_integrand-integrand))
+			#integrandDifferences_v.append(abs(diff_v_integrand-integrand))
 			
-			sum += F(currentR.x, currentR.y, currentR.z).dot(calc_cross(u, v, u2, v2, currentR))
+			print("Diff: ", calculate_analytical_integral(u, u2, v, v2) - integrand)
+			
+			sum += integrand
 			
 			v = v2
+			areas += 1
+		
 		u = u2
+		
+	#for arr in [integrandDifferences_u, integrandDifferences_v]:
+		#var sum_indiffs = arr.reduce(func(accum, number): return accum + number, 0)
+		#print("Mean integrand differences: ", float(sum_indiffs) / arr.size())
+		#print("Max integrand difference: ", arr.max())
 	
+	return {"sum": sum, "second_sum": sum, "areas": areas, "extra_areas": 0}
 
+func calculate_and_report(sol, use_analytical_R_partials):
+	var start_time = Time.get_ticks_usec()
+	var results = calculate(use_analytical_R_partials)
 	var execution_time = Time.get_ticks_usec() - start_time
-	#var sol = (4/3.0)*PI
-	var sol = PI/2.0
-	print("Flux: ", sum)
+	print("Flux: ", results["sum"])
 	print("Analytical solution: ", sol)
-	print("Error: ", sum - sol)
+	print("Error: ", String.num_scientific(abs(results["sum"] - sol)) )
 	print("Time elapsed: ", execution_time/1000000.0, " s")
+	print("Areas: ", results["areas"])
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var sol = calculate_analytical_integral(ustart, uend, vstart, vend)
+	calculate_and_report(sol, true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
