@@ -1,5 +1,12 @@
 extends Node2D
 
+# COMPARING METHODS:
+# - central vs cornered
+# - analytical vs nonanalytical R partials for integrand
+# - corner averaging vs center value
+# ON MULTIPLE FUNCTIONS
+
+
 #func R(u, v):
 	#var pol = PI * u
 	#var azi = 2 * PI * v
@@ -46,7 +53,15 @@ func calculate_analytical_integral(u_a, u_b, v_a, v_b):
 func calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale):
 	var currentR = R(u, v)
 	var diffCross = R_u(u, v).cross(R_v(u, v)) * uscale * vscale
-	var value = F(currentR.x, currentR.y, currentR.z)
+	var value = Vector3.ZERO
+	#for xdm in [-1, 1]:
+		#for ydm in [-1, 1]:
+			#for zdm in [-1, 1]:
+				#value += F(currentR.x + finediff * xdm, currentR.y + finediff * ydm, currentR.z + finediff * zdm)
+	#value /= 8.0
+	#print(value)
+	value = F(currentR.x + finediff, currentR.y + finediff, currentR.z)
+	#print(value)
 	return value.dot(diffCross)
 
 func calculate_integrand(u, v, u2, v2):
@@ -56,7 +71,13 @@ func calculate_integrand(u, v, u2, v2):
 	var diffRu = newRu - currentR
 	var diffRv = newRv - currentR
 	var diffCross = diffRu.cross(diffRv)
-	var value = F(currentR.x, currentR.y, currentR.z)
+	var value = 0
+	#for xdm in [-1, 1]:
+		#for ydm in [-1, 1]:
+			#for zdm in [-1, 1]:
+				#value += F(currentR.x + finediff * xdm, currentR.y + finediff * ydm, currentR.z * zdm)
+	#value /= 8.0
+	#value = F(currentR.x + finediff, currentR.y + finediff, currentR.z)
 	return value.dot(diffCross)
 
 func calculate(use_analytical_R_partials=true):
@@ -87,7 +108,8 @@ func calculate(use_analytical_R_partials=true):
 			#integrandDifferences_u.append(abs(diff_u_integrand-integrand))
 			#integrandDifferences_v.append(abs(diff_v_integrand-integrand))
 			
-			print("Diff: ", calculate_analytical_integral(u, u2, v, v2) - integrand)
+			#if areas % 50000 == 0:
+				#print("Diff: ", calculate_analytical_integral(u, u2, v, v2) - integrand)
 			
 			sum += integrand
 			
