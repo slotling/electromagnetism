@@ -4,6 +4,10 @@ class_name VectorField
 @export var config: WorldConfig = WorldConfig.new()
 
 @onready var calculated_settings = {
+	"x_values": [],
+	"y_values": [],
+	"z_values": [],
+	"magnitudes": [],
 	"max": Vector3.ZERO,
 	"magmax": 0,
 	"min": Vector3.ZERO,
@@ -11,32 +15,57 @@ class_name VectorField
 
 var drawing_list = []
 
-func F(x, y=0, z=0) -> Vector3:
+func F(x, y=0, z=0, id=null) -> Vector3:
 	var evaluation = G.FUNCTIONS[G.current_function_index][config.subfunction_choice].call(x, y, z)
 	return evaluation if typeof(evaluation) == TYPE_VECTOR3 else Vector3(evaluation, 0, 0)
 
-func add_drawing_object(x, y, z, value):
+func add_drawing_object(x, y, z, value, initialize):
 	var ix = float(x) / float(config.draw.ValScale)
 	var iy = float(y) / float(config.draw.ValScale)
 	var iz = float(z) / float(config.draw.ValScale)
 	var pos := config.draw.PosScale * Vector3(ix, iy, iz)
-	pos = G.reorient(pos)
+	pos = G.reorient_to_game(pos)
+	var val = G.reorient_to_game(value)
 			
-	drawing_list.append([value, pos])
-			
-	calculated_settings["max"] = calculated_settings["max"].max(value)
-	calculated_settings["magmax"] = max(calculated_settings["magmax"], value.length())
-	calculated_settings["min"] = calculated_settings["min"].min(value)
+	drawing_list.append([val, pos])
+	
+	if initialize:
+		calculated_settings["x_values"].append(val.x)
+		calculated_settings["y_values"].append(val.y)
+		calculated_settings["z_values"].append(val.z)
+		calculated_settings["magnitudes"].append(val.length())
 
-func create_drawing_list() -> void:
+func create_drawing_list(initialize) -> void:
+	drawing_list = []
+	
+	if initialize:
+		calculated_settings["x_values"] = []
+		calculated_settings["y_values"] = []
+		calculated_settings["z_values"] = []
+		calculated_settings["magnitudes"] = []
+	
+	var id = 0
 	for ix in range(config.draw.LatticeStart.x, config.draw.LatticeEnd.x+1, 1):
 		for iy in range(config.draw.LatticeStart.y, config.draw.LatticeEnd.y+1, 1):
 			for iz in range(config.draw.LatticeStart.z, config.draw.LatticeEnd.z+1, 1):
 				var x = config.draw.ValScale * ix
 				var y = config.draw.ValScale * iy
 				var z = config.draw.ValScale * iz
-				var value = F(x, y, z)
-				add_drawing_object(x, y, z, value)
+				var value = F(x, y, z, id)
+				add_drawing_object(x, y, z, value, initialize)
+				id += 1
+	
+	if initialize:
+		var length = calculated_settings["x_values"].size()
+		var upper_percentile_index = length / 100.0 * config.draw.UpperPercentile
+		var lower_percentile_index = length / 100.0 * config.draw.LowerPercentile
+		calculated_settings["x_values"].sort()
+		calculated_settings["y_values"].sort()
+		calculated_settings["z_values"].sort()
+		calculated_settings["magnitudes"].sort()
+		calculated_settings["max"] = Vector3(calculated_settings["x_values"][upper_percentile_index], calculated_settings["y_values"][upper_percentile_index], calculated_settings["z_values"][upper_percentile_index])
+		calculated_settings["magmax"] = calculated_settings["magnitudes"][upper_percentile_index]
+		calculated_settings["min"] = Vector3(calculated_settings["x_values"][lower_percentile_index], calculated_settings["y_values"][lower_percentile_index], calculated_settings["z_values"][lower_percentile_index])
 				
 func get_instance_count():
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
@@ -44,7 +73,7 @@ func get_instance_count():
 
 func _ready() -> void:
 	await get_tree().process_frame
-	create_drawing_list()
+	create_drawing_list(true)
 	draw_vectors(0, true)
 
 var cycle_length = 1
@@ -69,7 +98,7 @@ func draw_vectors(curtime=0, init=false):
 		
 		var magnitude = info[0].length()
 		
-		var finalscale = Vector3.ONE * max((config.draw.MinSize if (magnitude != 0 or config.type == 3) else 0.0), magnitude / calculated_settings["magmax"] * config.draw.BaseSize) * config.draw.MultSize
+		var finalscale = Vector3.ONE * min(max((config.draw.MinSize if (magnitude != 0 or config.type == 3) else 0.0), magnitude / calculated_settings["magmax"] * config.draw.BaseSize), config.draw.MaxSize) * config.draw.MultSize
 		transformation = transformation.scaled(Vector3.ONE * finalscale)
 		
 		# timeoffset: 0 to 1, progress through anim
@@ -86,7 +115,7 @@ func draw_vectors(curtime=0, init=false):
 		elif timeoffset > 0.8:
 			alpha = timeoffset * -5 + 5
 		
-		var color = Color(transpoint.x, transpoint.y, transpoint.z, alpha)
+		var color = Color(transpoint.x, transpoint.y, transpoint.z, alpha) * config.draw.ColorMult
 		
 		MM.set_instance_color(i, color)
 		MM.set_instance_transform(i, Transform3D(transformation, info[1] + moveoffset))

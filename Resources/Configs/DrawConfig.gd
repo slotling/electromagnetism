@@ -18,8 +18,14 @@ class_name DrawConfig
 # Each vector's scale depends on its magnitude.
 # The scaling can be configured here.
 @export var BaseSize := 2.0 # Size of vector with maximum magnitude. All other vectors are scaled proportionally.
-@export var MinSize := 1.0 # Lower bound of size for nonzero vectors.
+@export var MinSize := 0.01 # Lower bound of size for nonzero vectors.
+@export var MaxSize := 1.5 # Upper bound of size for vectors.
 @export var MultSize := 1.0 # Multiplied with post-processed scale of each vector.
+
+@export var UpperPercentile = 80
+@export var LowerPercentile = 20
+
+@export var ColorMult = 0.5
 
 # Additional configurations
 @export var LowDetailMode := false # When true, disables moving animations of vectors.

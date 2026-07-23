@@ -16,7 +16,7 @@ height = 8.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_hyu7n"]
 radius = 4.0
 
-[node name="PointCharge" type="Node3D"]
+[node name="PointCharge" type="Node3D" groups=["charge"]]
 script = ExtResource("1_hyu7n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

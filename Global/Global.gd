@@ -75,5 +75,8 @@ func _process(_delta: float) -> void:
 #func refresh_world():
 	#WORLD = ROOT_WORLD.get_child(0).get_child(0)
 	
-func reorient(v: Vector3):
+func reorient_to_game(v: Vector3):
+	return Vector3(v.x, v.z, -v.y)
+	
+func reorient_to_conventional(v: Vector3):
 	return Vector3(v.x, -v.z, v.y)

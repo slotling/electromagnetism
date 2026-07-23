@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 				pressed[i] = false
 			
 		var relpos = G.CAMERA.global_position - old_global_position # relative position
-		relpos = G.reorient(relpos)
+		relpos = G.reorient_to_conventional(relpos)
 		var deadzone = 5e-5 
 		if abs(relpos.x) < deadzone:
 			relpos.x = 0

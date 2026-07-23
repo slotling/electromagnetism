@@ -45,7 +45,7 @@ func calc_cross(u, v, u2, v2, currentR):
 	return (R(u2, v) - currentR).cross(R(u, v2) - currentR)
 	
 func reoriented_calc_cross(u, v, u2, v2, currentR):
-	return (G.reorient(R(u2, v) - currentR)).cross(G.reorient(R(u, v2) - currentR))
+	return (G.reorient_to_game(R(u2, v) - currentR)).cross(G.reorient_to_game(R(u, v2) - currentR))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -81,7 +81,7 @@ func _ready() -> void:
 			
 			var raw_vert = R(u, v)
 			var vert = raw_vert * G.WORLD.config.draw.PosScale
-			vert = G.reorient(vert)
+			vert = G.reorient_to_game(vert)
 			var raw_cross = calc_cross(u, v, u2, v2, raw_vert)
 			var cross = reoriented_calc_cross(u, v, u2, v2, raw_vert)
 			var normal = cross.normalized()

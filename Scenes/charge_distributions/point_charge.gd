@@ -1,6 +1,10 @@
 extends Node3D
 class_name ChargeDisplay
 
+@export var charge_magnitude:float = 1
+
+var id = null
+
 var hovered = false
 
 func is_selected() -> bool:
@@ -22,6 +26,9 @@ func _process(delta: float) -> void:
 			pass
 		elif is_selected():
 			get_parent().select_update(null)
+	
+	if $Gizmo.any_pressed():
+		get_parent().update_charge(id, true)
 	
 	tick += 1
 	if is_selected() and tick % 10 == 0:
