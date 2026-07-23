@@ -7,28 +7,30 @@ var id = null
 
 var hovered = false
 
+@onready var parent = get_parent().get_parent()
+
 func is_selected() -> bool:
-	return get_parent().InspectedCharge == self
+	return parent.InspectedCharge == self
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_parent().charge_selected.connect(select_update_event)
+	parent.charge_selected.connect(select_update_event)
 
 
 var tick = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$BaseArea/CollisionShape3D.disabled = not get_parent().InspectedCharge == null
+	$BaseArea/CollisionShape3D.disabled = not parent.InspectedCharge == null
 	if Input.is_action_just_pressed("click"):
 		if hovered:
 			self_select()
 		elif $Gizmo.hovered.x or $Gizmo.hovered.y or $Gizmo.hovered.z:
 			pass
 		elif is_selected():
-			get_parent().select_update(null)
+			parent.select_update(null)
 	
 	if $Gizmo.any_pressed():
-		get_parent().update_charge(id, true)
+		parent.update_charge(id, true)
 	
 	tick += 1
 	if is_selected() and tick % 10 == 0:
@@ -71,7 +73,7 @@ func select_update_event(chargeNode):
 		deselect_event()
 
 func self_select():
-	get_parent().select_update(self)
+	parent.select_update(self)
 	
 func select_event():
 	#$MeshInstance3D.get_active_material(0).emission_enabled = true

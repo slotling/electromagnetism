@@ -3,7 +3,7 @@ class_name ChargeVectorField
 
 signal charge_selected(chargeNode)
 
-@onready var charges = get_tree().get_nodes_in_group("charge")
+@onready var charges = $Charges.get_children()
 
 var forces = []
 

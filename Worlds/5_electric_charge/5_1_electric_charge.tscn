@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://bmajbq80iw741"]
+[gd_scene load_steps=7 format=4 uid="uid://bmajbq80iw741"]
 
 [ext_resource type="PackedScene" uid="uid://4tag6ti1sfhp" path="res://Worlds/1_vector_fields/1_1_fields.tscn" id="1_eqyib"]
 [ext_resource type="Script" uid="uid://ds01ou2of5pyj" path="res://Worlds/5_electric_charge/5_1_electric_charge.gd" id="2_t782x"]
+[ext_resource type="PackedScene" uid="uid://ch3sxdbhv1l3a" path="res://Scenes/charge_distributions/PointCharge.tscn" id="3_iqswy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdw3r"]
 resource_local_to_scene = true
@@ -35,3 +36,8 @@ script = ExtResource("2_t782x")
 [node name="MM" parent="." index="0"]
 visible = false
 multimesh = SubResource("MultiMesh_t75b5")
+
+[node name="Charges" type="Node3D" parent="." index="1"]
+
+[node name="PointCharge" parent="Charges" index="0" instance=ExtResource("3_iqswy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
