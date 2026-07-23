@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch3sxdbhv1l3a"]
+
+[ext_resource type="Script" uid="uid://dnx1rnywqhfhu" path="res://Scenes/charge_distributions/point_charge.gd" id="1_hyu7n"]
+[ext_resource type="PackedScene" uid="uid://cejvsuyeqclnt" path="res://Scenes/charge_distributions/gizmo.tscn" id="2_rivto"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbutg"]
+resource_local_to_scene = true
+emission = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hyu7n"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vbutg")
+radius = 4.0
+height = 8.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hyu7n"]
+radius = 4.0
+
+[node name="PointCharge" type="Node3D"]
+script = ExtResource("1_hyu7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hyu7n")
+
+[node name="BaseArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseArea"]
+shape = SubResource("SphereShape3D_hyu7n")
+
+[node name="Gizmo" parent="." instance=ExtResource("2_rivto")]
+visible = false
+
+[connection signal="mouse_entered" from="BaseArea" to="." method="_on_base_area_mouse_entered"]
+[connection signal="mouse_exited" from="BaseArea" to="." method="_on_base_area_mouse_exited"]

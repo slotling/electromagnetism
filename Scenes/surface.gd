@@ -18,20 +18,16 @@ func R(u, v):
 	var x = v * cos(u)
 	var y = v * sin(u)
 	var result = Vector3(x, y, 1-x*x-y*y)
-	return Vector3(result.x, result.z, result.y)
+	return Vector3(result.x, result.y, result.z)
 	
 var ustart = 0
 var uend = 2.0 * PI
 var vstart = 0
 var vend = 1
-var diff = 0.01
-	
+var diff = 0.1
 
-var calc_raw_verts = PackedVector3Array()
-var calc_raw_crosses = PackedVector3Array()
-
-func calculate_raw_values():
-	pass
+var ireps = 0
+var jreps = 0
 
 var raw_verts = PackedVector3Array()
 var raw_crosses = PackedVector3Array()
@@ -40,8 +36,16 @@ var uvs = PackedVector2Array()
 var normals = PackedVector3Array()
 var indices = PackedInt32Array()
 
+var vector_verts = PackedVector3Array()
+var vector_crosses = PackedVector3Array()
+var i_vector_spacing = 2
+var j_vector_spacing = 1
+
 func calc_cross(u, v, u2, v2, currentR):
 	return (R(u2, v) - currentR).cross(R(u, v2) - currentR)
+	
+func reoriented_calc_cross(u, v, u2, v2, currentR):
+	return (G.reorient(R(u2, v) - currentR)).cross(G.reorient(R(u, v2) - currentR))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -59,21 +63,27 @@ func _ready() -> void:
 	var vscale = diff
 	var uintercept = ustart
 	var vintercept = vstart
-	var ireps = int((uend-ustart)/diff)
-	var jreps = int((vend-vstart)/diff)
-	print(ireps, " ", jreps)
+	ireps = int((uend-ustart)/diff) + 2 # +1 for adding last vertex of floor, +1 for one overshoot to complete surface
+	jreps = int((vend-vstart)/diff) + 2
 	
 	var u = uintercept
 	for i in ireps:
 		var v = vintercept
-		var u2 = u + uscale
+		var u2 = u + uscale	
+		if i+1 == ireps:
+			u = uend
+			
 		for j in jreps:
-			print(u, " ", v)
 			var v2 = v + vscale
+			if j+1 == jreps:
+				#pass
+				v = vend
 			
 			var raw_vert = R(u, v)
 			var vert = raw_vert * G.WORLD.config.draw.PosScale
-			var cross = calc_cross(u, v, u2, v2, raw_vert)
+			vert = G.reorient(vert)
+			var raw_cross = calc_cross(u, v, u2, v2, raw_vert)
+			var cross = reoriented_calc_cross(u, v, u2, v2, raw_vert)
 			var normal = cross.normalized()
 			var uv = Vector2(i * texture_spacing, j * texture_spacing)
 			
@@ -84,8 +94,12 @@ func _ready() -> void:
 			#print(vert, normal)
 			normals.push_back(-normal)
 			
+			var icount = jreps
+			if i+1 != ireps and j+1 != jreps and i % i_vector_spacing == 0 and j % j_vector_spacing == 0:
+				vector_verts.push_back(raw_vert)
+				vector_crosses.push_back(cross)
+			
 			if i > 0 and j > 0:
-				var icount = jreps
 				# front triangles
 				indices.push_back(i*icount + j-1)
 				indices.push_back((i-1)*icount + j)

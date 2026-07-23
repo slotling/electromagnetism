@@ -10,9 +10,9 @@ func _on_ready() -> void:
 		var t = i * G.WORLD.config.draw.ValScale
 		var pos = R(t) * G.WORLD.config.draw.PosScale
 		$Path3D.curve.add_point(pos)
-		var point = G.PL["pt"].instantiate()
-		point.init(pos)
-		G.WORLD.add_child.call_deferred(point)
+		#var point = G.PL["pt"].instantiate()
+		#point.init(pos)
+		#G.WORLD.add_child.call_deferred(point)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

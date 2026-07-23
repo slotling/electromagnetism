@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=4 uid="uid://gosnea0i5ufl"]
 
-[ext_resource type="Script" uid="uid://bp5w3ywu7ku5k" path="res://Scenes/display_vector.gd" id="1_eibn6"]
+[ext_resource type="Script" uid="uid://bp5w3ywu7ku5k" path="res://Junk/display_vector.gd" id="1_eibn6"]
 [ext_resource type="Texture2D" uid="uid://dm78onyhvou52" path="res://Assets/curl.svg" id="2_lgkgx"]
 
 [sub_resource type="Animation" id="Animation_vfu20"]

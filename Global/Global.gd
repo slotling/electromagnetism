@@ -52,8 +52,8 @@ var state = {
 }
 
 @onready var PL: Dictionary[String, PackedScene] = { # preloads
-	"vec": preload("res://Scenes/display_vector.tscn"),
-	"pt": preload("res://Scenes/point.tscn")
+	#"vec": preload("res://Scenes/display_vector.tscn"),
+	#"pt": preload("res://Scenes/point.tscn")
 }
 
 @onready var ROOT_WORLD = get_tree().root.get_node("World")
@@ -74,3 +74,6 @@ func _process(_delta: float) -> void:
 #
 #func refresh_world():
 	#WORLD = ROOT_WORLD.get_child(0).get_child(0)
+	
+func reorient(v: Vector3):
+	return Vector3(v.x, -v.z, v.y)

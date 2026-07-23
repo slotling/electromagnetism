@@ -59,9 +59,7 @@ func calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale):
 			#for zdm in [-1, 1]:
 				#value += F(currentR.x + finediff * xdm, currentR.y + finediff * ydm, currentR.z + finediff * zdm)
 	#value /= 8.0
-	#print(value)
 	value = F(currentR.x + finediff, currentR.y + finediff, currentR.z)
-	#print(value)
 	return value.dot(diffCross)
 
 func calculate_integrand(u, v, u2, v2):

@@ -1,11 +1,11 @@
 [gd_resource type="CylinderMesh" load_steps=2 format=3 uid="uid://dp8vruwyagpka"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tyu1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7pswh"]
 resource_local_to_scene = true
 transparency = 1
 vertex_color_use_as_albedo = true
 
 [resource]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_1tyu1")
-height = 4.0
+material = SubResource("StandardMaterial3D_7pswh")
+height = 8.0

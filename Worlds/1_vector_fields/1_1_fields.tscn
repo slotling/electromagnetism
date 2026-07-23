@@ -16,6 +16,7 @@ draw = SubResource("Resource_xxy1g")
 metadata/_custom_type_script = "uid://b38abs6n85w0l"
 
 [sub_resource type="MultiMesh" id="MultiMesh_xxy1g"]
+resource_local_to_scene = true
 transform_format = 1
 use_colors = true
 use_custom_data = true

@@ -20,6 +20,7 @@ func add_drawing_object(x, y, z, value):
 	var iy = float(y) / float(config.draw.ValScale)
 	var iz = float(z) / float(config.draw.ValScale)
 	var pos := config.draw.PosScale * Vector3(ix, iy, iz)
+	pos = G.reorient(pos)
 			
 	drawing_list.append([value, pos])
 			
@@ -42,6 +43,7 @@ func get_instance_count():
 	return instances_dim.x * instances_dim.y * instances_dim.z
 
 func _ready() -> void:
+	await get_tree().process_frame
 	create_drawing_list()
 	draw_vectors(0, true)
 

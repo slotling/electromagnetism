@@ -39,10 +39,10 @@ environment = SubResource("Environment_uxfqk")
 [node name="SceneSwitcher" parent="." instance=ExtResource("2_uxfqk")]
 
 [node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.70710665, 0.70710665, 0, -0.70710665, 0.70710665, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
+transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0, 0, 150)
 current = true
 script = ExtResource("3_qhi0i")
 
