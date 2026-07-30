@@ -31,6 +31,8 @@ func any_pressed() -> bool:
 var tick = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	scale = Vector3.ONE / get_parent().scale
+	
 	for i in $Arrows.get_child_count():
 		var arrow = $Arrows.get_child(i)
 		arrow.get_node("Mesh/Area/CollisionShape3D").disabled = not get_parent().is_selected()

@@ -16,8 +16,20 @@ func is_selected() -> bool:
 func _ready() -> void:
 	parent.charge_selected.connect(select_update_event)
 
-
 var tick = 0
+
+func is_updated() -> bool:
+	return $Gizmo.any_pressed()
+	
+func E(x, y, z):
+	var pos = Vector3(x, y, z)
+	var diffpos = pos - get_logical_position()
+	var field = diffpos / (diffpos.length()**3) * charge_magnitude
+	return field
+	
+func get_logical_position() -> Vector3:
+	return G.reorient_to_conventional(global_position) / G.WORLD.config.draw.PosScale * G.WORLD.config.draw.ValScale
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$BaseArea/CollisionShape3D.disabled = not parent.InspectedCharge == null
@@ -28,9 +40,6 @@ func _process(delta: float) -> void:
 			pass
 		elif is_selected():
 			parent.select_update(null)
-	
-	if $Gizmo.any_pressed():
-		parent.update_charge(id, true)
 	
 	tick += 1
 	if is_selected() and tick % 10 == 0:

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://siusbmdv3c7i"]
+
+[ext_resource type="Script" uid="uid://bqf1r58prach6" path="res://Scenes/functions/function_controller.gd" id="1_kecq5"]
+
+[node name="FunctionController" type="Node"]
+script = ExtResource("1_kecq5")

@@ -1,51 +1,5 @@
 extends Node
 
-var current_function_index = "idk"
-var FUNCTIONS: Dictionary[String, Array] = { # Dictionary[String, Array[Callable]]
-	"default": [
-		func(x, y, z): return Vector3(x, y, z), 
-		func(x, y, z): return Vector3(0, 0, 0),
-		func(x, y, z): return 3, 
-		func(x, y, z): return Vector3(0, 0, 0)
-	],
-	"sine": [
-		func(x, y, z): return Vector3(sin(x), sin(y), sin(z)), 
-		func(x, y, z): return Vector3(0, 0, 0),
-		func(x, y, z): return 0, 
-		func(x, y, z): return Vector3(0, 0, 0)
-	],
-	"2dswirl": [
-		func(x, y, z): return Vector3(sin(y), sin(x), 0), 
-		func(x, y, z): return Vector3(0, 0, 0),
-		func(x, y, z): return 0, 
-		func(x, y, z): return Vector3(0, 0, -sin(x) + sin(y))
-	],
-	"rotary": [
-		func(x, y, z): return Vector3(-y+z, -z+x, -x+y), 
-		func(x, y, z): return Vector3(0, 0, 0),
-		func(x, y, z): return 0, 
-		func(x, y, z): return Vector3(y+z, z+x, x+y)
-	],
-	"rotarycubed": [
-		func(x, y, z): return Vector3((-y+z)**3, (-z+x)**3, (-x+y)**3), 
-		func(x, y, z): return Vector3(0, 0, 0),
-		func(x, y, z): return 0, 
-		func(x, y, z): return Vector3(0, 0, 0)
-	],
-	"scalar": [
-		func(x, y, z): return x**2 + y**2 - z**2, 
-		func(x, y, z): return Vector3(2*x, 2*y, -2*z),
-		func(x, y, z): return 0, 
-		func(x, y, z): return Vector3(0, 0, 0)
-	],
-	"idk": [
-		func(x, y, z): return Vector3(z, y, x), 
-		#func(x, y, z): return Vector3(2*x, 2*y, -2*z),
-		#func(x, y, z): return 0, 
-		#func(x, y, z): return Vector3(0, 0, 0)
-	],
-}
-
 var state = {
 	"paused": false,
 	"sections": []
@@ -80,3 +34,33 @@ func reorient_to_game(v: Vector3):
 	
 func reorient_to_conventional(v: Vector3):
 	return Vector3(v.x, -v.z, v.y)
+
+var superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹"
+func number_to_superscript(num: int) -> String:
+	var final = ""
+	for i in str(num):
+		if i == "-":
+			final += "⁻"
+			continue
+		final += superscript[int(i)]
+	return final
+
+func format_number(num: float, sig_figs: int) -> String:
+	if is_nan(num):
+		return "NaN"
+	
+	var raw = str(num).replace(".", "")
+	var negative_offset = 0 if num > 0 else 1
+	if num == 0.0 or sig_figs <= 0:
+		return "0." + "0".repeat(sig_figs-1) + " ⋅ 10⁰"
+	var d = floor(log(abs(num)) / log(10.0))
+	
+	var most_sig_fig = negative_offset
+	
+	if d < 0:
+		most_sig_fig += -d+1
+		
+	var final = ("-" if num < 0 else "") + raw[most_sig_fig] + "." + raw.substr(most_sig_fig+1, sig_figs-1)
+	final += " ⋅ 10" + number_to_superscript(d) if d != 0 else ""
+	
+	return final

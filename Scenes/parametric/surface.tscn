@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://de33bloc4b5qt"]
+[gd_scene load_steps=6 format=3 uid="uid://de33bloc4b5qt"]
 
-[ext_resource type="Script" uid="uid://cepu50p3r525r" path="res://Scenes/surface.gd" id="1_o104s"]
+[ext_resource type="Script" uid="uid://cepu50p3r525r" path="res://Scenes/parametric/surface.gd" id="1_o104s"]
 [ext_resource type="Texture2D" uid="uid://d3teg332mh6pv" path="res://Assets/Group 1.svg" id="2_2tapi"]
+[ext_resource type="Script" uid="uid://d3j2hnf4txnem" path="res://Scenes/functions/parametric_surfaces/01_parabola.gd" id="3_hby2c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o104s"]
 transparency = 1
@@ -17,3 +18,9 @@ script = ExtResource("1_o104s")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_o104s")
 mesh = SubResource("ArrayMesh_2tapi")
+
+[node name="FunctionController" type="Node" parent="."]
+script = ExtResource("3_hby2c")
+vend = 6.283
+diff = 0.1
+metadata/_custom_type_script = "uid://bqf1r58prach6"

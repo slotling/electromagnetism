@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bt4lc2lt5wuf"]
 
-[ext_resource type="Script" uid="uid://cj1i16qtum3ah" path="res://Scenes/canvas_layer.gd" id="1_oqheq"]
+[ext_resource type="Script" uid="uid://cj1i16qtum3ah" path="res://Junk/canvas_layer.gd" id="1_oqheq"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3

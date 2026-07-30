@@ -1,30 +1,15 @@
 extends Node3D
 
-
 var texture_spacing = 1.0/5.0
 
-#func R(u, v):
-	#var pol = PI * u
-	#var azi = 2 * PI * v
-	#var r = 1
-	#return Vector3(sin(pol)*cos(azi), cos(pol), sin(pol)*sin(azi)) * r
-	##return Vector3(u, v, u+v) * 10
-	##return Vector3(sin(u * 2 * PI / 100), cos(u * 2 * PI / 100), sin(v))
-	##return Vector3(v, sin(u) + sin(v), u)
-	##return Vector3((2+sin(v)) * cos(u), (2+sin(v)) * sin(u), u + cos(v))
-	##return Vector3(2 * cos(u) + v * cos(u/2), 2 * sin(u) + v * cos(u/2), v * sin(u/2))
-
 func R(u, v):
-	var x = v * cos(u)
-	var y = v * sin(u)
-	var result = Vector3(x, y, 1-x*x-y*y)
-	return Vector3(result.x, result.y, result.z)
+	return $FunctionController.R(u, v)
 	
-var ustart = 0
-var uend = 2.0 * PI
-var vstart = 0
-var vend = 1
-var diff = 0.1
+@onready var ustart = $FunctionController.ustart
+@onready var uend = $FunctionController.uend
+@onready var vstart = $FunctionController.vstart
+@onready var vend = $FunctionController.vend
+@onready var diff = $FunctionController.diff
 
 var ireps = 0
 var jreps = 0

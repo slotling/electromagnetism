@@ -16,8 +16,7 @@ class_name VectorField
 var drawing_list = []
 
 func F(x, y=0, z=0, id=null) -> Vector3:
-	var evaluation = G.FUNCTIONS[G.current_function_index][config.subfunction_choice].call(x, y, z)
-	return evaluation if typeof(evaluation) == TYPE_VECTOR3 else Vector3(evaluation, 0, 0)
+	return $FunctionController.F(x, y, z)
 
 func add_drawing_object(x, y, z, value, initialize):
 	var ix = float(x) / float(config.draw.ValScale)
@@ -67,6 +66,8 @@ func create_drawing_list(initialize) -> void:
 		calculated_settings["magmax"] = calculated_settings["magnitudes"][upper_percentile_index]
 		calculated_settings["min"] = Vector3(calculated_settings["x_values"][lower_percentile_index], calculated_settings["y_values"][lower_percentile_index], calculated_settings["z_values"][lower_percentile_index])
 				
+	draw_vectors(0)
+	
 func get_instance_count():
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
 	return instances_dim.x * instances_dim.y * instances_dim.z
@@ -98,7 +99,7 @@ func draw_vectors(curtime=0, init=false):
 		
 		var magnitude = info[0].length()
 		
-		var finalscale = Vector3.ONE * min(max((config.draw.MinSize if (magnitude != 0 or config.type == 3) else 0.0), magnitude / calculated_settings["magmax"] * config.draw.BaseSize), config.draw.MaxSize) * config.draw.MultSize
+		var finalscale = Vector3.ONE * min(max((config.draw.MinSize if (magnitude != 0) else 0.0), magnitude / calculated_settings["magmax"] * config.draw.BaseSize), config.draw.MaxSize) * config.draw.MultSize
 		transformation = transformation.scaled(Vector3.ONE * finalscale)
 		
 		# timeoffset: 0 to 1, progress through anim
@@ -107,7 +108,14 @@ func draw_vectors(curtime=0, init=false):
 		
 		var moveoffset = info[0].normalized() * ((timeoffset - 0.5) * (finalscale)) * 10
 		
-		var transpoint = (info[0] - calculated_settings["min"]) / (calculated_settings["max"] - calculated_settings["min"])
+		var value_range = calculated_settings["max"] - calculated_settings["min"]
+		var transpoint = (info[0] - calculated_settings["min"]) / value_range
+		transpoint.x = 0 if transpoint.x == null else transpoint.x
+		transpoint.y = 0 if transpoint.y == null else transpoint.y
+		transpoint.z = 0 if transpoint.z == null else transpoint.z
+		transpoint.x = clamp(transpoint.x, 0, 1)
+		transpoint.y = clamp(transpoint.y, 0, 1)
+		transpoint.z = clamp(transpoint.z, 0, 1)
 		
 		var alpha = 1
 		if timeoffset < 0.2:
@@ -128,4 +136,5 @@ var time = 0
 func _process(delta: float) -> void:
 	frame += 1
 	time += delta
-	draw_vectors(time)
+	if not config.draw.LowDetailMode:
+		draw_vectors(time)

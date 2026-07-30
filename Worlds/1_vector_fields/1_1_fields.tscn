@@ -1,13 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://4tag6ti1sfhp"]
+[gd_scene load_steps=9 format=3 uid="uid://4tag6ti1sfhp"]
 
 [ext_resource type="Script" uid="uid://baxxj1qjw6rx1" path="res://Worlds/1_vector_fields/1_1_fields.gd" id="1_l7lvn"]
 [ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="2_nndrr"]
 [ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="2_xxy1g"]
 [ext_resource type="ArrayMesh" uid="uid://brfks7dnlrg16" path="res://Resources/Visual/ArrowMesh.tres" id="4_jwodo"]
+[ext_resource type="Script" uid="uid://bgeus1jhplqb8" path="res://Scenes/functions/vector_functions/01_default.gd" id="5_roeds"]
 
 [sub_resource type="Resource" id="Resource_xxy1g"]
 script = ExtResource("2_xxy1g")
-MultSize = 0.5
 metadata/_custom_type_script = "uid://ckj7ev16yia8c"
 
 [sub_resource type="Resource" id="Resource_nndrr"]
@@ -28,3 +28,7 @@ config = SubResource("Resource_nndrr")
 
 [node name="MM" type="MultiMeshInstance3D" parent="."]
 multimesh = SubResource("MultiMesh_xxy1g")
+
+[node name="FunctionController" type="Node" parent="."]
+script = ExtResource("5_roeds")
+metadata/_custom_type_script = "uid://bqf1r58prach6"

@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bakh64v877oqf"]
+[gd_scene load_steps=4 format=3 uid="uid://bakh64v877oqf"]
 
-[ext_resource type="Script" uid="uid://dvtanbmiblvku" path="res://Scenes/path.gd" id="1_s43gj"]
+[ext_resource type="Script" uid="uid://dvtanbmiblvku" path="res://Scenes/parametric/path.gd" id="1_s43gj"]
+[ext_resource type="Script" uid="uid://cw6m8876ohrcq" path="res://Scenes/functions/parametric_paths/01_squiggly.gd" id="2_lfmom"]
 
 [sub_resource type="Curve3D" id="Curve3D_tjn3m"]
+resource_local_to_scene = true
 
 [node name="Path" type="Node3D"]
 script = ExtResource("1_s43gj")
@@ -12,7 +14,7 @@ curve = SubResource("Curve3D_tjn3m")
 debug_custom_color = Color(1, 0, 1, 1)
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
-polygon = PackedVector2Array(-0.1, -0.1, -0.1, 0.1, 0.1, 0.1, 0.1, -0.1)
+polygon = PackedVector2Array(-0.2, -0.2, -0.2, 0.2, 0.2, 0.2, 0.2, -0.2)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
@@ -24,5 +26,9 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
+
+[node name="FunctionController" type="Node" parent="."]
+script = ExtResource("2_lfmom")
+metadata/_custom_type_script = "uid://bqf1r58prach6"
 
 [connection signal="ready" from="." to="." method="_on_ready"]
