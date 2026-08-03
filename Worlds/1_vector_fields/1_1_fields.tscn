@@ -25,10 +25,7 @@ mesh = ExtResource("4_jwodo")
 [node name="1_1_fields" type="Node3D"]
 script = ExtResource("1_l7lvn")
 config = SubResource("Resource_nndrr")
+FieldScript = ExtResource("5_roeds")
 
 [node name="MM" type="MultiMeshInstance3D" parent="."]
 multimesh = SubResource("MultiMesh_xxy1g")
-
-[node name="FunctionController" type="Node" parent="."]
-script = ExtResource("5_roeds")
-metadata/_custom_type_script = "uid://bqf1r58prach6"

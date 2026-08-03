@@ -21,6 +21,9 @@ var tick = 0
 func is_updated() -> bool:
 	return $Gizmo.any_pressed()
 	
+func has_stopped_updating() -> bool:
+	return $Gizmo.just_released
+	
 func E(x, y, z):
 	var pos = Vector3(x, y, z)
 	var diffpos = pos - get_logical_position()

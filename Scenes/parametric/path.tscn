@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bakh64v877oqf"]
 
 [ext_resource type="Script" uid="uid://dvtanbmiblvku" path="res://Scenes/parametric/path.gd" id="1_s43gj"]
-[ext_resource type="Script" uid="uid://cw6m8876ohrcq" path="res://Scenes/functions/parametric_paths/01_squiggly.gd" id="2_lfmom"]
+[ext_resource type="Script" uid="uid://dfgotp6a0b3cg" path="res://Scenes/functions/parametric_paths/02_line.gd" id="2_lfmom"]
 
 [sub_resource type="Curve3D" id="Curve3D_tjn3m"]
 resource_local_to_scene = true
 
 [node name="Path" type="Node3D"]
 script = ExtResource("1_s43gj")
+ParametricCurveScript = ExtResource("2_lfmom")
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_tjn3m")
@@ -26,9 +27,3 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
-
-[node name="FunctionController" type="Node" parent="."]
-script = ExtResource("2_lfmom")
-metadata/_custom_type_script = "uid://bqf1r58prach6"
-
-[connection signal="ready" from="." to="." method="_on_ready"]

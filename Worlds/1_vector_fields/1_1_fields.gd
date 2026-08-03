@@ -15,8 +15,11 @@ class_name VectorField
 
 var drawing_list = []
 
+@export var FieldScript: Script
+@onready var FieldScriptInstance = FieldScript.new() if FieldScript != null else null
+
 func F(x, y=0, z=0, id=null) -> Vector3:
-	return $FunctionController.F(x, y, z)
+	return FieldScriptInstance.F(x, y, z)
 
 func add_drawing_object(x, y, z, value, initialize):
 	var ix = float(x) / float(config.draw.ValScale)
@@ -66,7 +69,7 @@ func create_drawing_list(initialize) -> void:
 		calculated_settings["magmax"] = calculated_settings["magnitudes"][upper_percentile_index]
 		calculated_settings["min"] = Vector3(calculated_settings["x_values"][lower_percentile_index], calculated_settings["y_values"][lower_percentile_index], calculated_settings["z_values"][lower_percentile_index])
 				
-	draw_vectors(0)
+	draw_vectors(time)
 	
 func get_instance_count():
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
@@ -106,7 +109,7 @@ func draw_vectors(curtime=0, init=false):
 		var timeoffset = curtime + MM.get_instance_custom_data(i).r 
 		timeoffset = (timeoffset - int(timeoffset/cycle_length))/cycle_length
 		
-		var moveoffset = info[0].normalized() * ((timeoffset - 0.5) * (finalscale)) * 10
+		var moveoffset = info[0].normalized() * ((timeoffset - 0.5) * (finalscale)) * 10 # timeoffset - 0.5 for central
 		
 		var value_range = calculated_settings["max"] - calculated_settings["min"]
 		var transpoint = (info[0] - calculated_settings["min"]) / value_range
@@ -135,6 +138,6 @@ var time = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	frame += 1
-	time += delta
 	if not config.draw.LowDetailMode:
+		time += delta
 		draw_vectors(time)

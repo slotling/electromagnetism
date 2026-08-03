@@ -28,6 +28,8 @@ var old_global_position: Vector3
 func any_pressed() -> bool:
 	return pressed["x"] or pressed["y"] or pressed["z"]
 
+var just_released = false
+
 var tick = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,11 +42,13 @@ func _process(delta: float) -> void:
 	if any_pressed():
 		tick = 0
 	tick += 1
+	just_released = false
 	if get_parent().is_selected():
 		if Input.is_action_just_pressed("click"):
 			pressed = hovered.duplicate()
 			old_global_position = global_position
 		if Input.is_action_just_released("click"):
+			just_released = any_pressed()
 			for i in pressed.keys():
 				pressed[i] = false
 			
@@ -59,6 +63,10 @@ func _process(delta: float) -> void:
 			relpos.z = 0
 		var pol = acos(relpos.z/relpos.length())
 		var azi = atan2(relpos.y, relpos.x) + PI/2.0
+		
+		# experimental camera angles:
+		azi = G.CAMERA.pivot.rotation.y
+		pol = G.CAMERA.pivot.rotation.x
 		
 		if relpos.x == 0 and relpos.y == 0:
 			azi = G.CAMERA.pivot.rotation.y * (-1 if pol == 0 else 1)

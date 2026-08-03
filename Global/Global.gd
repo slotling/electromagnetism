@@ -61,6 +61,6 @@ func format_number(num: float, sig_figs: int) -> String:
 		most_sig_fig += -d+1
 		
 	var final = ("-" if num < 0 else "") + raw[most_sig_fig] + "." + raw.substr(most_sig_fig+1, sig_figs-1)
-	final += " ⋅ 10" + number_to_superscript(d) if d != 0 else ""
+	final += " ⋅ 10" + number_to_superscript(d) if true else ""
 	
 	return final

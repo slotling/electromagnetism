@@ -11,7 +11,7 @@ script = ExtResource("3_l31xq")
 LatticeStart = Vector3(-15, -15, 0)
 LatticeEnd = Vector3(15, 15, 0)
 PosScale = 5.0
-ValScale = 0.25
+ValScale = 1.0
 metadata/_custom_type_script = "uid://ckj7ev16yia8c"
 
 [sub_resource type="Resource" id="Resource_udydx"]
@@ -66,4 +66,5 @@ offset_top = 24.0
 offset_right = 640.0
 offset_bottom = 128.0
 bbcode_enabled = true
-text = "Electric field at test charge: ⁻⁰¹²³⁴⁵⁶⁷⁸⁹"
+text = "Electric field at test charge: ⁻⁰¹²³⁴⁵⁶⁷⁸⁹
+Debug in-game position: "

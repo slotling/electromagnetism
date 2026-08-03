@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://comngv0ycq24"]
+[gd_scene load_steps=7 format=3 uid="uid://comngv0ycq24"]
 
 [ext_resource type="PackedScene" uid="uid://ch3sxdbhv1l3a" path="res://Scenes/charge_distributions/PointCharge.tscn" id="1_1p3fp"]
 [ext_resource type="PackedScene" uid="uid://bakh64v877oqf" path="res://Scenes/parametric/path.tscn" id="2_7lihv"]
+[ext_resource type="Script" uid="uid://qr4vhjddgbjn" path="res://Scenes/charge_distributions/path_charge.gd" id="2_pt2r7"]
+[ext_resource type="Script" uid="uid://dfgotp6a0b3cg" path="res://Scenes/functions/parametric_paths/02_line.gd" id="4_aftbr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lihv"]
 resource_local_to_scene = true
@@ -14,8 +16,11 @@ radius = 4.0
 height = 8.0
 
 [node name="PathCharge" instance=ExtResource("1_1p3fp")]
+script = ExtResource("2_pt2r7")
+ParametricCurveScript = ExtResource("4_aftbr")
 
 [node name="MeshInstance3D" parent="." index="0"]
+visible = false
 mesh = SubResource("SphereMesh_pt2r7")
 
 [node name="Path" parent="." index="3" instance=ExtResource("2_7lihv")]

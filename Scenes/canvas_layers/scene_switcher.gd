@@ -31,6 +31,8 @@ func _on_option_button_item_selected(index: int) -> void:
 		G.ROOT_SCENE.add_child(NEW_WORLD)
 		scenes_loaded.append(index)
 	else:
-		G.ROOT_SCENE.get_children()[loaded_find].visible = true
+		var EXISTING_WORLD = G.ROOT_SCENE.get_children()[loaded_find]
+		EXISTING_WORLD.visible = true
+		G.WORLD = EXISTING_WORLD
 
 	#G.refresh_world()

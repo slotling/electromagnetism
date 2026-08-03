@@ -2,14 +2,17 @@ extends Node3D
 
 var texture_spacing = 1.0/5.0
 
+@export var ParametricSurfaceScript: Script
+@onready var ParametricSurfaceScriptInstance = ParametricSurfaceScript.new() if ParametricSurfaceScript != null else null
+
 func R(u, v):
-	return $FunctionController.R(u, v)
+	return ParametricSurfaceScriptInstance.R(u, v)
 	
-@onready var ustart = $FunctionController.ustart
-@onready var uend = $FunctionController.uend
-@onready var vstart = $FunctionController.vstart
-@onready var vend = $FunctionController.vend
-@onready var diff = $FunctionController.diff
+@onready var ustart = ParametricSurfaceScriptInstance.ustart
+@onready var uend = ParametricSurfaceScriptInstance.uend
+@onready var vstart = ParametricSurfaceScriptInstance.vstart
+@onready var vend = ParametricSurfaceScriptInstance.vend
+@onready var diff = ParametricSurfaceScriptInstance.diff
 
 var ireps = 0
 var jreps = 0
