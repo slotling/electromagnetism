@@ -8,9 +8,10 @@ var vstart = 0.0
 var vend = 1.0
 var wstart = 0.0
 var wend = 1.0
-var diff = 0.01
+var render_diff = 0.01
+var calculation_diff = 0.01
 
-# Attach in export parameters
+# Functions are divided based on physical significance, number of input variables, and number of outputs.
 
 # FIELDS
 # - a parametric path: (u) -> (x, y, z)
@@ -23,10 +24,22 @@ func F(x, y=0, z=0) -> Vector3:
 # - a scalar field: (x, y, z) -> (a)
 func R(u, v=0, w=0) -> Vector3:
 	return Vector3.ZERO
+	
+# PARTIAL DERIVATIVES FOR PARAMETRIC LINES AND SURFACES
+# - Infinitesimal displacement vector functions with respect to parameters u and v
+# (u) -> (x, y, z)
+# (u, v) -> (x, y, z)
+func R_u(u, v=0) -> Vector3:
+	return Vector3.ZERO
+	
+func R_v(u, v) -> Vector3:
+	return Vector3.ZERO
 
 # DENSITIES
 # - a parametric scalar path: (u) -> (a)
 # - a parametric scalar surface: (u, v) -> (a)
+# - a parametric scalar volume: (u, v, w) -> (a)
+# - a density scalar field: (x, y, z) -> (a)
 func P(u, v=0, w=0) -> float: # for densities
 	return 0.0
 

@@ -5,7 +5,7 @@ extends Node3D
 @onready var ParametricCurveScriptInstance = ParametricCurveScript.new()
 @onready var ustart = ParametricCurveScriptInstance.ustart
 @onready var uend = ParametricCurveScriptInstance.uend
-@onready var diff = ParametricCurveScriptInstance.diff
+@onready var diff = ParametricCurveScriptInstance.render_diff
 
 var raw_points = []
 

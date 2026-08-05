@@ -3,6 +3,8 @@ class_name VectorField
 
 @export var config: WorldConfig = WorldConfig.new()
 
+signal FieldUpdatedSignal
+
 @onready var calculated_settings = {
 	"x_values": [],
 	"y_values": [],
@@ -36,8 +38,8 @@ func add_drawing_object(x, y, z, value, initialize):
 		calculated_settings["y_values"].append(val.y)
 		calculated_settings["z_values"].append(val.z)
 		calculated_settings["magnitudes"].append(val.length())
-
-func create_drawing_list(initialize) -> void:
+	
+func create_drawing_list_process(initialize) -> void:
 	drawing_list = []
 	
 	if initialize:
@@ -68,7 +70,11 @@ func create_drawing_list(initialize) -> void:
 		calculated_settings["max"] = Vector3(calculated_settings["x_values"][upper_percentile_index], calculated_settings["y_values"][upper_percentile_index], calculated_settings["z_values"][upper_percentile_index])
 		calculated_settings["magmax"] = calculated_settings["magnitudes"][upper_percentile_index]
 		calculated_settings["min"] = Vector3(calculated_settings["x_values"][lower_percentile_index], calculated_settings["y_values"][lower_percentile_index], calculated_settings["z_values"][lower_percentile_index])
-				
+	
+
+func create_drawing_list(initialize) -> void:
+	create_drawing_list_process(initialize)
+	FieldUpdatedSignal.emit()
 	draw_vectors(time)
 	
 func get_instance_count():
@@ -101,8 +107,7 @@ func draw_vectors(curtime=0, init=false):
 			MM.set_instance_custom_data(i, Color(offset * cycle_length, 0, 0, 0))
 		
 		var magnitude = info[0].length()
-		
-		var finalscale = Vector3.ONE * min(max((config.draw.MinSize if (magnitude != 0) else 0.0), magnitude / calculated_settings["magmax"] * config.draw.BaseSize), config.draw.MaxSize) * config.draw.MultSize
+		var finalscale = Vector3.ONE * min(max(config.draw.MinSize, magnitude / calculated_settings["magmax"] * config.draw.BaseSize) if not is_zero_approx(magnitude) else 0.0, config.draw.MaxSize) * config.draw.MultSize
 		transformation = transformation.scaled(Vector3.ONE * finalscale)
 		
 		# timeoffset: 0 to 1, progress through anim

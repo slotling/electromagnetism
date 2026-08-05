@@ -20,7 +20,13 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_option_button_item_selected(index: int) -> void:
-	#G.ROOT_WORLD.get_node("Scene").get_child(0).queue_free()
+	var freeScene = true
+	if freeScene:
+		var child = G.ROOT_WORLD.get_node("Scene").get_child(0)
+		if child != null:
+			child.queue_free()
+		scenes_loaded = []
+	
 	for i in G.ROOT_SCENE.get_children():
 		i.visible = false
 	

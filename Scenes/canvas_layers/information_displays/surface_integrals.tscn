@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://xpctx2hvs2nv"]
+
+[ext_resource type="Script" uid="uid://8arctl4yk8i0" path="res://Scenes/canvas_layers/information_displays/surface_integrals.gd" id="1_xk50g"]
+
+[node name="SurfaceIntegralCanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_xk50g")
+
+[node name="Label" type="RichTextLabel" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 640.0
+offset_bottom = 128.0
+bbcode_enabled = true
+text = "Flux: [color=\"FF00AE\"]thinking very hard...[/color]"

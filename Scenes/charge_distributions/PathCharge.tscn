@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ch3sxdbhv1l3a" path="res://Scenes/charge_distributions/PointCharge.tscn" id="1_1p3fp"]
 [ext_resource type="PackedScene" uid="uid://bakh64v877oqf" path="res://Scenes/parametric/path.tscn" id="2_7lihv"]
 [ext_resource type="Script" uid="uid://qr4vhjddgbjn" path="res://Scenes/charge_distributions/path_charge.gd" id="2_pt2r7"]
-[ext_resource type="Script" uid="uid://dfgotp6a0b3cg" path="res://Scenes/functions/parametric_paths/02_line.gd" id="4_aftbr"]
+[ext_resource type="Script" uid="uid://dfgotp6a0b3cg" path="res://Resources/Functions/parametric_paths/02_line.gd" id="4_aftbr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lihv"]
 resource_local_to_scene = true

@@ -4,6 +4,7 @@ class_name ChargeVectorField
 signal charge_selected(chargeNode)
 
 @export var refresh_config_upon_release = false
+@export var recalculate_field_only_upon_release = false
 
 @onready var charges = $Charges.get_children()
 
@@ -50,7 +51,7 @@ func select_update(chargeNode):
 func _process(delta: float) -> void:
 	super(delta)
 	for i in charges:
-		if i.is_updated():
+		if i.is_updated() and not recalculate_field_only_upon_release:
 			update_charge(i.id, true)
 		if i.has_stopped_updating():
 			update_charge(i.id, true, true)

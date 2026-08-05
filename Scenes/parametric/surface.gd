@@ -12,7 +12,7 @@ func R(u, v):
 @onready var uend = ParametricSurfaceScriptInstance.uend
 @onready var vstart = ParametricSurfaceScriptInstance.vstart
 @onready var vend = ParametricSurfaceScriptInstance.vend
-@onready var diff = ParametricSurfaceScriptInstance.diff
+@onready var diff = ParametricSurfaceScriptInstance.render_diff
 
 var ireps = 0
 var jreps = 0
@@ -26,6 +26,9 @@ var indices = PackedInt32Array()
 
 var vector_verts = PackedVector3Array()
 var vector_crosses = PackedVector3Array()
+
+var debug_arrays = [null, null]
+
 var i_vector_spacing = 2
 var j_vector_spacing = 1
 
@@ -46,6 +49,9 @@ func _ready() -> void:
 	uvs = PackedVector2Array()
 	normals = PackedVector3Array()
 	indices = PackedInt32Array()
+	
+	for i in debug_arrays.size():
+		debug_arrays[i] = PackedVector3Array()
 	
 	var uscale = diff
 	var vscale = diff
@@ -75,17 +81,20 @@ func _ready() -> void:
 			var normal = cross.normalized()
 			var uv = Vector2(i * texture_spacing, j * texture_spacing)
 			
+			debug_arrays[0].push_back(R(u2, v) - raw_vert)
+			debug_arrays[1].push_back(R(u, v2) - raw_vert)
+			
 			raw_verts.push_back(raw_vert)
 			raw_crosses.push_back(cross)
 			verts.push_back(vert)
 			uvs.push_back(uv)
 			#print(vert, normal)
-			normals.push_back(-normal)
+			normals.push_back(normal)
 			
 			var icount = jreps
 			if i+1 != ireps and j+1 != jreps and i % i_vector_spacing == 0 and j % j_vector_spacing == 0:
 				vector_verts.push_back(raw_vert)
-				vector_crosses.push_back(cross)
+				vector_crosses.push_back(raw_cross)
 			
 			if i > 0 and j > 0:
 				# front triangles

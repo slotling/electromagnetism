@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://d3qhe3uwfc8mv"]
+[gd_scene load_steps=13 format=4 uid="uid://d3qhe3uwfc8mv"]
 
 [ext_resource type="PackedScene" uid="uid://bmajbq80iw741" path="res://Worlds/5_electric_charge/5_1_electric_charge.tscn" id="1_8jqi1"]
 [ext_resource type="PackedScene" uid="uid://ch3sxdbhv1l3a" path="res://Scenes/charge_distributions/PointCharge.tscn" id="2_8jqi1"]
 [ext_resource type="Script" uid="uid://d31edtavv8bm2" path="res://Worlds/5_electric_charge/5_3_test_charge.gd" id="2_hu8rt"]
 [ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="3_l31xq"]
 [ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="4_2qo1c"]
+[ext_resource type="Script" uid="uid://4mqks1784sb4" path="res://Scenes/calculation_controllers/field/TestChargeCalculationController.gd" id="6_2qo1c"]
+[ext_resource type="PackedScene" uid="uid://c5oaoyvfkq44j" path="res://Scenes/canvas_layers/information_displays/test_charge_canvas_layer.tscn" id="7_byqtt"]
 
 [sub_resource type="Resource" id="Resource_ebtaj"]
 script = ExtResource("3_l31xq")
@@ -47,24 +49,21 @@ mesh = SubResource("ArrayMesh_bck8s")
 
 [node name="electric charge world!!!" instance=ExtResource("1_8jqi1")]
 script = ExtResource("2_hu8rt")
+recalculate_field_only_upon_release = false
 config = SubResource("Resource_udydx")
 
 [node name="MM" parent="." index="0"]
 visible = true
 multimesh = SubResource("MultiMesh_l31xq")
 
-[node name="TestCharge" type="Node3D" parent="." index="2"]
+[node name="TestCharges" type="Node3D" parent="." index="2"]
 
-[node name="PointCharge" parent="TestCharge" index="0" instance=ExtResource("2_8jqi1")]
+[node name="PointCharge" parent="TestCharges" index="0" instance=ExtResource("2_8jqi1")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
+[node name="TestChargeCalculationController" type="Node" parent="TestCharges/PointCharge" index="3"]
+script = ExtResource("6_2qo1c")
+metadata/_custom_type_script = "uid://4mqks1784sb4"
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer" index="0"]
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 640.0
-offset_bottom = 128.0
-bbcode_enabled = true
-text = "Electric field at test charge: ⁻⁰¹²³⁴⁵⁶⁷⁸⁹
-Debug in-game position: "
+[node name="TestChargeCanvasLayer" parent="." index="3" instance=ExtResource("7_byqtt")]
+testCharge = NodePath("../TestCharges/PointCharge")

@@ -8,7 +8,7 @@ func _ready() -> void:
 	$Path.ParametricCurveScript = ParametricCurveScript
 	$Path._ready()
 
-# analytical computation of integral:
+# numerical computation of integral:
 # int, E(squigglyR) * P(squigglyR) * dS
 # = int ustart to uend, E(squigglyR) * P(squigglyR) * (dS/dt) * dt
 
@@ -17,7 +17,7 @@ func E(x, y, z):
 	
 	var field = Vector3.ZERO
 	
-	var uscale = ParametricCurveScriptInstance.diff
+	var uscale = ParametricCurveScriptInstance.calculation_diff
 	var uintercept = ParametricCurveScriptInstance.ustart # locate at center of patch
 	
 	var sum = 0
