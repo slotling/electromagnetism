@@ -4,7 +4,8 @@ class_name ChargeVectorField
 signal charge_selected(chargeNode)
 
 @export var refresh_config_upon_release = false
-@export var recalculate_field_only_upon_release = false
+@export var recalculate_field_when_dragging = false
+@export var recalculate_field_only_on_command = false
 
 @onready var charges = $Charges.get_children()
 
@@ -30,6 +31,8 @@ func update_charge(charge_id, update_drawing_list, refresh_config=false):
 				var field = charge.E(x, y, z)
 				forces[charge_id][id] = field
 				id += 1
+				
+	charge_id_update_list.erase(charge_id)
 	
 	if update_drawing_list:
 		create_drawing_list(true) # refresh_config and refresh_config_upon_release
@@ -47,11 +50,19 @@ func _ready() -> void:
 func select_update(chargeNode):
 	InspectedCharge = chargeNode
 	charge_selected.emit(chargeNode)
-	
+
+var charge_id_update_list = []
+
 func _process(delta: float) -> void:
 	super(delta)
 	for i in charges:
-		if i.is_updated() and not recalculate_field_only_upon_release:
-			update_charge(i.id, true)
-		if i.has_stopped_updating():
-			update_charge(i.id, true, true)
+		if i.is_updated():
+			charge_id_update_list.erase(i.id)
+			charge_id_update_list.append(i.id)
+			
+	if not recalculate_field_only_on_command:
+		for i in charges:
+			if i.is_updated() and recalculate_field_when_dragging:
+				update_charge(i.id, true)
+			if i.has_stopped_updating():
+				update_charge(i.id, true, true)

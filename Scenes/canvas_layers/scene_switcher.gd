@@ -2,6 +2,7 @@ extends CanvasLayer
 
 var scenes = []
 var scenes_loaded = []
+var current_scene = null
 
 func init(options: Dictionary, default_index=0) -> void: # name, nodepath
 	$OptionButton.clear()
@@ -19,8 +20,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+@export var freeScene = false
 func _on_option_button_item_selected(index: int) -> void:
-	var freeScene = true
 	if freeScene:
 		var child = G.ROOT_WORLD.get_node("Scene").get_child(0)
 		if child != null:
@@ -29,6 +30,8 @@ func _on_option_button_item_selected(index: int) -> void:
 	
 	for i in G.ROOT_SCENE.get_children():
 		i.visible = false
+		for j in i.get_children():
+			j.visible = false
 	
 	var loaded_find = scenes_loaded.find(index)
 	if loaded_find == -1:
@@ -39,6 +42,6 @@ func _on_option_button_item_selected(index: int) -> void:
 	else:
 		var EXISTING_WORLD = G.ROOT_SCENE.get_children()[loaded_find]
 		EXISTING_WORLD.visible = true
+		for j in EXISTING_WORLD.get_children():
+			j.visible = true
 		G.WORLD = EXISTING_WORLD
-
-	#G.refresh_world()

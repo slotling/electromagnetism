@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0jq72axobkte"]
+
+[ext_resource type="Script" uid="uid://cudjcmhl6no80" path="res://Scenes/canvas_layers/information_displays/update_field_canvas_layer.gd" id="1_kvs65"]
+
+[node name="UpdateFieldCanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_kvs65")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 144.0
+offset_bottom = 120.0
+text = "Update field"
+
+[node name="Label" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 152.0
+offset_top = 88.0
+offset_right = 584.0
+offset_bottom = 112.0
+bbcode_enabled = true
+text = "[color=\"FF00AE\"]thinking very hard...[/color]"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

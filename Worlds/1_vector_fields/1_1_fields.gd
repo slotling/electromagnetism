@@ -143,6 +143,6 @@ var time = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	frame += 1
-	if not config.draw.LowDetailMode:
+	if not config.draw.LowDetailMode and G.WORLD == self:
 		time += delta
 		draw_vectors(time)
