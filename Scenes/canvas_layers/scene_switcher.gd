@@ -31,7 +31,8 @@ func _on_option_button_item_selected(index: int) -> void:
 	for i in G.ROOT_SCENE.get_children():
 		i.visible = false
 		for j in i.get_children():
-			j.visible = false
+			if "visible" in j:
+				j.visible = false
 	
 	var loaded_find = scenes_loaded.find(index)
 	if loaded_find == -1:

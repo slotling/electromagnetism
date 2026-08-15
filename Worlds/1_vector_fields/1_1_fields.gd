@@ -18,10 +18,10 @@ signal FieldUpdatedSignal
 var drawing_list = []
 
 @export var FieldScript: Script
-@onready var FieldScriptInstance = FieldScript.new() if FieldScript != null else null
+@onready var FieldScriptInstance: FunctionController = FieldScript.new() if FieldScript != null else null
 
 func F(x, y=0, z=0, id=null) -> Vector3:
-	return FieldScriptInstance.F(x, y, z)
+	return FieldScriptInstance.F(x, y, z, id)
 
 func add_drawing_object(x, y, z, value, initialize):
 	var ix = float(x) / float(config.draw.ValScale)
@@ -83,6 +83,7 @@ func get_instance_count():
 
 func _ready() -> void:
 	await get_tree().process_frame
+	FieldScriptInstance.WORLD = self
 	create_drawing_list(true)
 	draw_vectors(0, true)
 

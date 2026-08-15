@@ -7,7 +7,7 @@ var id = null
 
 var hovered = false
 
-@onready var parent = get_parent().get_parent()
+@onready var parent = get_node("../../ElectricFieldFunctionReplacerController")
 
 func is_selected() -> bool:
 	return parent.InspectedCharge == self

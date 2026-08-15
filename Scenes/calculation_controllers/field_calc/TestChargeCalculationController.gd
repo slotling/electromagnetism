@@ -6,6 +6,6 @@ class_name TestChargeCalculationController
 func calculate():
 	var electric_field = Vector3.ZERO
 	var pos = get_node("../").get_logical_position()
-	for charge in G.WORLD.charges:
+	for charge in G.WORLD.get_node("ElectricFieldFunctionReplacerController").charges:
 		electric_field += charge.E(pos.x, pos.y, pos.z)
 	return electric_field

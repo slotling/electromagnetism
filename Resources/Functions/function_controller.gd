@@ -2,6 +2,8 @@ extends Resource
 class_name FunctionController
 # Extend script to add your own function and modify starting and ending values for parameters!!!
 
+var WORLD = null
+
 var ustart = 0.0
 var uend = 1.0
 var vstart = 0.0
@@ -16,7 +18,7 @@ var calculation_diff = 0.01
 # FIELDS
 # - a parametric path: (u) -> (x, y, z)
 # - a parametric surface: (u, v) -> (x, y, z)
-func F(x, y=0, z=0) -> Vector3:
+func F(x, y=0, z=0, id=null) -> Vector3:
 	return Vector3.ZERO
 
 # PARAMETRIC

@@ -51,9 +51,9 @@ config = SubResource("Resource_udydx")
 visible = true
 multimesh = SubResource("MultiMesh_mvyu6")
 
-[node name="PointCharge6" parent="Charges" index="1" instance=ExtResource("2_4h2pt")]
+[node name="PointCharge6" parent="Charges" index="0" instance=ExtResource("2_4h2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 48)
 charge_magnitude = -1.0
 
-[node name="PointCharge7" parent="Charges" index="2" instance=ExtResource("2_4h2pt")]
+[node name="PointCharge7" parent="Charges" index="1" instance=ExtResource("2_4h2pt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0)

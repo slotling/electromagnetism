@@ -10,6 +10,8 @@ resource_local_to_scene = true
 script = ExtResource("1_s43gj")
 ParametricCurveScript = ExtResource("2_lfmom")
 
+[node name="Paths" type="Node3D" parent="."]
+
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_tjn3m")
 debug_custom_color = Color(1, 0, 1, 1)

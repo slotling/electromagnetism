@@ -1,7 +1,5 @@
 extends VectorField
 
-var sphere = preload("res://Junk/sphere.tscn")
-
 func create_drawing_list_process(initialize) -> void:
 	for vert_index in $surface.vector_verts.size():
 		var vert = $surface.vector_verts[vert_index]

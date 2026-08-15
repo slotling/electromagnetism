@@ -47,8 +47,6 @@ use_custom_data = true
 mesh = SubResource("ArrayMesh_p2jq1")
 
 [node name="5_4_arbitrary_charge_distributions" instance=ExtResource("1_e4lfs")]
-recalculate_field_when_dragging = true
-recalculate_field_only_on_command = true
 config = SubResource("Resource_gndnu")
 
 [node name="MM" parent="." index="0"]
@@ -58,3 +56,6 @@ multimesh = SubResource("MultiMesh_ug5ax")
 ParametricCurveScript = ExtResource("5_xtsxh")
 
 [node name="UpdateFieldCanvasLayer" parent="." index="4" instance=ExtResource("6_gndnu")]
+
+[node name="ElectricFieldFunctionReplacerController" parent="." index="5"]
+recalculate_field_only_on_command = true
