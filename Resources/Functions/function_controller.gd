@@ -13,6 +13,8 @@ var wend = 1.0
 var render_diff = 0.01
 var calculation_diff = 0.01
 
+var invert_face_rendering = false
+
 # Functions are divided based on physical significance, number of input variables, and number of outputs.
 
 # FIELDS

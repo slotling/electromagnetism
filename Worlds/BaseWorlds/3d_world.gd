@@ -16,8 +16,9 @@ func _ready() -> void:
 		"5.2: electric field": load("res://Worlds/5_electric_charge/5_2_electric_field.tscn"),
 		"5.3: test charge": load("res://Worlds/5_electric_charge/5_3_test_charge.tscn"),
 		"5.4: arbitrary charge distributions": load("res://Worlds/5_electric_charge/5_4_arbitrary_charge_distributions.tscn"),
+		"6.1: gauss's law": load("res://Worlds/6_gauss_law/6_1_verifying_gauss_law.tscn"),
 	}
-	var scene_index = scenes.keys().find("4.1: flux")
+	var scene_index = scenes.keys().find("3.2: parametric surface")
 	$SceneSwitcher.init(scenes, scene_index)
 
 

@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=4 uid="uid://irj8j41x80tt"]
+[gd_scene load_steps=11 format=4 uid="uid://irj8j41x80tt"]
 
 [ext_resource type="PackedScene" uid="uid://ehfxyysvctxi" path="res://Worlds/4_integrals/4_1_surface_integral.tscn" id="1_4s3j2"]
 [ext_resource type="PackedScene" uid="uid://xpctx2hvs2nv" path="res://Scenes/canvas_layers/information_displays/surface_integrals.tscn" id="2_d6w7k"]
+[ext_resource type="Script" uid="uid://be0a2wgu4dwlh" path="res://Scenes/calculation_controllers/integration/SurfaceIntegralCalculationController.gd" id="2_goxmp"]
+[ext_resource type="Script" uid="uid://c8xixeh1nmpll" path="res://Resources/Functions/vector_functions/SPECIAL_electric_field_override.gd" id="2_rwhq7"]
+[ext_resource type="Script" uid="uid://ln1gxrxxbqy8" path="res://Resources/Functions/parametric_surfaces/03_sphere_shell.gd" id="3_kjw63"]
+[ext_resource type="Script" uid="uid://c5ti84r5a68gu" path="res://Scenes/calculation_controllers/field_func/ElectricFieldFunctionReplacerController.gd" id="5_etvby"]
+[ext_resource type="PackedScene" uid="uid://ch3sxdbhv1l3a" path="res://Scenes/charge_distributions/PointCharge.tscn" id="6_8r5e5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6w7k"]
 resource_local_to_scene = true
@@ -30,8 +35,28 @@ use_custom_data = true
 mesh = SubResource("ArrayMesh_goxmp")
 
 [node name="6_1_verifying_gauss_law" instance=ExtResource("1_4s3j2")]
+drawNormals = false
+FieldScript = ExtResource("2_rwhq7")
 
 [node name="MM" parent="." index="0"]
 multimesh = SubResource("MultiMesh_rwhq7")
 
+[node name="surface" parent="." index="1"]
+visible = false
+ParametricSurfaceScript = ExtResource("3_kjw63")
+
+[node name="SurfaceIntegralCalculationController" type="Node" parent="surface" index="1"]
+script = ExtResource("2_goxmp")
+metadata/_custom_type_script = "uid://be0a2wgu4dwlh"
+
 [node name="SurfaceIntegralCanvasLayer" parent="." index="2" instance=ExtResource("2_d6w7k")]
+SurfaceIntegralCalculationController = NodePath("../surface/SurfaceIntegralCalculationController")
+
+[node name="ElectricFieldFunctionReplacerController" type="Node" parent="." index="3"]
+script = ExtResource("5_etvby")
+recalculate_field_when_dragging = true
+metadata/_custom_type_script = "uid://c5ti84r5a68gu"
+
+[node name="Charges" type="Node3D" parent="." index="4"]
+
+[node name="PointCharge" parent="Charges" index="0" instance=ExtResource("6_8r5e5")]

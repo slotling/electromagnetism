@@ -9,7 +9,7 @@ signal charge_selected(chargeNode)
 @export var recalculate_field_when_dragging = false
 @export var recalculate_field_only_on_command = false
 
-@onready var WORLD = get_parent()
+@onready var WORLD: VectorField = get_parent()
 @onready var charges = WORLD.get_node("Charges").get_children()
 
 var forces = []
@@ -18,25 +18,26 @@ var InspectedCharge: ChargeDisplay = null
 
 func F(x, y=0, z=0, id=null) -> Vector3:
 	var sum = Vector3.ZERO
-	for arr in forces:
-		sum += arr[id]
+	if id != null:
+		for arr in forces:
+			sum += arr[id]
+	else:
+		for charge in charges:
+			sum += charge.E(x, y, z)
+			
 	return sum
-
-func update_charge(charge_id, update_drawing_list, refresh_config=false):
-	var id = 0
+	
+func add_field(x, y, z, id, extra, charge_id):
 	var charge = charges[charge_id]
+	var field = charge.E(x, y, z)
+	forces[charge_id][id] = field
+
+func update_charge(chargeId, update_drawing_list, refresh_config=false):
+	var id = 0
 	var drawConfig: DrawConfig = WORLD.config.draw
-	for ix in range(drawConfig.LatticeStart.x, drawConfig.LatticeEnd.x+1, 1):
-		for iy in range(drawConfig.LatticeStart.y, drawConfig.LatticeEnd.y+1, 1):
-			for iz in range(drawConfig.LatticeStart.z, drawConfig.LatticeEnd.z+1, 1):
-				var x = drawConfig.ValScale * ix
-				var y = drawConfig.ValScale * iy
-				var z = drawConfig.ValScale * iz
-				var field = charge.E(x, y, z)
-				forces[charge_id][id] = field
-				id += 1
+	WORLD.loop_through_all_points(false, Callable(self, "add_field").bind(chargeId))
 				
-	charge_id_update_list.erase(charge_id)
+	charge_id_update_list.erase(chargeId)
 	
 	if update_drawing_list:
 		WORLD.create_drawing_list(true) # refresh_config and refresh_config_upon_release

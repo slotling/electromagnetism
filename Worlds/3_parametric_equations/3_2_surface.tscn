@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://blbxu4etlngqs"]
+[gd_scene load_steps=8 format=3 uid="uid://blbxu4etlngqs"]
 
 [ext_resource type="Script" uid="uid://maeo4vn1rhv1" path="res://Worlds/3_parametric_equations/3_2_surface.gd" id="1_8d468"]
 [ext_resource type="PackedScene" uid="uid://de33bloc4b5qt" path="res://Scenes/parametric/surface.tscn" id="1_syarw"]
 [ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="2_svktb"]
 [ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="3_ox3ju"]
+[ext_resource type="Script" uid="uid://ln1gxrxxbqy8" path="res://Resources/Functions/parametric_surfaces/03_sphere_shell.gd" id="5_ox3ju"]
 
 [sub_resource type="Resource" id="Resource_811um"]
 script = ExtResource("2_svktb")
@@ -20,3 +21,4 @@ script = ExtResource("1_8d468")
 config = SubResource("Resource_m1sw4")
 
 [node name="surface" parent="." instance=ExtResource("1_syarw")]
+ParametricSurfaceScript = ExtResource("5_ox3ju")

@@ -1,6 +1,9 @@
 extends VectorField
 
-func create_drawing_list_process(initialize) -> void:
+@export var drawNormals = true
+
+func loop_through_all_points(initialize: bool, callable: Callable):
+	var id = 0
 	for vert_index in $surface.vector_verts.size():
 		var vert = $surface.vector_verts[vert_index]
 		var cross = $surface.vector_crosses[vert_index]
@@ -8,17 +11,14 @@ func create_drawing_list_process(initialize) -> void:
 		var x = vert.x
 		var y = vert.y
 		var z = vert.z
-		
-		var value = F(x, y, z).dot(cross) * normal
-		#print(F(x, y, z), cross, normal, value)
-		#var value = F(x, y, z)
-		#var value = cross
-		
-		#print(vert)
-		#add_drawing_object(x, y, z, $surface.debug_arrays[0][vert_index], initialize)
-		#add_drawing_object(x, y, z, $surface.debug_arrays[1][vert_index], initialize)
-		#add_drawing_object(x, y, z, normal, initialize)
-		add_drawing_object(x, y, z, value, initialize)
+		callable.call(x, y, z, id, {"cross": cross, "normal": normal, "initialize": initialize})
+		id += 1
+
+func every_point(x, y, z, id, extra):
+	var value = F(x, y, z, id)
+	if drawNormals:
+		value = value.dot(extra["cross"]) * extra["normal"]
+	add_drawing_object(x, y, z, value, extra["initialize"])
 		
 func get_instance_count():
 	return $surface.vector_verts.size() # remove overshooting vertices

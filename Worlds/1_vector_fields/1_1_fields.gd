@@ -38,16 +38,8 @@ func add_drawing_object(x, y, z, value, initialize):
 		calculated_settings["y_values"].append(val.y)
 		calculated_settings["z_values"].append(val.z)
 		calculated_settings["magnitudes"].append(val.length())
-	
-func create_drawing_list_process(initialize) -> void:
-	drawing_list = []
-	
-	if initialize:
-		calculated_settings["x_values"] = []
-		calculated_settings["y_values"] = []
-		calculated_settings["z_values"] = []
-		calculated_settings["magnitudes"] = []
-	
+
+func loop_through_all_points(initialize: bool, callable: Callable):
 	var id = 0
 	for ix in range(config.draw.LatticeStart.x, config.draw.LatticeEnd.x+1, 1):
 		for iy in range(config.draw.LatticeStart.y, config.draw.LatticeEnd.y+1, 1):
@@ -55,9 +47,21 @@ func create_drawing_list_process(initialize) -> void:
 				var x = config.draw.ValScale * ix
 				var y = config.draw.ValScale * iy
 				var z = config.draw.ValScale * iz
-				var value = F(x, y, z, id)
-				add_drawing_object(x, y, z, value, initialize)
+				callable.call(x, y, z, id, {"initialize": initialize})
 				id += 1
+
+func every_point(x, y, z, id, extra):
+	var value = F(x, y, z, id)
+	add_drawing_object(x, y, z, value, extra["initialize"])
+
+func create_drawing_list_process(initialize) -> void:
+	if initialize:
+		calculated_settings["x_values"] = []
+		calculated_settings["y_values"] = []
+		calculated_settings["z_values"] = []
+		calculated_settings["magnitudes"] = []
+	
+	loop_through_all_points(initialize, Callable(self, "every_point"))
 	
 	if initialize:
 		var length = calculated_settings["x_values"].size()
@@ -73,6 +77,7 @@ func create_drawing_list_process(initialize) -> void:
 	
 
 func create_drawing_list(initialize) -> void:
+	drawing_list = []
 	create_drawing_list_process(initialize)
 	FieldUpdatedSignal.emit()
 	draw_vectors(time)

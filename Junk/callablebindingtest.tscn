@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8p78qnd8pt2r"]
+
+[ext_resource type="Script" uid="uid://dt85d14qifh4r" path="res://Junk/callablebindingtest.gd" id="1_jq3n6"]
+
+[node name="Callablebindingtest" type="Node2D"]
+script = ExtResource("1_jq3n6")

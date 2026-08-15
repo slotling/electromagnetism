@@ -44,4 +44,4 @@ script = ExtResource("2_inhgc")
 metadata/_custom_type_script = "uid://be0a2wgu4dwlh"
 
 [node name="SurfaceIntegralCanvasLayer" parent="." index="2" instance=ExtResource("5_ykw7y")]
-surface = NodePath("../surface")
+SurfaceIntegralCalculationController = NodePath("../surface/SurfaceIntegralCalculationController")
