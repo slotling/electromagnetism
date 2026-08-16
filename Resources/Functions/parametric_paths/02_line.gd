@@ -1,8 +1,8 @@
 extends FunctionController
 
 func _init() -> void:
-	ustart = -10.0
-	uend = 10.0
+	ustart = -1.0
+	uend = 1.0
 	render_diff = 0.5
 
 func R(u, v=0, w=0) -> Vector3:

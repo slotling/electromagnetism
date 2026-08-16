@@ -32,7 +32,8 @@ func _on_option_button_item_selected(index: int) -> void:
 		i.visible = false
 		for j in i.get_children():
 			if "visible" in j:
-				j.visible = false
+				if "visible" in j and not j.is_in_group("retain_visibility"):
+					j.visible = false
 	
 	var loaded_find = scenes_loaded.find(index)
 	if loaded_find == -1:
@@ -44,5 +45,6 @@ func _on_option_button_item_selected(index: int) -> void:
 		var EXISTING_WORLD = G.ROOT_SCENE.get_children()[loaded_find]
 		EXISTING_WORLD.visible = true
 		for j in EXISTING_WORLD.get_children():
-			j.visible = true
+			if "visible" in j and not j.is_in_group("retain_visibility"):
+				j.visible = true
 		G.WORLD = EXISTING_WORLD

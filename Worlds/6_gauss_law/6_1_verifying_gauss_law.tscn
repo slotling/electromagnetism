@@ -41,7 +41,7 @@ FieldScript = ExtResource("2_rwhq7")
 [node name="MM" parent="." index="0"]
 multimesh = SubResource("MultiMesh_rwhq7")
 
-[node name="surface" parent="." index="1"]
+[node name="surface" parent="." index="1" groups=["retain_visibility"]]
 visible = false
 ParametricSurfaceScript = ExtResource("3_kjw63")
 
