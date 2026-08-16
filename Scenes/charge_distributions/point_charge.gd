@@ -1,7 +1,7 @@
 extends Node3D
 class_name ChargeDisplay
 
-@export var charge_magnitude:float = 1
+@export var charge_magnitude:float = 1 # in terms of epsilon_0, the permittivity of free space
 
 var id = null
 
@@ -27,7 +27,7 @@ func has_stopped_updating() -> bool:
 func E(x, y, z):
 	var pos = Vector3(x, y, z)
 	var diffpos = pos - get_logical_position()
-	var field = diffpos / (diffpos.length()**3) * charge_magnitude
+	var field = diffpos / (diffpos.length()**3) * charge_magnitude / 4 / PI
 	return field
 	
 func get_logical_position() -> Vector3:
