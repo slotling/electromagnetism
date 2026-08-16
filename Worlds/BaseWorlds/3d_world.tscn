@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3p2c07rqxu0e" path="res://Worlds/BaseWorlds/3d_world.gd" id="1_jbcjw"]
 [ext_resource type="PackedScene" uid="uid://db6l0b7ieh54k" path="res://Scenes/canvas_layers/scene_switcher.tscn" id="2_uxfqk"]
-[ext_resource type="Script" uid="uid://dwpefa5nxn2kr" path="res://camera_3d.gd" id="3_qhi0i"]
+[ext_resource type="Script" uid="uid://dwpefa5nxn2kr" path="res://Scenes/canvas_layers/camera_3d.gd" id="3_qhi0i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4uv8h"]
 sky_top_color = Color(0, 0, 0, 1)
