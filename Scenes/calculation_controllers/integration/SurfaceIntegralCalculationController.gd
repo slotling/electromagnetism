@@ -6,36 +6,32 @@ class_name SurfaceIntegralCalculationController
 @onready var SurfaceScriptInstance: FunctionController
 @onready var FieldScriptInstance: FunctionController
 
-var R_u_cache = {} # u, v hierarchy
-var R_v_cache = {} # u, v hierarchy
+var normal_cache = {} # u, v hierarchy
 
 func R(u, v):
 	return SurfaceScriptInstance.R(u, v)
 	
-func R_partial(u, v, partial="u", use_cache=true, store_cache=true):
-	var cache_dict = R_u_cache if partial=="u" else R_v_cache
+func R_partial(u, v, partial="u"):
 	var partial_func_callable: Callable = SurfaceScriptInstance.R_u if partial=="u" else SurfaceScriptInstance.R_v
-	
-	var result
-	if not u in cache_dict and store_cache:
-		cache_dict[u] = {}
-		
-	if not use_cache or not v in cache_dict[u]:
-		result = partial_func_callable.call(u, v)
-		if store_cache:
-			cache_dict[u][v] = result
-	else:
-		result = cache_dict[u][v]
-		
-	return result
+	return partial_func_callable.call(u, v)
 
 func F(x, y, z):
 	return FieldScriptInstance.F(x, y, z)
 
 # efficient one given you worked out the derivatives
-func calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale):
+func calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale, use_cache=true, store_cache = true):
 	var currentR = R(u, v)
-	var diffCross = R_partial(u, v, "u").cross(R_partial(u, v, "v")) * uscale * vscale
+	
+	var diffCross
+	if not u in normal_cache and store_cache:
+		normal_cache[u] = {}
+	if not v in normal_cache[u] or not use_cache:
+		diffCross = R_partial(u, v, "u").cross(R_partial(u, v, "v")) * uscale * vscale
+		if store_cache:
+			normal_cache[u][v] = diffCross
+	else:
+		diffCross = normal_cache[u][v]
+	
 	var value = F(currentR.x, currentR.y, currentR.z)
 	return value.dot(diffCross)
 
