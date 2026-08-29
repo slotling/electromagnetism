@@ -7,6 +7,8 @@ var texture_spacing = 1.0/5.0
 
 # Alias variable name for FunctionInput nodes and consistency
 @onready var FunctionScriptInstances = [ParametricSurfaceScriptInstance]
+func function_updater():
+	generate_surface()
 
 func R(u, v):
 	return ParametricSurfaceScriptInstance.R(u, v)
@@ -41,8 +43,7 @@ func calc_cross(u, v, u2, v2, currentR):
 func reoriented_calc_cross(u, v, u2, v2, currentR):
 	return (G.reorient_to_game(R(u2, v) - currentR)).cross(G.reorient_to_game(R(u, v2) - currentR))
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func generate_surface():
 	var surface_array = []
 	surface_array.resize(Mesh.ARRAY_MAX)
 	
@@ -128,6 +129,10 @@ func _ready() -> void:
 	
 	$MeshInstance3D.mesh.clear_surfaces()
 	$MeshInstance3D.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	generate_surface()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

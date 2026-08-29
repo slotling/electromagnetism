@@ -9,10 +9,12 @@ extends Node3D
 
 # Alias variable name for FunctionInput nodes and consistency
 @onready var FunctionScriptInstances = [ParametricCurveScriptInstance]
+func function_updater():
+	generate_points()
 
 var raw_points = []
 
-func _ready() -> void:
+func generate_points():
 	raw_points = []
 	$Path3D.curve.clear_points()
 	
@@ -28,7 +30,11 @@ func _ready() -> void:
 		if u > uend:
 			u = uend
 		
+		if u == uintercept:
+			pass
+		
 		var raw_pos = ParametricCurveScriptInstance.R(u)
+		#print(raw_pos)
 		if u != uend or true:
 			raw_points.append(raw_pos)
 			
@@ -39,6 +45,10 @@ func _ready() -> void:
 		# "Adds a point with the specified position relative to the curve's own position, with control points in and out. Appends the new point at the end of the point list." 
 		# but the resulting points, when displayed, have had the global position of the path added to it. this is likely a bug.
 
+
+func _ready() -> void:
+	generate_points()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

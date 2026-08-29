@@ -1,9 +1,23 @@
-[gd_scene load_steps=8 format=4 uid="uid://ci0af7mt2auc7"]
+[gd_scene load_steps=12 format=4 uid="uid://ci0af7mt2auc7"]
 
 [ext_resource type="PackedScene" uid="uid://4tag6ti1sfhp" path="res://Worlds/1_vector_fields/1_1_fields.tscn" id="1_lhwrq"]
 [ext_resource type="Script" uid="uid://cw3o83iuiqjpx" path="res://Resources/Functions/overrides/SPECIAL_function_input_override.gd" id="2_8qp4v"]
+[ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="2_a75hg"]
 [ext_resource type="PackedScene" uid="uid://cno5vr8ekj43" path="res://Scenes/canvas_layers/information_inputs/function_input.tscn" id="2_c38mg"]
-[ext_resource type="PackedScene" uid="uid://d0jq72axobkte" path="res://Scenes/canvas_layers/information_inputs/update_field_canvas_layer.tscn" id="4_pmb8k"]
+[ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="3_c5ogb"]
+[ext_resource type="PackedScene" uid="uid://qh7fqtqwc87r" path="res://Scenes/canvas_layers/information_inputs/function_input_updater.tscn" id="4_pmb8k"]
+
+[sub_resource type="Resource" id="Resource_jvdk4"]
+script = ExtResource("2_a75hg")
+LatticeStart = Vector3(-15, -15, 0)
+LatticeEnd = Vector3(15, 15, 0)
+PosScale = 5.0
+metadata/_custom_type_script = "uid://ckj7ev16yia8c"
+
+[sub_resource type="Resource" id="Resource_e4o13"]
+script = ExtResource("3_c5ogb")
+draw = SubResource("Resource_jvdk4")
+metadata/_custom_type_script = "uid://b38abs6n85w0l"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c38mg"]
 resource_local_to_scene = true
@@ -32,6 +46,7 @@ use_custom_data = true
 mesh = SubResource("ArrayMesh_8qp4v")
 
 [node name="1_2_custom_functions" instance=ExtResource("1_lhwrq")]
+config = SubResource("Resource_e4o13")
 FieldScript = ExtResource("2_8qp4v")
 
 [node name="MM" parent="." index="0"]
@@ -39,6 +54,7 @@ multimesh = SubResource("MultiMesh_pmb8k")
 
 [node name="FunctionInput" parent="." index="1" instance=ExtResource("2_c38mg")]
 node_path_with_script_instance = NodePath("..")
-variable_names = Array[String](["x", "y", "z"])
 
-[node name="UpdateFieldCanvasLayer" parent="." index="2" instance=ExtResource("4_pmb8k")]
+[node name="FunctionInputUpdater" parent="." index="2" instance=ExtResource("4_pmb8k")]
+node_paths_with_script_instance = Array[NodePath]([NodePath("..")])
+node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput")])

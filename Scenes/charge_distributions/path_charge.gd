@@ -5,9 +5,13 @@ extends ChargeDisplay
 
 # Alias variable name for FunctionInput nodes and consistency
 @onready var FunctionScriptInstances = [ParametricCurveScriptInstance]
+func function_updater():
+	_ready()
 
 func _ready() -> void:
 	super()
+	
+func set_path():
 	$Path.ParametricCurveScript = ParametricCurveScript
 	$Path._ready()
 

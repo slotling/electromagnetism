@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwfmwp0clbrc8"]
+
+[ext_resource type="PackedScene" uid="uid://ds6tgon6cwvmr" path="res://Worlds/3_parametric_equations/3_1_curve.tscn" id="1_7pmbj"]
+[ext_resource type="PackedScene" uid="uid://cno5vr8ekj43" path="res://Scenes/canvas_layers/information_inputs/function_input.tscn" id="2_f5043"]
+[ext_resource type="Script" uid="uid://cw3o83iuiqjpx" path="res://Resources/Functions/overrides/SPECIAL_function_input_override.gd" id="2_s2nut"]
+[ext_resource type="PackedScene" uid="uid://qh7fqtqwc87r" path="res://Scenes/canvas_layers/information_inputs/function_input_updater.tscn" id="3_s2nut"]
+
+[node name="3_3_parametric_curve_input" instance=ExtResource("1_7pmbj")]
+
+[node name="Path" parent="." index="0"]
+ParametricCurveScript = ExtResource("2_s2nut")
+
+[node name="FunctionInput" parent="." index="1" instance=ExtResource("2_f5043")]
+node_path_with_script_instance = NodePath("../Path")
+variable_names = Array[String](["t"])
+function_name = "R"
+overriding_function_id = 1
+
+[node name="FunctionInputUpdater" parent="." index="2" instance=ExtResource("3_s2nut")]
+node_paths_with_script_instance = Array[NodePath]([NodePath("../Path")])
+node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput")])

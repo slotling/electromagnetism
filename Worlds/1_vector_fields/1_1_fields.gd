@@ -22,6 +22,9 @@ var drawing_list = []
 
 # Alias variable name for FunctionInput nodes and consistency
 @onready var FunctionScriptInstances = [FieldScriptInstance]
+func function_updater():
+	create_drawing_list(true)
+	draw_vectors(0, true)
 
 func F(x, y=0, z=0, id=null) -> Vector3:
 	return FieldScriptInstance.F(x, y, z, id)
@@ -78,7 +81,7 @@ func create_drawing_list_process(initialize) -> void:
 		calculated_settings["magmax"] = calculated_settings["magnitudes"][upper_percentile_index]
 		calculated_settings["min"] = Vector3(calculated_settings["x_values"][lower_percentile_index], calculated_settings["y_values"][lower_percentile_index], calculated_settings["z_values"][lower_percentile_index])
 	
-
+# THIS IS WHAT YOU CALL TO REFRESH THE DRAWING LIST
 func create_drawing_list(initialize) -> void:
 	drawing_list = []
 	create_drawing_list_process(initialize)

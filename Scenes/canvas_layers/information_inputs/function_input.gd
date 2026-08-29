@@ -1,24 +1,38 @@
 extends CanvasLayer
+class_name FunctionInput
 
 @export var node_path_with_script_instance: NodePath
 @export var function_script_instance_to_input = 0
 @export var entries = 3
 @export var variable_names: Array[String] = []
 @export var function_name = "F"
+## Refer to Resources/Functions/overrides/SPECIAL_function_input_override.gd
+@export var overriding_function_id = 0 
 
 var FunctionScriptInstances
 
 var string_expressions: PackedStringArray = []
 
-func evaluate(variables: Array[float]):
+func evaluate(variables):
 	var results = []
 	for string in string_expressions:
+		#print(string)
 		var expression = Expression.new()
 		var finalstring = string
 		for i in variable_names.size():
 			finalstring = finalstring.replace(variable_names[i], str(variables[i]))
-		expression.parse(finalstring)
+		#print(finalstring)
+		var parse_error = expression.parse(finalstring)
+		
+		if parse_error != Error.OK:
+			return {"error": error_string(parse_error)}
+		
 		var result = expression.execute()
+		#print(result)
+
+		if result == null:
+			return {"error": "Unable to parse '" + string + "'"}
+		
 		results.push_back(result)
 	
 	if entries == 1:
@@ -35,15 +49,25 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	FunctionScriptInstances = get_node(node_path_with_script_instance).FunctionScriptInstances
-	FunctionScriptInstances[function_script_instance_to_input].FUNCTION_PROVIDER = self
+	FunctionScriptInstances[function_script_instance_to_input].FUNCTION_PROVIDERS.append(self)
 	$Control/SubjectLabel.text = function_name + "(" + ", ".join(variable_names) + ") = "
+	var my_array = []
+	my_array.resize(entries)
+	my_array.fill("+".join(variable_names))
+	$Control/LineEdit.placeholder_text = ", ".join(my_array)
 	$Control/VecIndicator.visible = entries > 1
 
 var error = ""
+var text = ""
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	return
-	var processed_string: String = $Control/LineEdit.text.replace(" ", "")
+	pass
+	#$Control/Button.disabled = error != ""
+
+func _on_button_pressed() -> bool:
+	text = $Control/LineEdit.text
+	var processed_string: String = text.replace(" ", "")
 	string_expressions = processed_string.split(",")
 	#print(string_expressions)
 	error = ""
@@ -51,8 +75,15 @@ func _process(delta: float) -> void:
 		if string == "":
 			error = "Empty entry!"
 	if entries != string_expressions.size():
-		error = "Entry count mismatch!"
+		error = "Entry count mismatch! " + str(string_expressions.size()) + " given, " + str(entries) + " required"
+	
+	if error == "":
+		var variables_test = []
+		variables_test.resize(variable_names.size())
+		variables_test.fill(67.67)
+		var evaluation = evaluate(variables_test)
+		if typeof(evaluation) == TYPE_DICTIONARY and "error" in evaluation:
+			error = evaluation["error"]
 	
 	$Control/Label3.text = '[color="#ff1212"]' + error
-	
-	$Control/Button.disabled = error != ""
+	return error == ""

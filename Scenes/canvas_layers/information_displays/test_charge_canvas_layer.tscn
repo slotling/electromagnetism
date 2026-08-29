@@ -6,10 +6,15 @@
 script = ExtResource("1_rf2cr")
 
 [node name="Label" type="RichTextLabel" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 24.0
-offset_top = 24.0
-offset_right = 640.0
-offset_bottom = 128.0
+offset_top = -56.0
+offset_right = 976.0
+offset_bottom = 48.0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "Electric field at test charge: [color=\"FF00AE\"]thinking very hard...[/color]
 Debug in-game position: [color=\"FF00AE\"]thinking very hard...[/color]"

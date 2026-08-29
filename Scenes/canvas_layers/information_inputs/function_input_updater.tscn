@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://qh7fqtqwc87r"]
+
+[ext_resource type="Script" uid="uid://gt2y7rugq7il" path="res://Scenes/canvas_layers/information_inputs/function_input_updater.gd" id="1_h4yxd"]
+
+[node name="FunctionInputUpdater" type="CanvasLayer"]
+script = ExtResource("1_h4yxd")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 160.0
+offset_bottom = 64.0
+text = "Apply functions"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -5,7 +5,7 @@ extends Node3D
 func _ready() -> void:
 	var scenes:Dictionary[String, Resource] = {
 		"A.1: vector field": load("res://Worlds/1_vector_fields/1_2_custom_functions.tscn"),
-		"B.1: parametric curve": load("res://Worlds/3_parametric_equations/3_1_curve.tscn"),
+		"B.1: parametric curve": load("res://Worlds/3_parametric_equations/3_3_parametric_curve_input.tscn"),
 		"B.2: parametric surface": load("res://Worlds/3_parametric_equations/3_2_surface.tscn"),
 		"C.1: surface integral": load("res://Worlds/4_integrals/4_2_surface_integral_calculation.tscn"),
 		"D.1: electric field": load("res://Worlds/5_electric_charge/5_3_a_test_charge_with_some_charges.tscn"),
