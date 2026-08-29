@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0jq72axobkte"]
 
-[ext_resource type="Script" uid="uid://cudjcmhl6no80" path="res://Scenes/canvas_layers/information_displays/update_field_canvas_layer.gd" id="1_kvs65"]
+[ext_resource type="Script" uid="uid://cudjcmhl6no80" path="res://Scenes/canvas_layers/information_inputs/update_field_canvas_layer.gd" id="1_kvs65"]
 
 [node name="UpdateFieldCanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_kvs65")

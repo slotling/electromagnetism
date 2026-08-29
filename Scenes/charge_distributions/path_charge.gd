@@ -3,6 +3,9 @@ extends ChargeDisplay
 @export var ParametricCurveScript: Script
 @onready var ParametricCurveScriptInstance = ParametricCurveScript.new()
 
+# Alias variable name for FunctionInput nodes and consistency
+@onready var FunctionScriptInstances = [ParametricCurveScriptInstance]
+
 func _ready() -> void:
 	super()
 	$Path.ParametricCurveScript = ParametricCurveScript
@@ -30,7 +33,6 @@ func E(x, y, z):
 		var curPos = $Path.raw_points[curPoint]
 		var diffpos = pos - (curPos + get_logical_position())
 		field += diffpos / (diffpos.length()**3) * charge_magnitude * ($Path.raw_points[curPoint] - $Path.raw_points[curPoint + 1]).length() * ParametricCurveScriptInstance.P(u)
-		
 		
 		u = u2
 		curPoint += 1

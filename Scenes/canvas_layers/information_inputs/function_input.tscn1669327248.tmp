@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://cno5vr8ekj43"]
+
+[ext_resource type="Script" uid="uid://cl72pvulc3xqp" path="res://Scenes/canvas_layers/information_inputs/function_input.gd" id="1_2g3e2"]
+
+[node name="FunctionInput" type="CanvasLayer"]
+script = ExtResource("1_2g3e2")
+identifier = null
+entries = null
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="LineEdit" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = -24.0
+offset_right = 824.0
+offset_bottom = 16.0
+placeholder_text = "(x, y, z)"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = -16.0
+offset_right = 103.0
+offset_bottom = 7.0
+text = "F(x, y, z) = "
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = -27.0
+offset_right = 65.0
+offset_bottom = -4.0
+text = "→"
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 832.0
+offset_top = -24.0
+offset_right = 880.0
+offset_bottom = 16.0
+text = "Set!"
+
+[node name="Label3" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = -48.0
+offset_right = 384.0
+offset_bottom = -25.0
+bbcode_enabled = true
+text = "[color=\"#ff1212\"]Errors are displayed here!"

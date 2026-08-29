@@ -20,6 +20,9 @@ var drawing_list = []
 @export var FieldScript: Script
 @onready var FieldScriptInstance: FunctionController = FieldScript.new() if FieldScript != null else null
 
+# Alias variable name for FunctionInput nodes and consistency
+@onready var FunctionScriptInstances = [FieldScriptInstance]
+
 func F(x, y=0, z=0, id=null) -> Vector3:
 	return FieldScriptInstance.F(x, y, z, id)
 
@@ -106,6 +109,8 @@ func draw_vectors(curtime=0, init=false):
 
 	for i in instance_count:
 		var info = drawing_list[i]
+		if info[0] == Vector3.ZERO:
+			continue
 		var transformation = Basis.looking_at(info[0], Vector3(0, 0, -1))
 		
 		if init:

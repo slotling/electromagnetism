@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ehfxyysvctxi" path="res://Worlds/4_integrals/4_1_surface_integral.tscn" id="1_4s3j2"]
 [ext_resource type="PackedScene" uid="uid://xpctx2hvs2nv" path="res://Scenes/canvas_layers/information_displays/surface_integrals.tscn" id="2_d6w7k"]
 [ext_resource type="Script" uid="uid://be0a2wgu4dwlh" path="res://Scenes/calculation_controllers/integration/SurfaceIntegralCalculationController.gd" id="2_goxmp"]
-[ext_resource type="Script" uid="uid://c8xixeh1nmpll" path="res://Resources/Functions/vector_functions/SPECIAL_electric_field_override.gd" id="2_rwhq7"]
+[ext_resource type="Script" uid="uid://c8xixeh1nmpll" path="res://Resources/Functions/overrides/SPECIAL_electric_field_override.gd" id="2_rwhq7"]
 [ext_resource type="Script" uid="uid://ln1gxrxxbqy8" path="res://Resources/Functions/parametric_surfaces/03_sphere_shell.gd" id="3_kjw63"]
 [ext_resource type="Script" uid="uid://c5ti84r5a68gu" path="res://Scenes/calculation_controllers/field_func/ElectricFieldFunctionReplacerController.gd" id="5_etvby"]
 [ext_resource type="PackedScene" uid="uid://ch3sxdbhv1l3a" path="res://Scenes/charge_distributions/PointCharge.tscn" id="6_8r5e5"]
@@ -50,7 +50,7 @@ script = ExtResource("2_goxmp")
 metadata/_custom_type_script = "uid://be0a2wgu4dwlh"
 
 [node name="SurfaceIntegralCanvasLayer" parent="." index="2" instance=ExtResource("2_d6w7k")]
-SurfaceIntegralCalculationController = NodePath("../surface/SurfaceIntegralCalculationController")
+SurfaceIntegralCalculationControllerNode = NodePath("../surface/SurfaceIntegralCalculationController")
 
 [node name="ElectricFieldFunctionReplacerController" type="Node" parent="." index="3"]
 script = ExtResource("5_etvby")

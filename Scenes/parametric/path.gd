@@ -7,6 +7,9 @@ extends Node3D
 @onready var uend = ParametricCurveScriptInstance.uend
 @onready var diff = ParametricCurveScriptInstance.render_diff
 
+# Alias variable name for FunctionInput nodes and consistency
+@onready var FunctionScriptInstances = [ParametricCurveScriptInstance]
+
 var raw_points = []
 
 func _ready() -> void:

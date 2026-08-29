@@ -5,6 +5,9 @@ var texture_spacing = 1.0/5.0
 @export var ParametricSurfaceScript: Script
 @onready var ParametricSurfaceScriptInstance = ParametricSurfaceScript.new() if ParametricSurfaceScript != null else null
 
+# Alias variable name for FunctionInput nodes and consistency
+@onready var FunctionScriptInstances = [ParametricSurfaceScriptInstance]
+
 func R(u, v):
 	return ParametricSurfaceScriptInstance.R(u, v)
 	
