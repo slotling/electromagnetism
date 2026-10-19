@@ -9,16 +9,42 @@ class_name FunctionInput
 ## Refer to Resources/Functions/overrides/SPECIAL_function_input_override.gd
 @export var overriding_function_id = 0 
 
+const OPERATION_SYMBOLS = ["+", "-", "*", "/", ",", "#"]
+
 var FunctionScriptInstances
 
 var string_expressions: PackedStringArray = []
 
-func evaluate(variables):
+func evaluate(variables, debug=false):
 	var results = []
 	for string in string_expressions:
 		#print(string)
 		var expression = Expression.new()
 		var finalstring = string
+		
+		var char_index = 0
+		if finalstring.length() != 1:
+			while char_index < finalstring.length():
+				var substring
+				if char_index == 0:
+					substring = "#" + finalstring.substr(char_index, 2)
+				elif char_index == finalstring.length()-1:
+					substring = finalstring.substr(char_index-1, 2) + "#"
+				else:
+					substring = finalstring.substr(char_index-1, 3)
+				if substring[1] in variable_names:
+					if not (substring[0] in OPERATION_SYMBOLS or substring[0] == "("):
+						finalstring = finalstring.insert(char_index, "*")
+						char_index += 1
+					if not (substring[2] in OPERATION_SYMBOLS or substring[2] == ")"):
+						finalstring = finalstring.insert(char_index+1, "*")
+						char_index += 1
+					
+				char_index += 1
+			
+			if debug:
+				print(finalstring)
+		
 		for i in variable_names.size():
 			finalstring = finalstring.replace(variable_names[i], str(variables[i]))
 		#print(finalstring)
@@ -49,6 +75,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	FunctionScriptInstances = get_node(node_path_with_script_instance).FunctionScriptInstances
+	print(FunctionScriptInstances[function_script_instance_to_input])
 	FunctionScriptInstances[function_script_instance_to_input].FUNCTION_PROVIDERS.append(self)
 	$Control/SubjectLabel.text = function_name + "(" + ", ".join(variable_names) + ") = "
 	var my_array = []
@@ -67,7 +94,7 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> bool:
 	text = $Control/LineEdit.text
-	var processed_string: String = text.replace(" ", "")
+	var processed_string: String = text.replace(" ", "").replace("^", "**")
 	string_expressions = processed_string.split(",")
 	#print(string_expressions)
 	error = ""
@@ -81,7 +108,7 @@ func _on_button_pressed() -> bool:
 		var variables_test = []
 		variables_test.resize(variable_names.size())
 		variables_test.fill(67.67)
-		var evaluation = evaluate(variables_test)
+		var evaluation = evaluate(variables_test, true)
 		if typeof(evaluation) == TYPE_DICTIONARY and "error" in evaluation:
 			error = evaluation["error"]
 	

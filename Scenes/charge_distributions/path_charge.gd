@@ -9,6 +9,7 @@ func function_updater():
 	_ready()
 
 func _ready() -> void:
+	set_path()
 	super()
 	
 func set_path():
@@ -31,14 +32,21 @@ func E(x, y, z):
 	var u = uintercept
 	
 	var curPoint = 0
+	var curPos = Vector3.ZERO
+	var prevPos = Vector3.ZERO
 	while u < ParametricCurveScriptInstance.uend:
-		var u2 = u + uscale
+		curPos = ParametricCurveScriptInstance.R(u)
+		if curPoint != 0:
+			
+			var u2 = u + uscale
+			
+			
+			var diffpos = pos - (curPos + get_logical_position())
+			field += diffpos / (diffpos.length()**3) * charge_magnitude * (curPos - prevPos).length() * ParametricCurveScriptInstance.P(u)
+			
+			u = u2
 		
-		var curPos = $Path.raw_points[curPoint]
-		var diffpos = pos - (curPos + get_logical_position())
-		field += diffpos / (diffpos.length()**3) * charge_magnitude * ($Path.raw_points[curPoint] - $Path.raw_points[curPoint + 1]).length() * ParametricCurveScriptInstance.P(u)
-		
-		u = u2
+		prevPos = curPos
 		curPoint += 1
 		
 	return field

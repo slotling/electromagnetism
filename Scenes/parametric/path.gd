@@ -25,6 +25,7 @@ func generate_points():
 	var u = uintercept
 	
 	while u < uend + uscale:
+		#print("path creation: ", u)
 		var u2 = u + uscale
 		
 		if u > uend:
@@ -35,7 +36,7 @@ func generate_points():
 		
 		var raw_pos = ParametricCurveScriptInstance.R(u)
 		#print(raw_pos)
-		if u != uend or true:
+		if u != uend:
 			raw_points.append(raw_pos)
 			
 		var pos = G.reorient_to_game(raw_pos) * G.WORLD.config.draw.PosScale / G.WORLD.config.draw.ValScale
@@ -47,6 +48,7 @@ func generate_points():
 
 
 func _ready() -> void:
+	print(ParametricCurveScriptInstance.resource_path)
 	generate_points()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

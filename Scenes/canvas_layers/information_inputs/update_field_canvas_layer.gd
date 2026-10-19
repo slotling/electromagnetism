@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var parent = get_node("../ElectricFieldFunctionReplacerController")
+@onready var parent: ElectricFieldFunctionReplacerController = get_node("../ElectricFieldFunctionReplacerController")
 
 func _on_button_pressed() -> void:
 	$Label.visible = true

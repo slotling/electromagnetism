@@ -7,17 +7,17 @@ script = ExtResource("1_kvs65")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 24.0
-offset_top = 80.0
+offset_top = 24.0
 offset_right = 144.0
-offset_bottom = 120.0
+offset_bottom = 64.0
 text = "Update field"
 
 [node name="Label" type="RichTextLabel" parent="."]
 visible = false
 offset_left = 152.0
-offset_top = 88.0
+offset_top = 32.0
 offset_right = 584.0
-offset_bottom = 112.0
+offset_bottom = 56.0
 bbcode_enabled = true
 text = "[color=\"FF00AE\"]thinking very hard...[/color]"
 

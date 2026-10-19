@@ -1,7 +1,19 @@
-[gd_scene load_steps=6 format=4 uid="uid://7tmwx60nuwd8"]
+[gd_scene load_steps=10 format=4 uid="uid://7tmwx60nuwd8"]
 
 [ext_resource type="PackedScene" uid="uid://d3qhe3uwfc8mv" path="res://Worlds/5_electric_charge/5_3_test_charge.tscn" id="1_4t1f7"]
 [ext_resource type="PackedScene" uid="uid://ch3sxdbhv1l3a" path="res://Scenes/charge_distributions/PointCharge.tscn" id="2_ef688"]
+[ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="2_nrqid"]
+[ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="3_5c73i"]
+
+[sub_resource type="Resource" id="Resource_n3o2w"]
+script = ExtResource("2_nrqid")
+ValScale = 1.0
+metadata/_custom_type_script = "uid://ckj7ev16yia8c"
+
+[sub_resource type="Resource" id="Resource_csfdf"]
+script = ExtResource("3_5c73i")
+draw = SubResource("Resource_n3o2w")
+metadata/_custom_type_script = "uid://b38abs6n85w0l"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrqid"]
 resource_local_to_scene = true
@@ -30,6 +42,7 @@ use_custom_data = true
 mesh = SubResource("ArrayMesh_5c73i")
 
 [node name="electric charge world!!!" instance=ExtResource("1_4t1f7")]
+config = SubResource("Resource_csfdf")
 
 [node name="MM" parent="." index="0"]
 multimesh = SubResource("MultiMesh_n3o2w")

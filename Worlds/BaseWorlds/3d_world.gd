@@ -12,7 +12,7 @@ func _ready() -> void:
 		"D.2: line charge distribution": load("res://Worlds/5_electric_charge/5_4_arbitrary_charge_distributions.tscn"),
 		"D.3: gauss's law verification": load("res://Worlds/6_gauss_law/6_1_verifying_gauss_law.tscn"),
 	}
-	var scene_index = scenes.keys().find("D.3: gauss's law verification")
+	var scene_index = scenes.keys().find("D.2: line charge distribution")
 	$SceneSwitcher.init(scenes, scene_index)
 
 

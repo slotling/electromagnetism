@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://cja44wlxpqee2" path="res://Resources/Functions/parametric_paths/03_circle.gd" id="5_xtsxh"]
 [ext_resource type="PackedScene" uid="uid://d0jq72axobkte" path="res://Scenes/canvas_layers/information_inputs/update_field_canvas_layer.tscn" id="6_gndnu"]
 
-[sub_resource type="Resource" id="Resource_xtsxh"]
+[sub_resource type="Resource" id="Resource_f3gig"]
 script = ExtResource("2_xtsxh")
 LatticeStart = Vector3(-15, -15, 0)
 LatticeEnd = Vector3(15, 15, 0)
@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://ckj7ev16yia8c"
 
 [sub_resource type="Resource" id="Resource_gndnu"]
 script = ExtResource("3_gndnu")
-draw = SubResource("Resource_xtsxh")
+draw = SubResource("Resource_f3gig")
 metadata/_custom_type_script = "uid://b38abs6n85w0l"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3d3eq"]

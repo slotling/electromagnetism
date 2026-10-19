@@ -1,7 +1,9 @@
 extends Node
 class_name ElectricFieldFunctionReplacerController
 
-# attach as child of a VectorField! additionally, add a node3d with the name "Charges"
+# attach as child of a VectorField 
+# and with the function replaced with the override for elec fields! 
+# additionally, add a node3d with the name "Charges"
 
 signal charge_selected(chargeNode)
 
@@ -35,8 +37,12 @@ func add_field(x, y, z, id, extra, charge_id):
 func update_charge(chargeId, update_drawing_list, refresh_config=false):
 	var id = 0
 	var drawConfig: DrawConfig = WORLD.config.draw
+	charges[chargeId].update_position_for_calculation()
 	WORLD.loop_through_all_points(false, Callable(self, "add_field").bind(chargeId))
-				
+	
+	print("ok")
+	
+	
 	charge_id_update_list.erase(chargeId)
 	
 	if update_drawing_list:

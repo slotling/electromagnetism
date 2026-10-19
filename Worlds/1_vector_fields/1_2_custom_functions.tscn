@@ -9,9 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_jvdk4"]
 script = ExtResource("2_a75hg")
-LatticeStart = Vector3(-15, -15, 0)
-LatticeEnd = Vector3(15, 15, 0)
-PosScale = 5.0
 metadata/_custom_type_script = "uid://ckj7ev16yia8c"
 
 [sub_resource type="Resource" id="Resource_e4o13"]

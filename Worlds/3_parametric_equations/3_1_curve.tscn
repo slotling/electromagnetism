@@ -6,15 +6,16 @@
 [ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="3_2rbmn"]
 [ext_resource type="Script" uid="uid://cw6m8876ohrcq" path="res://Resources/Functions/parametric_paths/01_squiggly.gd" id="5_dwwuf"]
 
-[sub_resource type="Resource" id="Resource_vxhu7"]
+[sub_resource type="Resource" id="Resource_dwwuf"]
 script = ExtResource("2_5jxig")
 PosScale = 0.5
 ValScale = 0.01
+LowDetailMode = true
 metadata/_custom_type_script = "uid://ckj7ev16yia8c"
 
 [sub_resource type="Resource" id="Resource_djhfg"]
 script = ExtResource("3_2rbmn")
-draw = SubResource("Resource_vxhu7")
+draw = SubResource("Resource_dwwuf")
 metadata/_custom_type_script = "uid://b38abs6n85w0l"
 
 [node name="3_1_parametric" type="Node3D"]

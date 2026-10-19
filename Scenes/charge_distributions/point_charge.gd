@@ -7,6 +7,8 @@ var id = null
 
 var hovered = false
 
+var global_position_used_to_calculate = Vector3.ZERO
+
 @onready var parent = get_node("../../ElectricFieldFunctionReplacerController")
 
 func is_selected() -> bool:
@@ -31,7 +33,10 @@ func E(x, y, z):
 	return field
 	
 func get_logical_position() -> Vector3:
-	return G.reorient_to_conventional(global_position) / G.WORLD.config.draw.PosScale * G.WORLD.config.draw.ValScale
+	return G.reorient_to_conventional(global_position_used_to_calculate) / G.WORLD.config.draw.PosScale * G.WORLD.config.draw.ValScale
+
+func update_position_for_calculation() -> void:
+	global_position_used_to_calculate = global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
