@@ -30,6 +30,7 @@ class_name DrawConfig
 ## Multiplied with post-processed scale of each vector.
 @export var MultSize := 0.5 
 
+## 
 @export var UpperPercentile = 80
 @export var LowerPercentile = 20
 

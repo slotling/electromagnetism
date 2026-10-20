@@ -13,6 +13,7 @@ signal FieldUpdatedSignal
 	"max": Vector3.ZERO,
 	"magmax": 0,
 	"min": Vector3.ZERO,
+	"instance_count": 0
 }
 
 var drawing_list = []
@@ -25,11 +26,12 @@ var drawing_list = []
 func function_updater():
 	create_drawing_list(true)
 	draw_vectors(0, true)
+	print(calculated_settings["magmax"])
 
 func F(x, y=0, z=0, id=null) -> Vector3:
 	return FieldScriptInstance.F(x, y, z, id)
 
-func add_drawing_object(x, y, z, value, initialize):
+func add_drawing_object(x, y, z, value: Vector3, initialize):
 	var ix = float(x) / float(config.draw.ValScale)
 	var iy = float(y) / float(config.draw.ValScale)
 	var iz = float(z) / float(config.draw.ValScale)
@@ -57,8 +59,19 @@ func loop_through_all_points(initialize: bool, callable: Callable):
 				id += 1
 
 func every_point(x, y, z, id, extra):
-	var value = F(x, y, z, id)
-	add_drawing_object(x, y, z, value, extra["initialize"])
+	var value: Vector3 = F(x, y, z, id)
+	
+	const straddleInfArrowsCount = 1
+	var valSlightChange = config.draw.ValScale * 0.5
+	for xi in range(-straddleInfArrowsCount, straddleInfArrowsCount+1) if is_inf(value.x) else range(1):
+		for yi in range(-straddleInfArrowsCount, straddleInfArrowsCount+1) if is_inf(value.y) else range(1):
+			for zi in range(-straddleInfArrowsCount, straddleInfArrowsCount+1) if is_inf(value.z) else range(1):
+				var newx = x + valSlightChange * xi
+				var newy = y + valSlightChange * yi
+				var newz = z + valSlightChange * zi
+				var new_value: Vector3 = F(newx, newy, newz, id)
+				calculated_settings["instance_count"] += 1
+				add_drawing_object(newx, newy, newz, new_value, extra["initialize"])
 
 func create_drawing_list_process(initialize) -> void:
 	if initialize:
@@ -66,12 +79,13 @@ func create_drawing_list_process(initialize) -> void:
 		calculated_settings["y_values"] = []
 		calculated_settings["z_values"] = []
 		calculated_settings["magnitudes"] = []
+		calculated_settings["instance_count"] = 0
 	
 	loop_through_all_points(initialize, Callable(self, "every_point"))
 	
 	if initialize:
 		var length = calculated_settings["x_values"].size()
-		var upper_percentile_index = length / 100.0 * config.draw.UpperPercentile
+		var upper_percentile_index = int(length / 100.0 * config.draw.UpperPercentile)
 		var lower_percentile_index = length / 100.0 * config.draw.LowerPercentile
 		calculated_settings["x_values"].sort()
 		calculated_settings["y_values"].sort()
@@ -90,7 +104,7 @@ func create_drawing_list(initialize) -> void:
 	
 func get_instance_count():
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
-	return instances_dim.x * instances_dim.y * instances_dim.z
+	return instances_dim.x * instances_dim.y * instances_dim.z if not calculated_settings else calculated_settings["instance_count"]
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -113,6 +127,7 @@ func draw_vectors(curtime=0, init=false):
 	for i in instance_count:
 		var info = drawing_list[i]
 		if info[0] == Vector3.ZERO:
+			MM.set_instance_color(i, Color("TRANSPARENT"))
 			continue
 		var transformation = Basis.looking_at(info[0], Vector3(0, 0, -1))
 		

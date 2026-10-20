@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dedwwlk2f7y7c"]
+
+[ext_resource type="PackedScene" uid="uid://blbxu4etlngqs" path="res://Worlds/3_parametric_equations/3_2_surface.tscn" id="1_xyaru"]
+[ext_resource type="PackedScene" uid="uid://cno5vr8ekj43" path="res://Scenes/canvas_layers/information_inputs/function_input.tscn" id="2_ljkxe"]
+[ext_resource type="PackedScene" uid="uid://qh7fqtqwc87r" path="res://Scenes/canvas_layers/information_inputs/function_input_updater.tscn" id="3_iw02t"]
+
+[node name="3_4_custom_parametric_surface" instance=ExtResource("1_xyaru")]
+
+[node name="FunctionInput" parent="." index="1" instance=ExtResource("2_ljkxe")]
+node_path_with_script_instance = NodePath("../Path")
+variable_names = Array[String](["u", "v"])
+function_name = "R"
+overriding_function_id = 1
+
+[node name="FunctionInputUpdater" parent="." index="2" instance=ExtResource("3_iw02t")]
+node_paths_with_script_instance = Array[NodePath]([NodePath("../surface")])
+node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput")])

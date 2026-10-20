@@ -11,6 +11,7 @@ specular_mode = 2
 albedo_texture = ExtResource("2_2tapi")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2tapi"]
+resource_local_to_scene = true
 
 [node name="surface" type="Node3D"]
 script = ExtResource("1_o104s")

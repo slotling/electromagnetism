@@ -7,7 +7,7 @@ class_name FunctionInput
 @export var variable_names: Array[String] = []
 @export var function_name = "F"
 ## Refer to Resources/Functions/overrides/SPECIAL_function_input_override.gd
-@export var overriding_function_id = 0 
+@export_range(0, 4) var overriding_function_id:int = 0 
 
 const OPERATION_SYMBOLS = ["+", "-", "*", "/", ",", "#"]
 
@@ -108,7 +108,7 @@ func _on_button_pressed() -> bool:
 		var variables_test = []
 		variables_test.resize(variable_names.size())
 		variables_test.fill(67.67)
-		var evaluation = evaluate(variables_test, true)
+		var evaluation = evaluate(variables_test, false)
 		if typeof(evaluation) == TYPE_DICTIONARY and "error" in evaluation:
 			error = evaluation["error"]
 	

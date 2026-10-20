@@ -40,9 +40,6 @@ func update_charge(chargeId, update_drawing_list, refresh_config=false):
 	charges[chargeId].update_position_for_calculation()
 	WORLD.loop_through_all_points(false, Callable(self, "add_field").bind(chargeId))
 	
-	print("ok")
-	
-	
 	charge_id_update_list.erase(chargeId)
 	
 	if update_drawing_list:
