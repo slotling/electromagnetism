@@ -3,9 +3,9 @@ extends Node3D
 @export var ParametricCurveScript: Script
 
 @onready var ParametricCurveScriptInstance = ParametricCurveScript.new()
-@onready var ustart = ParametricCurveScriptInstance.ustart
-@onready var uend = ParametricCurveScriptInstance.uend
-@onready var diff = ParametricCurveScriptInstance.render_diff
+var ustart
+var uend
+var diff
 
 # Alias variable name for FunctionInput nodes and consistency
 @onready var FunctionScriptInstances = [ParametricCurveScriptInstance]
@@ -15,6 +15,10 @@ func function_updater():
 var raw_points = []
 
 func generate_points():
+	ustart = ParametricCurveScriptInstance.get_ustart()
+	uend = ParametricCurveScriptInstance.get_uend()
+	diff = ParametricCurveScriptInstance.get_render_diff()
+	
 	raw_points = []
 	$Path3D.curve.clear_points()
 	

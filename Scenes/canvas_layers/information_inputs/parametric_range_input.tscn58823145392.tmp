@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://db6wg5dix75br"]
+
+[ext_resource type="Script" uid="uid://b5myngefm10sm" path="res://Scenes/canvas_layers/information_inputs/parametric_range_input.gd" id="1_x8w7d"]
+
+[node name="ParametricRangeInput" type="CanvasLayer"]
+script = ExtResource("1_x8w7d")
+node_path_with_script_instance = null
+function_script_instance_to_input = null
+entries = null
+variable_names = null
+function_name = null
+overriding_function_id = null
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_right = 40.0
+offset_bottom = -56.0
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LineEdit" type="LineEdit" parent="Control/Control"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = -16.0
+offset_right = 208.0
+offset_bottom = 24.0
+placeholder_text = "[start, end]"
+
+[node name="SubjectLabel" type="Label" parent="Control/Control"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = -8.0
+offset_right = 103.0
+offset_bottom = 16.0
+text = "u ∈"
+
+[node name="Label3" type="RichTextLabel" parent="Control/Control"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = -48.0
+offset_right = 912.0
+offset_bottom = -25.0
+bbcode_enabled = true
+
+[node name="Control2" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 200.0
+offset_right = 240.0
+offset_bottom = 40.0
+
+[node name="LineEdit" type="LineEdit" parent="Control/Control2"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = -16.0
+offset_right = 208.0
+offset_bottom = 24.0
+placeholder_text = "[start, end]"
+
+[node name="SubjectLabel" type="Label" parent="Control/Control2"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = -8.0
+offset_right = 103.0
+offset_bottom = 16.0
+text = "v ∈"
+
+[node name="Label3" type="RichTextLabel" parent="Control/Control2"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = -48.0
+offset_right = 912.0
+offset_bottom = -25.0
+bbcode_enabled = true

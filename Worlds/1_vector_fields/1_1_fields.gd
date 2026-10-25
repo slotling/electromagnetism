@@ -26,7 +26,7 @@ var drawing_list = []
 func function_updater():
 	create_drawing_list(true)
 	draw_vectors(0, true)
-	print(calculated_settings["magmax"])
+	#print(calculated_settings["magmax"])
 
 func F(x, y=0, z=0, id=null) -> Vector3:
 	return FieldScriptInstance.F(x, y, z, id)

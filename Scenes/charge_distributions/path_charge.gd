@@ -25,8 +25,8 @@ func E(x, y, z):
 	
 	var field = Vector3.ZERO
 	
-	var uscale = ParametricCurveScriptInstance.calculation_diff
-	var uintercept = ParametricCurveScriptInstance.ustart # locate at center of patch
+	var uscale = ParametricCurveScriptInstance.get_calculation_diff()
+	var uintercept = ParametricCurveScriptInstance.get_ustart() # locate at center of patch
 	
 	var sum = 0
 	var u = uintercept
@@ -34,7 +34,7 @@ func E(x, y, z):
 	var curPoint = 0
 	var curPos = Vector3.ZERO
 	var prevPos = Vector3.ZERO
-	while u < ParametricCurveScriptInstance.uend:
+	while u < ParametricCurveScriptInstance.get_uend():
 		curPos = ParametricCurveScriptInstance.R(u)
 		if curPoint != 0:
 			

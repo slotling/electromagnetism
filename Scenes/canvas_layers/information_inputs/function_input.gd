@@ -9,7 +9,7 @@ class_name FunctionInput
 ## Refer to Resources/Functions/overrides/SPECIAL_function_input_override.gd
 @export_range(0, 4) var overriding_function_id:int = 0 
 
-const OPERATION_SYMBOLS = ["+", "-", "*", "/", ",", "#"]
+const OPERATION_SYMBOLS = ["+", "-", "*", "/", ",", "#"] # '#' is a dummy symbol
 
 var FunctionScriptInstances
 
@@ -92,7 +92,7 @@ func _process(delta: float) -> void:
 	pass
 	#$Control/Button.disabled = error != ""
 
-func _on_button_pressed() -> bool:
+func set_inputs() -> bool:
 	text = $Control/LineEdit.text
 	var processed_string: String = text.replace(" ", "").replace("^", "**")
 	string_expressions = processed_string.split(",")
@@ -105,12 +105,14 @@ func _on_button_pressed() -> bool:
 		error = "Entry count mismatch! " + str(string_expressions.size()) + " given, " + str(entries) + " required"
 	
 	if error == "":
-		var variables_test = []
-		variables_test.resize(variable_names.size())
-		variables_test.fill(67.67)
-		var evaluation = evaluate(variables_test, false)
-		if typeof(evaluation) == TYPE_DICTIONARY and "error" in evaluation:
-			error = evaluation["error"]
+		for testCase in [0, 1, 10]:
+			var variables_test = []
+			variables_test.resize(variable_names.size())
+			variables_test.fill(testCase)
+			var evaluation = evaluate(variables_test, true)
+			#print(evaluation)
+			if typeof(evaluation) == TYPE_DICTIONARY and "error" in evaluation:
+				error = evaluation["error"]
 	
 	$Control/Label3.text = '[color="#ff1212"]' + error
 	return error == ""

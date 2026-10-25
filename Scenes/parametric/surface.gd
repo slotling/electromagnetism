@@ -13,11 +13,11 @@ func function_updater():
 func R(u, v):
 	return ParametricSurfaceScriptInstance.R(u, v)
 	
-@onready var ustart = ParametricSurfaceScriptInstance.ustart
-@onready var uend = ParametricSurfaceScriptInstance.uend
-@onready var vstart = ParametricSurfaceScriptInstance.vstart
-@onready var vend = ParametricSurfaceScriptInstance.vend
-@onready var diff = ParametricSurfaceScriptInstance.render_diff
+var ustart
+var uend
+var vstart
+var vend
+var diff
 
 var ireps = 0
 var jreps = 0
@@ -44,6 +44,12 @@ func reoriented_calc_cross(u, v, u2, v2, currentR):
 	return (G.reorient_to_game(R(u2, v) - currentR)).cross(G.reorient_to_game(R(u, v2) - currentR))
 
 func generate_surface():
+	ustart = ParametricSurfaceScriptInstance.get_ustart()
+	uend = ParametricSurfaceScriptInstance.get_uend()
+	vstart = ParametricSurfaceScriptInstance.get_vstart()
+	vend = ParametricSurfaceScriptInstance.get_vend()
+	diff = ParametricSurfaceScriptInstance.get_render_diff()
+	
 	var surface_array = []
 	surface_array.resize(Mesh.ARRAY_MAX)
 	
@@ -67,7 +73,7 @@ func generate_surface():
 	var u = uintercept
 	for i in ireps:
 		var v = vintercept
-		var u2 = u + uscale	
+		var u2 = u + uscale
 		if i+1 == ireps:
 			u = uend
 			
@@ -92,7 +98,6 @@ func generate_surface():
 			raw_crosses.push_back(cross)
 			verts.push_back(vert)
 			uvs.push_back(uv)
-			#print(vert, normal)
 			normals.push_back(normal)
 			
 			var icount = jreps
@@ -123,8 +128,8 @@ func generate_surface():
 		u = u2
 			
 	surface_array[Mesh.ARRAY_VERTEX] = verts
-	surface_array[Mesh.ARRAY_TEX_UV] = uvs
 	surface_array[Mesh.ARRAY_NORMAL] = normals
+	surface_array[Mesh.ARRAY_TEX_UV] = uvs
 	surface_array[Mesh.ARRAY_INDEX] = indices
 	
 	$MeshInstance3D.mesh.clear_surfaces()
@@ -132,6 +137,8 @@ func generate_surface():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	generate_surface()
+	generate_surface()
 	generate_surface()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

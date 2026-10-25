@@ -46,10 +46,10 @@ func calculate_integrand(u, v, u2, v2):
 	return value.dot(diffCross)
 
 func calculate_full_integral(use_analytical_R_partials=true):
-	var uscale = SurfaceScriptInstance.calculation_diff
-	var vscale = SurfaceScriptInstance.calculation_diff
-	var uintercept = SurfaceScriptInstance.ustart + SurfaceScriptInstance.calculation_diff/2 # locate at center of patch
-	var vintercept = SurfaceScriptInstance.vstart + SurfaceScriptInstance.calculation_diff/2 # locate at center of patch
+	var uscale = SurfaceScriptInstance.get_calculation_diff()
+	var vscale = SurfaceScriptInstance.get_calculation_diff()
+	var uintercept = SurfaceScriptInstance.get_ustart() + SurfaceScriptInstance.get_calculation_diff()/2 # locate at center of patch
+	var vintercept = SurfaceScriptInstance.get_vstart() + SurfaceScriptInstance.get_calculation_diff()/2 # locate at center of patch
 	
 	var sum = 0
 	var u = uintercept
@@ -59,10 +59,10 @@ func calculate_full_integral(use_analytical_R_partials=true):
 	
 	# FIRST PASS: unmodified numerical quadrature
 	var areas = 0
-	while u < SurfaceScriptInstance.uend:
+	while u < SurfaceScriptInstance.get_uend():
 		var v = vintercept
 		var u2 = u + uscale
-		while v < SurfaceScriptInstance.vend:
+		while v < SurfaceScriptInstance.get_vend():
 			var v2 = v + vscale
 			var integrand = calculate_integrand(u, v, u2, v2) if not use_analytical_R_partials else calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale)
 			

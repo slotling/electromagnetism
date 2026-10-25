@@ -76,6 +76,11 @@ func _process(delta: float) -> void:
 		var y_axis_components = Vector2(cos(azi - PI/2), sin(azi - PI/2) * cos(pol)).normalized()
 		var z_axis_components = Vector2(0, 1).normalized()
 		
+		var speed = 0.25
+		get_parent().global_position.x += mouse_movement.dot(x_axis_components) * (1 if pressed["x"] else 0) * speed
+		get_parent().global_position.z -= mouse_movement.dot(y_axis_components) * (1 if pressed["y"] else 0) * speed
+		get_parent().global_position.y -= mouse_movement.dot(z_axis_components) * (1 if pressed["z"] else 0) * speed
+		
 		#if tick % 10 == 1 and any_pressed():
 			#print()
 			##print("relative pos: ", relpos.y, " ", relpos.x)
@@ -86,11 +91,6 @@ func _process(delta: float) -> void:
 			#print("MM:", debug_mouse_movement)
 			#print("MMXAC:", debug_mouse_movement.dot(x_axis_components))
 			#print("MMYAC:", debug_mouse_movement.dot(y_axis_components))
-		
-		var speed = 0.25
-		get_parent().global_position.x += mouse_movement.dot(x_axis_components) * (1 if pressed["x"] else 0) * speed
-		get_parent().global_position.z -= mouse_movement.dot(y_axis_components) * (1 if pressed["y"] else 0) * speed
-		get_parent().global_position.y -= mouse_movement.dot(z_axis_components) * (1 if pressed["z"] else 0) * speed
 		
 		mouse_movement = Vector2.ZERO
 

@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://db6wg5dix75br"]
+
+[ext_resource type="Script" uid="uid://b5myngefm10sm" path="res://Scenes/canvas_layers/information_inputs/parametric_range_input.gd" id="1_x8w7d"]
+[ext_resource type="PackedScene" uid="uid://da8ohuasllykb" path="res://Scenes/canvas_layers/information_inputs/parameter_subinput.tscn" id="2_a083q"]
+
+[node name="ParametricRangeInput" type="CanvasLayer"]
+script = ExtResource("1_x8w7d")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_right = 40.0
+offset_bottom = -56.0
+grow_vertical = 0
+
+[node name="ParameterSubinput" parent="Control" instance=ExtResource("2_a083q")]
+layout_mode = 0
+is_an_interval = true
+
+[node name="LineEdit" parent="Control/ParameterSubinput" index="0"]
+text = "0, 1"
+
+[node name="ParameterSubinput2" parent="Control" instance=ExtResource("2_a083q")]
+layout_mode = 0
+offset_left = 208.0
+offset_right = 248.0
+is_an_interval = true
+
+[node name="LineEdit" parent="Control/ParameterSubinput2" index="0"]
+text = "0, 1"
+
+[node name="SubjectLabel" parent="Control/ParameterSubinput2" index="1"]
+text = "v ∈"
+
+[node name="ParameterSubinput3" parent="Control" instance=ExtResource("2_a083q")]
+layout_mode = 0
+offset_left = 416.0
+offset_right = 456.0
+
+[node name="LineEdit" parent="Control/ParameterSubinput3" index="0"]
+offset_left = 184.0
+offset_right = 336.0
+text = "0.01"
+placeholder_text = ""
+
+[node name="SubjectLabel" parent="Control/ParameterSubinput3" index="1"]
+text = "(rendering) Δu, Δv ="
+
+[editable path="Control/ParameterSubinput"]
+[editable path="Control/ParameterSubinput2"]
+[editable path="Control/ParameterSubinput3"]

@@ -13,6 +13,24 @@ var wend = 1.0
 var render_diff = 0.01
 var calculation_diff = 0.01
 
+# RANGES
+func get_ustart():
+	return ustart
+func get_uend():
+	return uend
+func get_vstart():
+	return vstart
+func get_vend():
+	return vend
+func get_wstart():
+	return wstart
+func get_wend():
+	return wend
+func get_render_diff():
+	return render_diff
+func get_calculation_diff():
+	return calculation_diff
+
 var invert_face_rendering = false
 
 # Functions are divided based on physical significance, number of input variables, and number of outputs.

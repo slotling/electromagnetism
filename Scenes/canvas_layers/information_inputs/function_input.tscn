@@ -39,15 +39,6 @@ offset_right = 65.0
 offset_bottom = -4.0
 text = "→"
 
-[node name="Button" type="Button" parent="Control"]
-visible = false
-layout_mode = 0
-offset_left = 928.0
-offset_top = -24.0
-offset_right = 976.0
-offset_bottom = 16.0
-text = "Set!"
-
 [node name="Label3" type="RichTextLabel" parent="Control"]
 layout_mode = 0
 offset_left = 104.0
@@ -55,5 +46,3 @@ offset_top = -48.0
 offset_right = 912.0
 offset_bottom = -25.0
 bbcode_enabled = true
-
-[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
