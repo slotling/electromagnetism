@@ -9,7 +9,6 @@
 [sub_resource type="Resource" id="Resource_xxy1g"]
 script = ExtResource("2_xxy1g")
 MaxSize = 10.0
-UpperPercentile = 100
 metadata/_custom_type_script = "uid://ckj7ev16yia8c"
 
 [sub_resource type="Resource" id="Resource_nndrr"]

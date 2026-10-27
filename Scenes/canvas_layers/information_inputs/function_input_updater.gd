@@ -4,6 +4,10 @@ extends CanvasLayer
 @export var node_paths_of_function_inputs: Array[NodePath]
 
 func _on_button_pressed() -> void:
+	$Label.visible = true
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
 	var error_inputs = false
 	for i in node_paths_of_function_inputs:
 		#print(get_node(i)._on_button_pressed())
@@ -12,3 +16,5 @@ func _on_button_pressed() -> void:
 		return
 	for i in node_paths_with_script_instance:
 		get_node(i).function_updater()
+	
+	$Label.visible = false

@@ -109,7 +109,7 @@ func set_inputs() -> bool:
 			var variables_test = []
 			variables_test.resize(variable_names.size())
 			variables_test.fill(testCase)
-			var evaluation = evaluate(variables_test, true)
+			var evaluation = evaluate(variables_test, false)
 			#print(evaluation)
 			if typeof(evaluation) == TYPE_DICTIONARY and "error" in evaluation:
 				error = evaluation["error"]

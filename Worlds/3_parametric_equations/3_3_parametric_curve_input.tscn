@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwfmwp0clbrc8"]
+[gd_scene load_steps=6 format=3 uid="uid://dwfmwp0clbrc8"]
 
 [ext_resource type="PackedScene" uid="uid://ds6tgon6cwvmr" path="res://Worlds/3_parametric_equations/3_1_curve.tscn" id="1_7pmbj"]
 [ext_resource type="PackedScene" uid="uid://cno5vr8ekj43" path="res://Scenes/canvas_layers/information_inputs/function_input.tscn" id="2_f5043"]
 [ext_resource type="Script" uid="uid://cw3o83iuiqjpx" path="res://Resources/Functions/overrides/SPECIAL_function_input_override.gd" id="2_s2nut"]
 [ext_resource type="PackedScene" uid="uid://qh7fqtqwc87r" path="res://Scenes/canvas_layers/information_inputs/function_input_updater.tscn" id="3_s2nut"]
+[ext_resource type="PackedScene" uid="uid://db6wg5dix75br" path="res://Scenes/canvas_layers/information_inputs/parametric_range_input.tscn" id="4_s2nut"]
 
 [node name="3_3_parametric_curve_input" instance=ExtResource("1_7pmbj")]
 
@@ -16,6 +17,24 @@ variable_names = Array[String](["t"])
 function_name = "R"
 overriding_function_id = 1
 
-[node name="FunctionInputUpdater" parent="." index="2" instance=ExtResource("3_s2nut")]
+[node name="ParametricRangeInput" parent="." index="2" instance=ExtResource("4_s2nut")]
+node_path_with_script_instance = NodePath("../Path")
+
+[node name="SubjectLabel" parent="ParametricRangeInput/Control/ParameterSubinput" index="1"]
+text = "t ∈"
+
+[node name="ParameterSubinput2" parent="ParametricRangeInput/Control" index="1"]
+visible = false
+
+[node name="ParameterSubinput3" parent="ParametricRangeInput/Control" index="2"]
+offset_left = 208.0
+offset_right = 248.0
+
+[node name="FunctionInputUpdater" parent="." index="3" instance=ExtResource("3_s2nut")]
 node_paths_with_script_instance = Array[NodePath]([NodePath("../Path")])
-node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput")])
+node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../ParametricRangeInput")])
+
+[editable path="ParametricRangeInput"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput2"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput3"]
