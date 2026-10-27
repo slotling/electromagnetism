@@ -44,6 +44,7 @@ multimesh = SubResource("MultiMesh_rwhq7")
 [node name="surface" parent="." index="1" groups=["retain_visibility"]]
 visible = false
 ParametricSurfaceScript = ExtResource("3_kjw63")
+autoRenderOnReady = true
 
 [node name="SurfaceIntegralCalculationController" type="Node" parent="surface" index="1"]
 script = ExtResource("2_goxmp")

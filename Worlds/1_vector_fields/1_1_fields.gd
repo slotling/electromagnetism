@@ -26,7 +26,6 @@ var drawing_list = []
 func function_updater():
 	create_drawing_list(true)
 	draw_vectors(0, true)
-	#print(calculated_settings["magmax"])
 
 func F(x, y=0, z=0, id=null) -> Vector3:
 	return FieldScriptInstance.F(x, y, z, id)
@@ -106,7 +105,7 @@ func get_instance_count():
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
 	return instances_dim.x * instances_dim.y * instances_dim.z if not calculated_settings else calculated_settings["instance_count"]
 
-@export var autoRenderOnReady = false
+@export var autoRenderOnReady = true
 func _ready() -> void:
 	await get_tree().process_frame
 	FieldScriptInstance.WORLD = self

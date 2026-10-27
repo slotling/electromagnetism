@@ -7,7 +7,6 @@ func call_provider(variables: Array[float], function_id):
 	for provider in FUNCTION_PROVIDERS:
 		if provider.overriding_function_id == function_id:
 			return provider.evaluate(variables)
-	#print("No provider provides this function.")
 	return Vector3.ZERO
 
 func F(x, y=0, z=0, id=null) -> Vector3:

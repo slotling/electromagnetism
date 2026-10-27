@@ -81,17 +81,6 @@ func _process(delta: float) -> void:
 		get_parent().global_position.z -= mouse_movement.dot(y_axis_components) * (1 if pressed["y"] else 0) * speed
 		get_parent().global_position.y -= mouse_movement.dot(z_axis_components) * (1 if pressed["z"] else 0) * speed
 		
-		#if tick % 10 == 1 and any_pressed():
-			#print()
-			##print("relative pos: ", relpos.y, " ", relpos.x)
-			#print("Polar angle: ", rad_to_deg(pol))
-			#print("Azimuthal angle: ", rad_to_deg(azi))
-			#print("XAC:", x_axis_components)
-			#print("YAC:", y_axis_components)
-			#print("MM:", debug_mouse_movement)
-			#print("MMXAC:", debug_mouse_movement.dot(x_axis_components))
-			#print("MMYAC:", debug_mouse_movement.dot(y_axis_components))
-		
 		mouse_movement = Vector2.ZERO
 
 func tween_scale(node, size):

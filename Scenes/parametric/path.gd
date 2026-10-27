@@ -29,7 +29,6 @@ func generate_points():
 	var u = uintercept
 	
 	while u < uend + uscale:
-		#print("path creation: ", u)
 		var u2 = u + uscale
 		
 		if u > uend:
@@ -39,7 +38,6 @@ func generate_points():
 			pass
 		
 		var raw_pos = ParametricCurveScriptInstance.R(u)
-		#print(raw_pos)
 		if u != uend:
 			raw_points.append(raw_pos)
 			

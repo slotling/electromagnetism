@@ -28,12 +28,8 @@ func init(options: Dictionary, default_index=0) -> void: # name, nodepath
 			popup.add_separator(section + " - " + sectionTitle[section])
 		$OptionButton.add_item(i)
 	scenes = options.values()
-	#print(options.keys()[default_index])
-	#print(sectionTitle.keys().find(options.keys()[default_index].split(".")[0]))
 	var current_section = options.keys()[default_index].split(".")[0]
 	var sectionindex = sectionTitle.keys().find(current_section)
-	print(current_section, sectionindex)
-	print(default_index + sectionindex + 1)
 	$OptionButton.select(default_index + sectionindex + 1)
 	_on_option_button_item_selected(default_index + sectionindex + 1)
 

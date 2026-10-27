@@ -34,12 +34,19 @@ use_custom_data = true
 mesh = SubResource("ArrayMesh_uigio")
 
 [node name="6_2_gauss_law_arbitrary_surfaces" instance=ExtResource("1_8oaqm")]
+autoRenderOnReady = false
 
 [node name="MM" parent="." index="0"]
 multimesh = SubResource("MultiMesh_xhfog")
 
 [node name="surface" parent="." index="1"]
 ParametricSurfaceScript = ExtResource("2_wpsqp")
+
+[node name="SurfaceIntegralCalculationController" parent="surface" index="1"]
+use_analytical_R_partials = false
+
+[node name="SurfaceIntegralCanvasLayer" parent="." index="2"]
+ButtonsToBePressed = Array[NodePath]([NodePath("../FunctionInputUpdater/Button")])
 
 [node name="FunctionInput" parent="." index="5" instance=ExtResource("2_xhfog")]
 node_path_with_script_instance = NodePath("../surface")
@@ -76,6 +83,7 @@ placeholder_text = ""
 text = "(calculating) Δu, Δv ="
 
 [node name="FunctionInputUpdater" parent="." index="7" instance=ExtResource("4_svag0")]
+visible = false
 node_paths_with_script_instance = Array[NodePath]([NodePath("../surface"), NodePath("../ElectricFieldFunctionReplacerController"), NodePath("..")])
 node_paths_of_function_inputs = Array[NodePath]([NodePath("../ParametricRangeInput"), NodePath("../FunctionInput")])
 

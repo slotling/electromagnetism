@@ -10,7 +10,6 @@ func _on_button_pressed() -> void:
 	
 	var error_inputs = false
 	for i in node_paths_of_function_inputs:
-		#print(get_node(i)._on_button_pressed())
 		error_inputs = error_inputs or not get_node(i).set_inputs()
 	if error_inputs:
 		return

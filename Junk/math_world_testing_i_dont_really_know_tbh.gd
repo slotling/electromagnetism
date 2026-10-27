@@ -100,26 +100,13 @@ func calculate(use_analytical_R_partials=true):
 		while v < vend:
 			var v2 = v + vscale
 			var integrand = calculate_integrand(u, v, u2, v2) if not use_analytical_R_partials else calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale)
-			
-			#var diff_u_integrand = calculate_integrand_using_analytical_R_partials(u+ufinescale, v, uscale, vscale)
-			#var diff_v_integrand = calculate_integrand_using_analytical_R_partials(u, v+vfinescale, uscale, vscale)
-			#integrandDifferences_u.append(abs(diff_u_integrand-integrand))
-			#integrandDifferences_v.append(abs(diff_v_integrand-integrand))
-			
-			#if areas % 50000 == 0:
-				#print("Diff: ", calculate_analytical_integral(u, u2, v, v2) - integrand)
-			
+
 			sum += integrand
 			
 			v = v2
 			areas += 1
 		
 		u = u2
-		
-	#for arr in [integrandDifferences_u, integrandDifferences_v]:
-		#var sum_indiffs = arr.reduce(func(accum, number): return accum + number, 0)
-		#print("Mean integrand differences: ", float(sum_indiffs) / arr.size())
-		#print("Max integrand difference: ", arr.max())
 	
 	return {"sum": sum, "second_sum": sum, "areas": areas, "extra_areas": 0}
 
@@ -127,11 +114,6 @@ func calculate_and_report(sol, use_analytical_R_partials):
 	var start_time = Time.get_ticks_usec()
 	var results = calculate(use_analytical_R_partials)
 	var execution_time = Time.get_ticks_usec() - start_time
-	print("Flux: ", results["sum"])
-	print("Analytical solution: ", sol)
-	print("Error: ", String.num_scientific(abs(results["sum"] - sol)) )
-	print("Time elapsed: ", execution_time/1000000.0, " s")
-	print("Areas: ", results["areas"])
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

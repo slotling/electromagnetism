@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://c28a4mkgrj0vs"]
+[gd_scene load_steps=18 format=4 uid="uid://c28a4mkgrj0vs"]
 
 [ext_resource type="PackedScene" uid="uid://d3qhe3uwfc8mv" path="res://Worlds/5_electric_charge/5_3_test_charge.tscn" id="1_e4lfs"]
 [ext_resource type="PackedScene" uid="uid://comngv0ycq24" path="res://Scenes/charge_distributions/PathCharge.tscn" id="2_3d3eq"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="3_gndnu"]
 [ext_resource type="Script" uid="uid://cja44wlxpqee2" path="res://Resources/Functions/parametric_paths/03_circle.gd" id="5_xtsxh"]
 [ext_resource type="PackedScene" uid="uid://d0jq72axobkte" path="res://Scenes/canvas_layers/information_inputs/update_field_canvas_layer.tscn" id="6_gndnu"]
+[ext_resource type="Script" uid="uid://cw3o83iuiqjpx" path="res://Resources/Functions/overrides/SPECIAL_function_input_override.gd" id="6_nru31"]
+[ext_resource type="PackedScene" uid="uid://cno5vr8ekj43" path="res://Scenes/canvas_layers/information_inputs/function_input.tscn" id="7_e0x5d"]
+[ext_resource type="PackedScene" uid="uid://db6wg5dix75br" path="res://Scenes/canvas_layers/information_inputs/parametric_range_input.tscn" id="8_nru31"]
+[ext_resource type="PackedScene" uid="uid://qh7fqtqwc87r" path="res://Scenes/canvas_layers/information_inputs/function_input_updater.tscn" id="9_e60ko"]
 
 [sub_resource type="Resource" id="Resource_f3gig"]
 script = ExtResource("2_xtsxh")
@@ -46,6 +50,16 @@ use_colors = true
 use_custom_data = true
 mesh = SubResource("ArrayMesh_p2jq1")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0x5d"]
+resource_local_to_scene = true
+emission = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nru31"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_e0x5d")
+radius = 4.0
+height = 8.0
+
 [node name="5_4_arbitrary_charge_distributions" instance=ExtResource("1_e4lfs")]
 config = SubResource("Resource_gndnu")
 
@@ -55,7 +69,52 @@ multimesh = SubResource("MultiMesh_ug5ax")
 [node name="PathCharge" parent="Charges" index="0" instance=ExtResource("2_3d3eq")]
 ParametricCurveScript = ExtResource("5_xtsxh")
 
+[node name="MeshInstance3D" parent="Charges/PathCharge" index="0"]
+mesh = SubResource("SphereMesh_nru31")
+
+[node name="Path" parent="Charges/PathCharge" index="3"]
+ParametricCurveScript = ExtResource("6_nru31")
+
 [node name="UpdateFieldCanvasLayer" parent="." index="4" instance=ExtResource("6_gndnu")]
+ButtonsToBePressed = Array[NodePath]([NodePath("../FunctionInputUpdater/Button")])
 
 [node name="ElectricFieldFunctionReplacerController" parent="." index="5"]
 recalculate_field_only_on_command = true
+
+[node name="FunctionInput" parent="." index="6" instance=ExtResource("7_e0x5d")]
+node_path_with_script_instance = NodePath("../Charges/PathCharge/Path")
+variable_names = Array[String](["t"])
+function_name = "R"
+overriding_function_id = 1
+
+[node name="ParametricRangeInput" parent="." index="7" instance=ExtResource("8_nru31")]
+node_path_with_script_instance = NodePath("../Charges/PathCharge/Path")
+
+[node name="SubjectLabel" parent="ParametricRangeInput/Control/ParameterSubinput" index="1"]
+text = "t ∈"
+
+[node name="ParameterSubinput2" parent="ParametricRangeInput/Control" index="1"]
+visible = false
+
+[node name="ParameterSubinput3" parent="ParametricRangeInput/Control" index="2"]
+offset_left = 208.0
+offset_right = 248.0
+
+[node name="FunctionInputUpdater" parent="." index="8" instance=ExtResource("9_e60ko")]
+visible = false
+node_paths_with_script_instance = Array[NodePath]([NodePath("../Charges/PathCharge/Path")])
+node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../ParametricRangeInput")])
+
+[node name="Button" parent="FunctionInputUpdater" index="0"]
+offset_left = 584.0
+offset_top = 888.0
+offset_right = 720.0
+offset_bottom = 928.0
+
+[editable path="Charges/PathCharge"]
+[editable path="FunctionInput"]
+[editable path="ParametricRangeInput"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput2"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput3"]
+[editable path="FunctionInputUpdater"]

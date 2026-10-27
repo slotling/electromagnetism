@@ -156,5 +156,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#_ready()
 	#v_intercept -= 0.1
-	#print(v_intercept)
 	pass

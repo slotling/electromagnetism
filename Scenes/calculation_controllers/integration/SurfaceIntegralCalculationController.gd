@@ -6,6 +6,8 @@ class_name SurfaceIntegralCalculationController
 @onready var SurfaceScriptInstance: FunctionController
 @onready var FieldScriptInstance: FunctionController
 
+@export var use_analytical_R_partials = true
+
 var normal_cache = {} # u, v hierarchy
 
 func R(u, v):
@@ -19,7 +21,7 @@ func F(x, y, z):
 	return FieldScriptInstance.F(x, y, z)
 
 # efficient one given you worked out the derivatives
-func calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale, use_cache=true, store_cache = true):
+func calculate_integrand_using_analytical_R_partials(u, v, uscale, vscale, use_cache=true, store_cache=true):
 	var currentR = R(u, v)
 	
 	var diffCross
@@ -45,9 +47,8 @@ func calculate_integrand(u, v, u2, v2):
 	var value = F(currentR.x, currentR.y, currentR.z)
 	return value.dot(diffCross)
 
-func calculate_full_integral(use_analytical_R_partials=true):
+func calculate_full_integral():
 	var uscale = SurfaceScriptInstance.get_calculation_diff()
-	print(SurfaceScriptInstance.get_calculation_diff())
 	var vscale = SurfaceScriptInstance.get_calculation_diff()
 	var uintercept = SurfaceScriptInstance.get_ustart() + SurfaceScriptInstance.get_calculation_diff()/2 # locate at center of patch
 	var vintercept = SurfaceScriptInstance.get_vstart() + SurfaceScriptInstance.get_calculation_diff()/2 # locate at center of patch
@@ -76,9 +77,9 @@ func calculate_full_integral(use_analytical_R_partials=true):
 	
 	return {"sum": sum, "areas": areas}
 
-func calculate_and_report(use_analytical_R_partials):
+func calculate_and_report():
 	var start_time = Time.get_ticks_usec()
-	var results = calculate_full_integral(use_analytical_R_partials)
+	var results = calculate_full_integral()
 	var execution_time = Time.get_ticks_usec() - start_time
 	print("Flux: ", results["sum"])
 	print("Time elapsed: ", execution_time/1000000.0, " s")
@@ -88,7 +89,7 @@ func calculate_and_report(use_analytical_R_partials):
 
 func calculate():
 	await get_tree().process_frame
-	return calculate_and_report(true)
+	return calculate_and_report()
 	
 func _ready() -> void:
 	await get_tree().process_frame

@@ -52,7 +52,6 @@ func _ready() -> void:
 	for i in charges.size():
 		charges[i].id = i
 		var arr = []
-		print("wic: ", WORLD.get_instance_count())
 		arr.resize(WORLD.get_instance_count())
 		arr.fill(Vector3.ZERO)
 		forces.append(arr)

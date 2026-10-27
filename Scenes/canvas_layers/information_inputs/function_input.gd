@@ -18,7 +18,6 @@ var string_expressions: PackedStringArray = []
 func evaluate(variables, debug=false):
 	var results = []
 	for string in string_expressions:
-		#print(string)
 		var expression = Expression.new()
 		var finalstring = string
 		
@@ -47,14 +46,12 @@ func evaluate(variables, debug=false):
 		
 		for i in variable_names.size():
 			finalstring = finalstring.replace(variable_names[i], str(variables[i]))
-		#print(finalstring)
 		var parse_error = expression.parse(finalstring)
 		
 		if parse_error != Error.OK:
 			return {"error": error_string(parse_error)}
 		
 		var result = expression.execute()
-		#print(result)
 
 		if result == null:
 			return {"error": "Unable to parse '" + string + "'"}
@@ -96,7 +93,7 @@ func set_inputs() -> bool:
 	text = $Control/LineEdit.text
 	var processed_string: String = text.replace(" ", "").replace("^", "**")
 	string_expressions = processed_string.split(",")
-	#print(string_expressions)
+
 	error = ""
 	for string in string_expressions:
 		if string == "":
@@ -110,7 +107,7 @@ func set_inputs() -> bool:
 			variables_test.resize(variable_names.size())
 			variables_test.fill(testCase)
 			var evaluation = evaluate(variables_test, false)
-			#print(evaluation)
+
 			if typeof(evaluation) == TYPE_DICTIONARY and "error" in evaluation:
 				error = evaluation["error"]
 	
