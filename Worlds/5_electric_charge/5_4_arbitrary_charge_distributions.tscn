@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=4 uid="uid://c28a4mkgrj0vs"]
+[gd_scene load_steps=17 format=4 uid="uid://c28a4mkgrj0vs"]
 
 [ext_resource type="PackedScene" uid="uid://d3qhe3uwfc8mv" path="res://Worlds/5_electric_charge/5_3_test_charge.tscn" id="1_e4lfs"]
 [ext_resource type="PackedScene" uid="uid://comngv0ycq24" path="res://Scenes/charge_distributions/PathCharge.tscn" id="2_3d3eq"]
 [ext_resource type="Script" uid="uid://ckj7ev16yia8c" path="res://Resources/Configs/DrawConfig.gd" id="2_xtsxh"]
 [ext_resource type="Script" uid="uid://b38abs6n85w0l" path="res://Resources/Configs/WorldConfig.gd" id="3_gndnu"]
-[ext_resource type="Script" uid="uid://cja44wlxpqee2" path="res://Resources/Functions/parametric_paths/03_circle.gd" id="5_xtsxh"]
 [ext_resource type="PackedScene" uid="uid://d0jq72axobkte" path="res://Scenes/canvas_layers/information_inputs/update_field_canvas_layer.tscn" id="6_gndnu"]
 [ext_resource type="Script" uid="uid://cw3o83iuiqjpx" path="res://Resources/Functions/overrides/SPECIAL_function_input_override.gd" id="6_nru31"]
 [ext_resource type="PackedScene" uid="uid://cno5vr8ekj43" path="res://Scenes/canvas_layers/information_inputs/function_input.tscn" id="7_e0x5d"]
@@ -50,13 +49,13 @@ use_colors = true
 use_custom_data = true
 mesh = SubResource("ArrayMesh_p2jq1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e0x5d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujn3t"]
 resource_local_to_scene = true
 emission = Color(1, 1, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_nru31"]
+[sub_resource type="SphereMesh" id="SphereMesh_e0x5d"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_e0x5d")
+material = SubResource("StandardMaterial3D_ujn3t")
 radius = 4.0
 height = 8.0
 
@@ -67,13 +66,16 @@ config = SubResource("Resource_gndnu")
 multimesh = SubResource("MultiMesh_ug5ax")
 
 [node name="PathCharge" parent="Charges" index="0" instance=ExtResource("2_3d3eq")]
-ParametricCurveScript = ExtResource("5_xtsxh")
 
 [node name="MeshInstance3D" parent="Charges/PathCharge" index="0"]
-mesh = SubResource("SphereMesh_nru31")
+mesh = SubResource("SphereMesh_e0x5d")
 
 [node name="Path" parent="Charges/PathCharge" index="3"]
 ParametricCurveScript = ExtResource("6_nru31")
+
+[node name="Label" parent="TestChargeCanvasLayer" index="0"]
+offset_top = -40.0
+offset_bottom = 64.0
 
 [node name="UpdateFieldCanvasLayer" parent="." index="4" instance=ExtResource("6_gndnu")]
 ButtonsToBePressed = Array[NodePath]([NodePath("../FunctionInputUpdater/Button")])
@@ -87,8 +89,16 @@ variable_names = Array[String](["t"])
 function_name = "R"
 overriding_function_id = 1
 
+[node name="Control" parent="FunctionInput" index="0"]
+offset_top = -64.0
+offset_bottom = -24.0
+
 [node name="ParametricRangeInput" parent="." index="7" instance=ExtResource("8_nru31")]
 node_path_with_script_instance = NodePath("../Charges/PathCharge/Path")
+
+[node name="Control" parent="ParametricRangeInput" index="0"]
+offset_top = -120.0
+offset_bottom = -80.0
 
 [node name="SubjectLabel" parent="ParametricRangeInput/Control/ParameterSubinput" index="1"]
 text = "t ∈"
@@ -112,6 +122,7 @@ offset_right = 720.0
 offset_bottom = 928.0
 
 [editable path="Charges/PathCharge"]
+[editable path="TestChargeCanvasLayer"]
 [editable path="FunctionInput"]
 [editable path="ParametricRangeInput"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput"]

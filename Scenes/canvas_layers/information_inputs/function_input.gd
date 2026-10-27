@@ -72,7 +72,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	FunctionScriptInstances = get_node(node_path_with_script_instance).FunctionScriptInstances
-	print(FunctionScriptInstances[function_script_instance_to_input])
+	print(FunctionScriptInstances[function_script_instance_to_input], " path: ", FunctionScriptInstances[function_script_instance_to_input].resource_path)
 	FunctionScriptInstances[function_script_instance_to_input].FUNCTION_PROVIDERS.append(self)
 	$Control/SubjectLabel.text = function_name + "(" + ", ".join(variable_names) + ") = "
 	var my_array = []

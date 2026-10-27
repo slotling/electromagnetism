@@ -1,14 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bakh64v877oqf"]
+[gd_scene load_steps=3 format=3 uid="uid://bakh64v877oqf"]
 
 [ext_resource type="Script" uid="uid://dvtanbmiblvku" path="res://Scenes/parametric/path.gd" id="1_s43gj"]
-[ext_resource type="Script" uid="uid://dfgotp6a0b3cg" path="res://Resources/Functions/parametric_paths/02_line.gd" id="2_lfmom"]
 
 [sub_resource type="Curve3D" id="Curve3D_tjn3m"]
 resource_local_to_scene = true
 
 [node name="Path" type="Node3D"]
 script = ExtResource("1_s43gj")
-ParametricCurveScript = ExtResource("2_lfmom")
 
 [node name="Paths" type="Node3D" parent="."]
 

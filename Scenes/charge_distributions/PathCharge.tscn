@@ -24,3 +24,4 @@ visible = false
 mesh = SubResource("SphereMesh_pt2r7")
 
 [node name="Path" parent="." index="3" instance=ExtResource("2_7lihv")]
+ParametricCurveScript = null
