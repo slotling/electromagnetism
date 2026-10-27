@@ -83,7 +83,7 @@ func create_drawing_list_process(initialize) -> void:
 	
 	loop_through_all_points(initialize, Callable(self, "every_point"))
 	
-	if initialize:
+	if initialize and drawing_list.size() != 0:
 		var length = calculated_settings["x_values"].size()
 		var upper_percentile_index = int(length / 100.0 * config.draw.UpperPercentile)
 		var lower_percentile_index = length / 100.0 * config.draw.LowerPercentile
@@ -106,11 +106,14 @@ func get_instance_count():
 	var instances_dim := config.draw.LatticeEnd + Vector3.ONE - config.draw.LatticeStart
 	return instances_dim.x * instances_dim.y * instances_dim.z if not calculated_settings else calculated_settings["instance_count"]
 
+@export var autoRenderOnReady = false
 func _ready() -> void:
 	await get_tree().process_frame
 	FieldScriptInstance.WORLD = self
-	create_drawing_list(true)
-	draw_vectors(0, true)
+	
+	if autoRenderOnReady:
+		create_drawing_list(true)
+		draw_vectors(0, true)
 
 var cycle_length = 1
 
@@ -172,6 +175,6 @@ var time = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	frame += 1
-	if not config.draw.LowDetailMode and G.WORLD == self:
+	if not config.draw.LowDetailMode and G.WORLD == self and drawing_list.size() != 0:
 		time += delta
 		draw_vectors(time)

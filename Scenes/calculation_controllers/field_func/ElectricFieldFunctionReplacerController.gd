@@ -14,9 +14,12 @@ signal charge_selected(chargeNode)
 @onready var WORLD: VectorField = get_parent()
 @onready var charges = WORLD.get_node("Charges").get_children()
 
-var forces = []
+@onready var forces = []
 
 var InspectedCharge: ChargeDisplay = null
+
+func function_updater():
+	_ready()
 
 func F(x, y=0, z=0, id=null) -> Vector3:
 	var sum = Vector3.ZERO
@@ -49,6 +52,7 @@ func _ready() -> void:
 	for i in charges.size():
 		charges[i].id = i
 		var arr = []
+		print("wic: ", WORLD.get_instance_count())
 		arr.resize(WORLD.get_instance_count())
 		arr.fill(Vector3.ZERO)
 		forces.append(arr)

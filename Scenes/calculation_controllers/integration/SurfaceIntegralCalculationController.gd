@@ -47,6 +47,7 @@ func calculate_integrand(u, v, u2, v2):
 
 func calculate_full_integral(use_analytical_R_partials=true):
 	var uscale = SurfaceScriptInstance.get_calculation_diff()
+	print(SurfaceScriptInstance.get_calculation_diff())
 	var vscale = SurfaceScriptInstance.get_calculation_diff()
 	var uintercept = SurfaceScriptInstance.get_ustart() + SurfaceScriptInstance.get_calculation_diff()/2 # locate at center of patch
 	var vintercept = SurfaceScriptInstance.get_vstart() + SurfaceScriptInstance.get_calculation_diff()/2 # locate at center of patch

@@ -30,8 +30,12 @@ func init(options: Dictionary, default_index=0) -> void: # name, nodepath
 	scenes = options.values()
 	#print(options.keys()[default_index])
 	#print(sectionTitle.keys().find(options.keys()[default_index].split(".")[0]))
-	$OptionButton.select(default_index + sectionTitle.keys().find(options.keys()[default_index].split(".")[0]) + 1)
-	_on_option_button_item_selected(default_index)
+	var current_section = options.keys()[default_index].split(".")[0]
+	var sectionindex = sectionTitle.keys().find(current_section)
+	print(current_section, sectionindex)
+	print(default_index + sectionindex + 1)
+	$OptionButton.select(default_index + sectionindex + 1)
+	_on_option_button_item_selected(default_index + sectionindex + 1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,7 +54,7 @@ func _on_option_button_item_selected(index: int) -> void:
 	if freeScene:
 		var child = G.ROOT_WORLD.get_node("Scene").get_child(0)
 		if child != null:
-			child.queue_free()
+			child.queue_fr6ee()
 		scenes_loaded = []
 	
 	for i in G.ROOT_SCENE.get_children():

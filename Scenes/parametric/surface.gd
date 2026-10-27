@@ -5,6 +5,8 @@ var texture_spacing = 1.0/5.0
 @export var ParametricSurfaceScript: Script
 @onready var ParametricSurfaceScriptInstance = ParametricSurfaceScript.new() if ParametricSurfaceScript != null else null
 
+@export var autoRenderOnReady = false
+
 # Alias variable name for FunctionInput nodes and consistency
 @onready var FunctionScriptInstances = [ParametricSurfaceScriptInstance]
 func function_updater():
@@ -44,6 +46,16 @@ func reoriented_calc_cross(u, v, u2, v2, currentR):
 	return (G.reorient_to_game(R(u2, v) - currentR)).cross(G.reorient_to_game(R(u, v2) - currentR))
 
 func generate_surface():
+	raw_verts = PackedVector3Array()
+	raw_crosses = PackedVector3Array()
+	verts = PackedVector3Array()
+	uvs = PackedVector2Array()
+	normals = PackedVector3Array()
+	indices = PackedInt32Array()
+
+	vector_verts = PackedVector3Array()
+	vector_crosses = PackedVector3Array()
+	
 	ustart = ParametricSurfaceScriptInstance.get_ustart()
 	uend = ParametricSurfaceScriptInstance.get_uend()
 	vstart = ParametricSurfaceScriptInstance.get_vstart()
@@ -137,9 +149,8 @@ func generate_surface():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	generate_surface()
-	generate_surface()
-	generate_surface()
+	if autoRenderOnReady:
+		generate_surface()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

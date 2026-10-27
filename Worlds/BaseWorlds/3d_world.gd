@@ -10,8 +10,9 @@ func _ready() -> void:
 		"B.1: electric field": load("res://Worlds/5_electric_charge/5_3_a_test_charge_with_some_charges.tscn"),
 		"B.2: line charges": load("res://Worlds/5_electric_charge/5_4_arbitrary_charge_distributions.tscn"),
 		"B.3: gauss's law verification": load("res://Worlds/6_gauss_law/6_1_verifying_gauss_law.tscn"),
+		"B.4: flux calculations on arbitrary surfaces": load("res://Worlds/6_gauss_law/6_2_gauss_law_arbitrary_surfaces.tscn"),
 	}
-	var scene_index = scenes.keys().find("A.1: vector field")
+	var scene_index = scenes.keys().find("B.4: flux calculations on arbitrary surfaces")
 	$SceneSwitcher.init(scenes, scene_index)
 
 
