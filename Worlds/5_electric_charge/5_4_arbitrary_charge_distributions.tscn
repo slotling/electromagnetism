@@ -126,18 +126,7 @@ offset_right = 248.0
 [node name="LineEdit" parent="ParametricRangeInput/Control/ParameterSubinput4" index="0"]
 text = "0.1"
 
-[node name="FunctionInputUpdater" parent="." index="8" instance=ExtResource("9_e60ko")]
-visible = false
-node_paths_with_script_instance = Array[NodePath]([NodePath("../Charges/PathCharge/Path"), NodePath("..")])
-node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../FunctionInput2"), NodePath("../ParametricRangeInput")])
-
-[node name="Button" parent="FunctionInputUpdater" index="0"]
-offset_left = 584.0
-offset_top = 888.0
-offset_right = 720.0
-offset_bottom = 928.0
-
-[node name="FunctionInput2" parent="." index="9" instance=ExtResource("7_e0x5d")]
+[node name="FunctionInput2" parent="." index="8" instance=ExtResource("7_e0x5d")]
 node_path_with_script_instance = NodePath("../Charges/PathCharge/Path")
 entries = 1
 variable_names = Array[String](["t"])
@@ -151,6 +140,17 @@ offset_bottom = -16.0
 [node name="LineEdit" parent="FunctionInput2/Control" index="0"]
 text = "1"
 
+[node name="FunctionInputUpdater" parent="." index="9" instance=ExtResource("9_e60ko")]
+visible = false
+node_paths_with_script_instance = Array[NodePath]([NodePath("../Charges/PathCharge/Path"), NodePath("..")])
+node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../FunctionInput2"), NodePath("../ParametricRangeInput")])
+
+[node name="Button" parent="FunctionInputUpdater" index="0"]
+offset_left = 584.0
+offset_top = 888.0
+offset_right = 720.0
+offset_bottom = 928.0
+
 [editable path="Charges/PathCharge"]
 [editable path="TestChargeCanvasLayer"]
 [editable path="FunctionInput"]
@@ -159,5 +159,5 @@ text = "1"
 [editable path="ParametricRangeInput/Control/ParameterSubinput2"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput3"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput4"]
-[editable path="FunctionInputUpdater"]
 [editable path="FunctionInput2"]
+[editable path="FunctionInputUpdater"]

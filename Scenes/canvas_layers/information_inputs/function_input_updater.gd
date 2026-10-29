@@ -5,12 +5,15 @@ extends CanvasLayer
 @export var node_paths_of_function_inputs: Array[NodePath]
 
 func _ready() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
 	_on_button_pressed()
 
 func _on_button_pressed() -> void:
-	$Label.visible = true
-	await get_tree().process_frame
-	await get_tree().process_frame
+	if visible:
+		$Label.visible = true
+		await get_tree().process_frame
+		await get_tree().process_frame
 	
 	var error_inputs = false
 	for i in node_paths_of_function_inputs:

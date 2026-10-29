@@ -128,14 +128,15 @@ func draw_vectors(curtime=0, init=false):
 
 	for i in instance_count:
 		var info = drawing_list[i]
-		if info[0] == Vector3.ZERO:
-			MM.set_instance_color(i, Color("TRANSPARENT"))
-			continue
-		var transformation = Basis.looking_at(info[0], Vector3(0, 0, -1))
 		
 		if init:
 			var offset = randf_range(0, 1)
 			MM.set_instance_custom_data(i, Color(offset * cycle_length, 0, 0, 0))
+			
+		if info[0] == Vector3.ZERO:
+			MM.set_instance_color(i, Color("TRANSPARENT"))
+			continue
+		var transformation = Basis.looking_at(info[0], Vector3(0, 0, -1))
 		
 		var magnitude = info[0].length()
 		var finalscale = Vector3.ONE * min(max(config.draw.MinSize, magnitude / calculated_settings["magmax"] * config.draw.BaseSize) if not is_zero_approx(magnitude) else 0.0, config.draw.MaxSize) * config.draw.MultSize
