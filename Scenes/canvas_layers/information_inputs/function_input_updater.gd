@@ -1,7 +1,11 @@
 extends CanvasLayer
 
+## NODE PATHS TO UPDATE
 @export var node_paths_with_script_instance: Array[NodePath]
 @export var node_paths_of_function_inputs: Array[NodePath]
+
+func _ready() -> void:
+	_on_button_pressed()
 
 func _on_button_pressed() -> void:
 	$Label.visible = true

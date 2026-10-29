@@ -61,11 +61,13 @@ height = 8.0
 
 [node name="5_4_arbitrary_charge_distributions" instance=ExtResource("1_e4lfs")]
 config = SubResource("Resource_gndnu")
+autoRenderOnReady = false
 
 [node name="MM" parent="." index="0"]
 multimesh = SubResource("MultiMesh_ug5ax")
 
 [node name="PathCharge" parent="Charges" index="0" instance=ExtResource("2_3d3eq")]
+always_update = true
 
 [node name="MeshInstance3D" parent="Charges/PathCharge" index="0"]
 mesh = SubResource("SphereMesh_e0x5d")
@@ -90,36 +92,64 @@ function_name = "R"
 overriding_function_id = 1
 
 [node name="Control" parent="FunctionInput" index="0"]
-offset_top = -64.0
-offset_bottom = -24.0
+offset_top = -104.0
+offset_bottom = -64.0
+
+[node name="LineEdit" parent="FunctionInput/Control" index="0"]
+text = "t, 0, 0"
 
 [node name="ParametricRangeInput" parent="." index="7" instance=ExtResource("8_nru31")]
 node_path_with_script_instance = NodePath("../Charges/PathCharge/Path")
 
 [node name="Control" parent="ParametricRangeInput" index="0"]
-offset_top = -120.0
-offset_bottom = -80.0
+offset_top = -160.0
+offset_bottom = -120.0
+
+[node name="LineEdit" parent="ParametricRangeInput/Control/ParameterSubinput" index="0"]
+text = "-5, 5"
 
 [node name="SubjectLabel" parent="ParametricRangeInput/Control/ParameterSubinput" index="1"]
 text = "t ∈"
 
 [node name="ParameterSubinput2" parent="ParametricRangeInput/Control" index="1"]
 visible = false
+is_disabled = true
 
 [node name="ParameterSubinput3" parent="ParametricRangeInput/Control" index="2"]
 offset_left = 208.0
 offset_right = 248.0
 
+[node name="ParameterSubinput4" parent="ParametricRangeInput/Control" index="3"]
+offset_left = 208.0
+offset_right = 248.0
+
+[node name="LineEdit" parent="ParametricRangeInput/Control/ParameterSubinput4" index="0"]
+text = "0.1"
+
 [node name="FunctionInputUpdater" parent="." index="8" instance=ExtResource("9_e60ko")]
 visible = false
-node_paths_with_script_instance = Array[NodePath]([NodePath("../Charges/PathCharge/Path")])
-node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../ParametricRangeInput")])
+node_paths_with_script_instance = Array[NodePath]([NodePath("../Charges/PathCharge/Path"), NodePath("..")])
+node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../FunctionInput2"), NodePath("../ParametricRangeInput")])
 
 [node name="Button" parent="FunctionInputUpdater" index="0"]
 offset_left = 584.0
 offset_top = 888.0
 offset_right = 720.0
 offset_bottom = 928.0
+
+[node name="FunctionInput2" parent="." index="9" instance=ExtResource("7_e0x5d")]
+node_path_with_script_instance = NodePath("../Charges/PathCharge/Path")
+entries = 1
+variable_names = Array[String](["t"])
+function_name = "ρ"
+overriding_function_id = 4
+
+[node name="Control" parent="FunctionInput2" index="0"]
+offset_top = -56.0
+offset_bottom = -16.0
+
+[node name="LineEdit" parent="FunctionInput2/Control" index="0"]
+text = "1"
 
 [editable path="Charges/PathCharge"]
 [editable path="TestChargeCanvasLayer"]
@@ -128,4 +158,6 @@ offset_bottom = 928.0
 [editable path="ParametricRangeInput/Control/ParameterSubinput"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput2"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput3"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput4"]
 [editable path="FunctionInputUpdater"]
+[editable path="FunctionInput2"]

@@ -1,6 +1,7 @@
 extends Node3D
 class_name ChargeDisplay
 
+@export var always_update = false
 @export var charge_magnitude:float = 1 # in terms of epsilon_0, the permittivity of free space
 
 var id = null

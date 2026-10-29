@@ -50,7 +50,6 @@ func generate_points():
 
 
 func _ready() -> void:
-	print(ParametricCurveScriptInstance.resource_path)
 	generate_points()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

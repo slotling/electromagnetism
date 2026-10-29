@@ -1,26 +1,23 @@
 extends ChargeDisplay
 
-@export var ParametricCurveScript: Script
-@onready var ParametricCurveScriptInstance = ParametricCurveScript.new()
-
-# Alias variable name for FunctionInput nodes and consistency
-@onready var FunctionScriptInstances = [ParametricCurveScriptInstance]
 func function_updater():
-	_ready()
+	print("hi")
+	set_path()
 
 func _ready() -> void:
+	#$Path.ParametricCurveScript = ParametricCurveScript
 	set_path()
 	super()
 	
 func set_path():
-	$Path.ParametricCurveScript = ParametricCurveScript
-	$Path._ready()
+	$Path.generate_points()
 
 # numerical computation of integral:
 # int, E(squigglyR) * P(squigglyR) * dS
 # = int ustart to uend, E(squigglyR) * P(squigglyR) * (dS/dt) * dt
 
 func E(x, y, z):
+	var ParametricCurveScriptInstance = $Path.ParametricCurveScriptInstance
 	var pos = Vector3(x, y, z)
 	
 	var field = Vector3.ZERO

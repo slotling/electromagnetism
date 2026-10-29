@@ -49,6 +49,23 @@ placeholder_text = ""
 [node name="SubjectLabel" parent="Control/ParameterSubinput3" index="1"]
 text = "(rendering) Δu, Δv ="
 
+[node name="ParameterSubinput4" parent="Control" instance=ExtResource("2_a083q")]
+layout_mode = 0
+offset_left = 416.0
+offset_top = -48.0
+offset_right = 456.0
+offset_bottom = -8.0
+
+[node name="LineEdit" parent="Control/ParameterSubinput4" index="0"]
+offset_left = 184.0
+offset_right = 336.0
+text = "0.01"
+placeholder_text = ""
+
+[node name="SubjectLabel" parent="Control/ParameterSubinput4" index="1"]
+text = "(calculating) Δu, Δv ="
+
 [editable path="Control/ParameterSubinput"]
 [editable path="Control/ParameterSubinput2"]
 [editable path="Control/ParameterSubinput3"]
+[editable path="Control/ParameterSubinput4"]

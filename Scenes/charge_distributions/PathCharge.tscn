@@ -17,11 +17,10 @@ height = 8.0
 
 [node name="PathCharge" instance=ExtResource("1_1p3fp")]
 script = ExtResource("2_pt2r7")
-ParametricCurveScript = ExtResource("4_aftbr")
 
 [node name="MeshInstance3D" parent="." index="0"]
 visible = false
 mesh = SubResource("SphereMesh_pt2r7")
 
 [node name="Path" parent="." index="3" instance=ExtResource("2_7lihv")]
-ParametricCurveScript = null
+ParametricCurveScript = ExtResource("4_aftbr")

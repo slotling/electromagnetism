@@ -22,7 +22,8 @@ func R_v(u, v) -> Vector3:
 	return call_provider([u, v], 3)
 
 func P(u, v=0, w=0) -> float:
-	return call_provider([u, v, w], 4)
+	var requested_value = call_provider([u, v, w], 4)
+	return 0 if requested_value is Vector3 else requested_value
 	
 func get_ustart():
 	return PARAMETER_PROVIDERS[0].simple_evaluate("ustart") if PARAMETER_PROVIDERS.size() > 0 else ustart

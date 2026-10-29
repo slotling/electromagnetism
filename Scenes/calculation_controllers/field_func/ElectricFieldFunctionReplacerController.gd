@@ -65,8 +65,7 @@ var charge_id_update_list = []
 
 func _process(delta: float) -> void:
 	for i in charges:
-		if i.is_updated():
-			charge_id_update_list.erase(i.id)
+		if (i.is_updated() or i.always_update) and not i.id in charge_id_update_list:
 			charge_id_update_list.append(i.id)
 			
 	if not recalculate_field_only_on_command:

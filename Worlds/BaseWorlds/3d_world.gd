@@ -8,11 +8,11 @@ func _ready() -> void:
 		"A.2: parametric curve": load("res://Worlds/3_parametric_equations/3_3_parametric_curve_input.tscn"),
 		"A.3: parametric surface": load("res://Worlds/3_parametric_equations/3_4_custom_parametric_surface.tscn"),
 		"B.1: electric field": load("res://Worlds/5_electric_charge/5_3_a_test_charge_with_some_charges.tscn"),
-		"B.2: line charges": load("res://Worlds/5_electric_charge/5_4_arbitrary_charge_distributions.tscn"),
+		"B.2: arbitrary line charges": load("res://Worlds/5_electric_charge/5_4_arbitrary_charge_distributions.tscn"),
 		"B.3: gauss's law verification": load("res://Worlds/6_gauss_law/6_1_verifying_gauss_law.tscn"),
 		"B.4: flux calculations on arbitrary surfaces": load("res://Worlds/6_gauss_law/6_2_gauss_law_arbitrary_surfaces.tscn"),
 	}
-	var scene_index = scenes.keys().find("B.4: flux calculations on arbitrary surfaces")
+	var scene_index = scenes.keys().find("B.2: arbitrary line charges")
 	$SceneSwitcher.init(scenes, scene_index)
 
 

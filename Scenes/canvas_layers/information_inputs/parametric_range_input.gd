@@ -52,6 +52,8 @@ func set_inputs() -> bool:
 		var control_child: ParameterSubinput = $Control.get_child(i)
 		var entries = 2 if control_child.is_an_interval else 1
 		if control_child.is_disabled:
+			for j in entries:
+				string_expressions.append("1")
 			current_string_expression_index += entries
 			continue
 		

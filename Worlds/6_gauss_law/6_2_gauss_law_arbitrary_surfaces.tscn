@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://cj28wcj1doxix"]
+[gd_scene load_steps=9 format=4 uid="uid://cj28wcj1doxix"]
 
 [ext_resource type="PackedScene" uid="uid://irj8j41x80tt" path="res://Worlds/6_gauss_law/6_1_verifying_gauss_law.tscn" id="1_8oaqm"]
 [ext_resource type="Script" uid="uid://cw3o83iuiqjpx" path="res://Resources/Functions/overrides/SPECIAL_function_input_override.gd" id="2_wpsqp"]
 [ext_resource type="PackedScene" uid="uid://cno5vr8ekj43" path="res://Scenes/canvas_layers/information_inputs/function_input.tscn" id="2_xhfog"]
 [ext_resource type="PackedScene" uid="uid://db6wg5dix75br" path="res://Scenes/canvas_layers/information_inputs/parametric_range_input.tscn" id="3_wpsqp"]
 [ext_resource type="PackedScene" uid="uid://qh7fqtqwc87r" path="res://Scenes/canvas_layers/information_inputs/function_input_updater.tscn" id="4_svag0"]
-[ext_resource type="PackedScene" uid="uid://da8ohuasllykb" path="res://Scenes/canvas_layers/information_inputs/parameter_subinput.tscn" id="5_svag0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ngmx"]
 resource_local_to_scene = true
@@ -66,22 +65,6 @@ text = "-1, 1"
 [node name="LineEdit" parent="ParametricRangeInput/Control/ParameterSubinput2" index="0"]
 text = "-1, 1"
 
-[node name="ParameterSubinput4" parent="ParametricRangeInput/Control" index="3" instance=ExtResource("5_svag0")]
-layout_mode = 0
-offset_left = 416.0
-offset_top = -48.0
-offset_right = 456.0
-offset_bottom = -8.0
-
-[node name="LineEdit" parent="ParametricRangeInput/Control/ParameterSubinput4" index="0"]
-offset_left = 184.0
-offset_right = 336.0
-text = "0.01"
-placeholder_text = ""
-
-[node name="SubjectLabel" parent="ParametricRangeInput/Control/ParameterSubinput4" index="1"]
-text = "(calculating) Δu, Δv ="
-
 [node name="FunctionInputUpdater" parent="." index="7" instance=ExtResource("4_svag0")]
 visible = false
 node_paths_with_script_instance = Array[NodePath]([NodePath("../surface"), NodePath("../ElectricFieldFunctionReplacerController"), NodePath("..")])
@@ -104,5 +87,4 @@ offset_bottom = 888.0
 [editable path="ParametricRangeInput/Control/ParameterSubinput"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput2"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput3"]
-[editable path="ParametricRangeInput/Control/ParameterSubinput4"]
 [editable path="FunctionInputUpdater"]
