@@ -1,5 +1,5 @@
 # Electromagnetism simulation (version alpha.1)
-[Download](https://github.com/slotling/electromagnetism/raw/refs/heads/main/Exports/electromagnetism.exe)
+[Download for windows](https://github.com/slotling/electromagnetism/raw/refs/heads/main/Exports/electromagnetism.exe)<br>
 [WIP web build (much worse performance, some unicode characters don't load correctly)](https://slotl.itch.io/electromagnetism)
 
 ## Features
