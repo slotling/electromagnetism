@@ -12,7 +12,7 @@ func _ready() -> void:
 		"B.3: gauss's law verification": load("res://Worlds/6_gauss_law/6_1_verifying_gauss_law.tscn"),
 		"B.4: flux calculations on arbitrary surfaces": load("res://Worlds/6_gauss_law/6_2_gauss_law_arbitrary_surfaces.tscn"),
 	}
-	var scene_index = scenes.keys().find("B.2: arbitrary line charges")
+	var scene_index = scenes.keys().find("A.1: vector field")
 	$SceneSwitcher.init(scenes, scene_index)
 
 

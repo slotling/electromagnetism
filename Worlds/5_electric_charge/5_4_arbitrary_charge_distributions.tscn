@@ -146,6 +146,7 @@ node_paths_with_script_instance = Array[NodePath]([NodePath("../Charges/PathChar
 node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../FunctionInput2"), NodePath("../ParametricRangeInput")])
 
 [node name="Button" parent="FunctionInputUpdater" index="0"]
+visible = false
 offset_left = 584.0
 offset_top = 888.0
 offset_right = 720.0

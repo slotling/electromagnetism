@@ -17,8 +17,14 @@ variable_names = Array[String](["t"])
 function_name = "R"
 overriding_function_id = 1
 
+[node name="LineEdit" parent="FunctionInput/Control" index="0"]
+text = "cos(t), sin(t), t/10"
+
 [node name="ParametricRangeInput" parent="." index="2" instance=ExtResource("4_s2nut")]
 node_path_with_script_instance = NodePath("../Path")
+
+[node name="LineEdit" parent="ParametricRangeInput/Control/ParameterSubinput" index="0"]
+text = "-5*PI, 5*PI"
 
 [node name="SubjectLabel" parent="ParametricRangeInput/Control/ParameterSubinput" index="1"]
 text = "t ∈"
@@ -34,7 +40,9 @@ offset_right = 248.0
 node_paths_with_script_instance = Array[NodePath]([NodePath("../Path")])
 node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput"), NodePath("../ParametricRangeInput")])
 
+[editable path="FunctionInput"]
 [editable path="ParametricRangeInput"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput2"]
 [editable path="ParametricRangeInput/Control/ParameterSubinput3"]
+[editable path="ParametricRangeInput/Control/ParameterSubinput4"]

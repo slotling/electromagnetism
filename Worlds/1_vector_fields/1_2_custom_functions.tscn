@@ -53,6 +53,11 @@ multimesh = SubResource("MultiMesh_pmb8k")
 [node name="FunctionInput" parent="." index="1" instance=ExtResource("2_c38mg")]
 node_path_with_script_instance = NodePath("..")
 
+[node name="LineEdit" parent="FunctionInput/Control" index="0"]
+text = "x, y, z"
+
 [node name="FunctionInputUpdater" parent="." index="2" instance=ExtResource("4_pmb8k")]
 node_paths_with_script_instance = Array[NodePath]([NodePath("..")])
 node_paths_of_function_inputs = Array[NodePath]([NodePath("../FunctionInput")])
+
+[editable path="FunctionInput"]
