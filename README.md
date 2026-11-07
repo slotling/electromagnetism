@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/4cfbd156-08d1-4167-9ec0-e361fd229622
 ### Modify a line charge with any charge density function
 https://github.com/user-attachments/assets/a0cb7808-8c62-43e7-87e1-1ec55968e169
 
-### Calculate flux given an electric field any parametric surface
+### Calculate flux given an electric field and any parametric surface
 https://github.com/user-attachments/assets/d757d3a8-1fed-4c89-aec2-8ef5e6160461
 
 ### Render any parametric path and surface
